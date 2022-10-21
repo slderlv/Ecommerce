@@ -1,4 +1,6 @@
 package Logic;
+import java.awt.Dimension;
+
 import javax.swing.SwingUtilities;
 
 import Panels.*;
@@ -6,7 +8,10 @@ import Panels.*;
 public class main {
 
 	public static void main(String[] args) {
-		new RegisterPanel().setVisible(true);
+		MainFrame mainFrame = new MainFrame();
+		
+		mainFrame.setVisible(true);
+		
 
 	}
 
