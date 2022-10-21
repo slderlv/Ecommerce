@@ -4,6 +4,8 @@
  */
 package Panels;
 
+import Database.SQLService;
+
 /**
  *
  * @author sketc
@@ -74,7 +76,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         errorLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         errorLogin.setForeground(new java.awt.Color(255, 0, 51));
-        errorLogin.setText("Cuenta o contraseña incorrectos");
+        errorLogin.setText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,6 +142,14 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void Login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login
         // TODO add your handling code here:
+    	String user = usernameText.getText();
+    	String password = passwordText.getText();
+    	
+    	if(password.isEmpty() || user.isEmpty()) {
+    		errorLogin.setText("Cuenta o contraseña incorrectos");
+    		
+    	}
+    	
     }//GEN-LAST:event_Login
 
     private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
