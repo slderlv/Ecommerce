@@ -9,13 +9,15 @@ package Panels;
  * @author sketc
  */
 public class RegisterPanel extends javax.swing.JPanel {
+	private MainFrame mainFrame;
 
     /**
      * Creates new form RegisterPanel
      */
-    public RegisterPanel() {
+    public RegisterPanel(MainFrame mainFrame) {
+    	this.mainFrame = mainFrame;
         initComponents();
-		this.setVisible(true);
+		
         
     }
     
@@ -61,7 +63,7 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("TelÃ©fono");
+        jLabel1.setText("Teléfono");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,7 +71,7 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("ContraseÃ±a");
+        jLabel3.setText("Contraseña");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +139,7 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("Â¿Ya tienes cuenta? Inicia sesiÃ³n");
+        jLabel5.setText("¿Ya tienes cuenta? Inicia sesión");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SignInAction(evt);
