@@ -8,9 +8,9 @@ import Panels.*;
 
 public class main {
 	public static void main(String[] args) {
-		MainFrame mainFrame = new MainFrame();
+		LoginFrame loginFrame = new LoginFrame();
 		
-		mainFrame.setVisible(true);
+		loginFrame.setVisible(true);
 		
 
 	}
