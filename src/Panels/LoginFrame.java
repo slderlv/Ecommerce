@@ -143,7 +143,9 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Login
 
     private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
-        // TODO add your handling code here:
+        RegisterFrame rf = new RegisterFrame();
+        this.setVisible(false);
+        rf.setVisible(true);
     }//GEN-LAST:event_Register
 
     /**

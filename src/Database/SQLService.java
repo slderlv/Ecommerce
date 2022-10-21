@@ -53,4 +53,8 @@ public class SQLService {
         return null;
     }
 
+    public void registerQuery(){
+        
+    }
+
 }
