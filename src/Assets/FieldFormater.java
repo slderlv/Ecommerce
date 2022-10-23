@@ -1,4 +1,4 @@
-package Utils;
+package Assets;
 
 public class FieldFormater {
     public static int getCommas(String text){

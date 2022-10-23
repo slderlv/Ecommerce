@@ -17,7 +17,10 @@ public class SQLConnection {
 	private static SQLConnection sqlConnection = null;
     
 	private SQLConnection(){}
-    
+    //ABSTRACT
+	// HEREDABLE PARA TODO los distintos servicios 
+	// SQLService --> Usuario
+	// SQLSERVICE --> 
 	static public SQLConnection getSQLConnection() {
  
         if (sqlConnection == null) {
@@ -35,5 +38,9 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void close(){
+		connection = null;
 	}
 }

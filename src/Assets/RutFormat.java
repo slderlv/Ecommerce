@@ -1,4 +1,4 @@
-package Utils;
+package Assets;
 
 public class RutFormat {
     public static boolean isValid(String rut){

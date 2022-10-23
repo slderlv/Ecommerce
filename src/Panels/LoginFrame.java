@@ -149,6 +149,12 @@ public class LoginFrame extends javax.swing.JFrame {
     		errorLogin.setText("Cuenta o contraseña incorrectos");
     		
     	}
+        //NUEVO FUNCIONAMIENTO 
+        //OBTENER LOS FIELDS 
+        //LLAMAR A SQLLoginServiceAdapter("user,password"[ese formato]) --> retorna un usuario
+        // RS rs = SQLClientService.getSQLClientService().read(SQLClientServiceAdapter(user,password));
+        // while (rs.next()) -> getFields -> Builder -> redirigir con esa info el programa
+
     	
     }//GEN-LAST:event_Login
 
