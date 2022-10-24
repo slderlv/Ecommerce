@@ -1,0 +1,12 @@
+/Admin.class
+/AdminBuilder.class
+/Client.class
+/ClientBuilder.class
+/ICategoryAdmin.class
+/ICommentsAdmin.class
+/IProductAdmin.class
+/IUserBuilder.class
+/IUsersAdmin.class
+/User.class
+/UserBuilder.class
+/UserDirector.class

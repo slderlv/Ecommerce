@@ -43,7 +43,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         registerButtom = new javax.swing.JButton();
         loginText = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ecommerce - Register");
 
         jPanel1.setBackground(new java.awt.Color(255, 212, 171));
@@ -216,7 +216,9 @@ public class RegisterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Back
 
     private void LoginText(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginText
-        // TODO add your handling code here:
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_LoginText
 
     private void RegisterButtom(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtom
