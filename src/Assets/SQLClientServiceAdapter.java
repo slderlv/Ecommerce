@@ -1,32 +1,25 @@
 package Assets;
 
-import User.User;
-import User.UserBuilder;
+import Domain.User;
+import Domain.UserBuilder;
+import Domain.UserDirector;
 
 public class SQLClientServiceAdapter {
 
     public static User loginData (String values){
         // Login & delete
         UserBuilder ub = new UserBuilder();
-        String parts[] = FieldFormater.fillArrayValues(values);
-        ub.setRut(parts[0]);
-        ub.setPassword(parts[1]);
-        User user = ub.getResult();
-        ub = null; 
-        return user;
+        UserDirector director = UserDirector.getUserDirector();
+        director.loginUser(ub, values);
+        return ub.getResult();
     }
 
-    public static User essentialData(String values){
+    public static User userData(String values){
         //Register & update
         UserBuilder ub = new UserBuilder();
-        String parts[] = FieldFormater.fillArrayValues(values);
-        ub.setRut(parts[0]);
-        ub.setPassword(parts[1]);
-        ub.setMail(parts[2]);
-        ub.setNumber(Integer.parseInt(parts[3]));
-        User user = ub.getResult();
-        ub = null; 
-        return user;
+        UserDirector director = UserDirector.getUserDirector();
+        director.createUser(ub, values);
+        return ub.getResult();
     }
 
 

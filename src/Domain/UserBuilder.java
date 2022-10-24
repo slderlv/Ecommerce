@@ -1,10 +1,9 @@
-package User;
+package Domain;
 
 public class UserBuilder implements IUserBuilder {
     private String rut;
     private String name;
     private String password;
-    private boolean isAdmin;
     private int number;
     private String mail;
     
@@ -19,9 +18,6 @@ public class UserBuilder implements IUserBuilder {
     public void setPassword(String password){
         this.password = password;
     }
-    public void setIsAdmin(boolean admin){
-        this.isAdmin=admin;
-    }
    
     public void setNumber(int number){
         this.number = number;
@@ -32,6 +28,6 @@ public class UserBuilder implements IUserBuilder {
     }
 
     public User getResult(){
-        return new User(rut,  name,  password,  isAdmin,  number, mail);
+        return new User(rut,  name,  password,  number, mail);
     }
 }

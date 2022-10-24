@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import javax.swing.SwingUtilities;
 
 import Database.SQLConnection;
-import Database.SQLService;
 import Panels.*;
 
 public class main {

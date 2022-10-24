@@ -4,7 +4,7 @@
  */
 package Panels;
 
-import Database.SQLService;
+
 
 /**
  *
@@ -154,6 +154,9 @@ public class LoginFrame extends javax.swing.JFrame {
         //LLAMAR A SQLLoginServiceAdapter("user,password"[ese formato]) --> retorna un usuario
         // RS rs = SQLClientService.getSQLClientService().read(SQLClientServiceAdapter(user,password));
         // while (rs.next()) -> getFields -> Builder -> redirigir con esa info el programa
+        // if (rs.getAdmin -> true){
+        //   Builder admin
+        //} else builder client
 
     	
     }//GEN-LAST:event_Login
