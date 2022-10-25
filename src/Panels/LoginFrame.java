@@ -148,6 +148,17 @@ public class LoginFrame extends javax.swing.JFrame {
     	if(password.isEmpty() || user.isEmpty()) {
     		errorLogin.setText("Cuenta o contraseña incorrectos");
     		
+    	}else {
+    		ResultSet rs = SQLClientService.getSQLClientService().read(SQLClientServiceAdapter(user,password));
+    		while (rs.next()){
+    			if (rs.getAdmin() == true){
+    				Builder admin = rs.getFields();
+    			}
+    			else{
+    				Builder client = rs.getFields() ;
+    			}
+    			
+    		}
     	}
         //NUEVO FUNCIONAMIENTO 
         //OBTENER LOS FIELDS 
