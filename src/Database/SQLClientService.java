@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import User.User;
+import Domain.User;
 
 public class SQLClientService implements ISQLGenericRepository<User>{
     //All user querys, from admin and client
