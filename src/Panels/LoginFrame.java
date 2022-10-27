@@ -12,6 +12,8 @@ import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import Domain.Admin;
+import Domain.Client;
 
 /**
  *
