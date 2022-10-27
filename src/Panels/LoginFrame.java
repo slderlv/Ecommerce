@@ -5,6 +5,8 @@
 package Panels;
 
 import Database.SQLClientService;
+import Assets.CryptoService;
+import Assets.RutFormat;
 import Assets.SQLClientServiceAdapter;
 import Domain.User;
 import Domain.UserDirector;
@@ -162,26 +164,39 @@ public class LoginFrame extends javax.swing.JFrame {
     	String password = passwordText.getText();
     	
     	if(password.isEmpty() || user.isEmpty()) {
-    		errorLogin.setText("Cuenta o contraseña incorrectos");
+    		errorLogin.setText("Falta algun campo");
     		
     	}else {
+            user = RutFormat.formatToDatabase(user);
+            password = CryptoService.getCryptoService().encodePassword(password);
             String format = user + "," + password;
+            System.out.println(format);
             User us = SQLClientServiceAdapter.loginData(format);
             ResultSet rs = SQLClientService.getSQLLoginService().read(us);
+            System.out.println(us);
+            System.out.println(rs);
             if (rs.next()){
                 //si existe
-                Boolean validation = Boolean.parseBoolean(rs.getString("admin"));
+                String validation = rs.getString("admin");
                 String rut = rs.getString("rut");
-                String name = rs.getString("name");
+                String name = rs.getString("nombre");
                 password = rs.getString("password");
-                String mail = rs.getString("mail");
+                String mail = rs.getString("correo");
 
-                if (validation == true){
+                System.out.println("ACA?");
+                System.out.println(validation);
+                System.out.println(rs.getString("admin"));
+                System.out.println(rs.getString("password"));
+                if (validation.equals("t")){
                     //Admin 
+                    System.out.println("ENTRE");
                     format = name + ","+ mail + ","+ password + ","+ rut;
                     AdminBuilder adminBuilder = new AdminBuilder();
                     UserDirector.getUserDirector().createUser(adminBuilder,format ); 
                     Admin admin = adminBuilder.getResult();
+                    MenuAdminFrame af = new MenuAdminFrame();
+                    af.setVisible(true);
+                    this.setVisible(false);
                 }
                 else{
                     //Client 

@@ -34,7 +34,7 @@ public class SQLConnection {
 			connection = DriverManager.getConnection(url,user,password);
 			if(connection != null)return connection;
 		}catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error con la conexion a la base de datos");
+			JOptionPane.showMessageDialog(null, "Error con la conexion a la base de datos. fallo aca");
 			e.printStackTrace();
 		}
 		return null;

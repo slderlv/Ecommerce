@@ -221,7 +221,9 @@ public class RegisterFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
-        
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_Back
 
     private void LoginText(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginText
@@ -231,9 +233,9 @@ public class RegisterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginText
 
     private void RegisterButtom(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtom
-    	JOptionPane.showMessageDialog(null, "EL BOTON FUNCIONA");
+    	//JOptionPane.showMessageDialog(null, "EL BOTON FUNCIONA");
     	String rut = nameText.getText();
-        String password = passwordText.getSelectedText();
+        String password = passwordText.getText();
         password = CryptoService.getCryptoService().encodePassword(password);
         String email = emailText.getText();
         //String number = phoneText.getText();
