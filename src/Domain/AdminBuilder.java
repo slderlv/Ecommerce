@@ -4,7 +4,6 @@ public class AdminBuilder implements IUserBuilder{
     private String rut;
     private String name;
     private String password;
-    private int number;
     private String mail;
 
     @Override
@@ -26,7 +25,7 @@ public class AdminBuilder implements IUserBuilder{
     }
 
     @Override
-    public void setNumber(int number) {
+    public void setMail(String string) {
         // TODO Auto-generated method stub
         
     }

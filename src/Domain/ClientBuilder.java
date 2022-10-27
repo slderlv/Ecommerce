@@ -27,8 +27,11 @@ public class ClientBuilder implements IUserBuilder{
     }
 
     @Override
-    public void setNumber(int number) {
+    public void setMail(String string) {
         // TODO Auto-generated method stub
         
     }
+
+    //setNumber
+    //get --> llama al constructor
 }

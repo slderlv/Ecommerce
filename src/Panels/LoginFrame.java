@@ -7,9 +7,11 @@ package Panels;
 import Database.SQLClientService;
 import Assets.SQLClientServiceAdapter;
 import Domain.User;
+import Domain.UserDirector;
 import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -145,7 +147,7 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login
+    private void Login(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_Login
         // TODO add your handling code here:
     	String user = usernameText.getText();
     	String password = passwordText.getText();
@@ -154,33 +156,36 @@ public class LoginFrame extends javax.swing.JFrame {
     		errorLogin.setText("Cuenta o contraseña incorrectos");
     		
     	}else {
-    		User us = SQLClientServiceAdapter(user,password);
+            String format = user + "," + password;
+            User us = SQLClientServiceAdapter.loginData(format);
+            ResultSet rs = SQLClientService.getSQLLoginService().read(us);
+            if (rs.next()){
+                //si existe
+                Boolean validation = Boolean.parseBoolean(rs.getString("admin"));
+                String rut = rs.getString("rut");
+                String name = rs.getString("name");
+                password = rs.getString("password");
+                String mail = rs.getString("mail");
+
+                if (validation == true){
+                    //Admin 
+                    format = name + ","+ mail + ","+ password + ","+ rut;
+                    AdminBuilder adminBuilder = new AdminBuilder();
+                    UserDirector.getUserDirector().createUser(adminBuilder,format ); 
+                    Admin admin = adminBuilder.getResult();
+                }
+                else{
+                    //Client 
+                    format = name + ","+ mail + ","+ password + ","+ rut;
+                    ClientBuilder clientBuilder = new ClientBuilder();
+                    UserDirector.getUserDirector().createUser(clientBuilder,format);
+                    Client client = clientBuilder.getResult();
+                }
+            } else {
+                //Error
+
+            }
     		
-    		if(us != null){
-    			ResultSet rs = SQLClientService.getSQLLoginService().read(SQLClientServiceAdapter(user,password));
-    			while (rs.next()){
-    				Boolean validation = rs.getField("admin");
-    				if (validation == true){
-    					//Admin 
-    					AdminBuilder.setRut(rs.getField("rut"));
-    					AdminBuilder.setName(rs.getField("name"));
-    					AdminBuilder.setPassword(rs.getField("password"));
-    					AdminBuilder.setNumber(rs.getField("number"));
-    					
-    				}
-    				else{
-    					//Client 
-    					ClientBuilder.setRut(rs.getField("rut"));
-    					ClientBuilder.setName(rs.getField("name"));
-    					ClientBuilder.setPassword(rs.getField("password"));
-    					ClientBuilder.setNumber(rs.getField("number"));
-    				}
-    			
-    			}
-    		}
-    		else {
-    			System.out.print("El usuario o la contraseña son incorrectos");
-    		}
     	}
         //NUEVO FUNCIONAMIENTO 
         //OBTENER LOS FIELDS 

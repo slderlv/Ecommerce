@@ -23,7 +23,7 @@ public class UserDirector {
     public void createUser(IUserBuilder builder,String values){
         String parts[] = FieldFormater.fillArrayValues(values);
         builder.setName(parts[0]);
-        builder.setNumber(Integer.parseInt(parts[1]));
+        builder.setMail(parts[1]);
         builder.setPassword(parts[2]);
         builder.setRut(parts[3]);
     }
