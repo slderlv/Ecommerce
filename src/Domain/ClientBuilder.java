@@ -41,7 +41,7 @@ public class ClientBuilder implements IUserBuilder{
         this.transactions = transactions;
     }
 
-    public Client getResult(String rut, String name, String password, String mail, int number, Transactions transactions){
+    public Client getResult(){
         return new Client (rut, name, password, mail, number, transactions);
     }
     //setNumber

@@ -79,7 +79,11 @@ public class LoginFrame extends javax.swing.JFrame {
         jButton2.setText("Iniciar Sesion");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Login(evt);
+                try {
+                    Login(evt);
+                } catch (Exception e) {
+                    System.out.println("oli");
+                }
             }
         });
 
@@ -184,7 +188,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     Client client = clientBuilder.getResult();
                 }
             } else {
-                //Error
+                errorLogin.setText("Cuenta o contraseña incorrectos");
 
             }
     		

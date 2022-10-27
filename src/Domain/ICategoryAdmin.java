@@ -1,5 +1,7 @@
 package Domain;
 
 public interface ICategoryAdmin {
-    //ADMIN METHODS RELATED TO CATEGORY
+    void addCategory();
+    void editCategory();
+    void deleteCategory();
 }
