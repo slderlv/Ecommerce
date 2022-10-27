@@ -4,7 +4,12 @@
  */
 package Panels;
 
-import Assets.CryptoService;
+import Database.SQLClientService;
+import Assets.SQLClientServiceAdapter;
+import Domain.User;
+import Domain.AdminBuilder;
+import Domain.ClientBuilder;
+import java.sql.ResultSet;
 
 /**
  *
@@ -149,15 +154,32 @@ public class LoginFrame extends javax.swing.JFrame {
     		errorLogin.setText("Cuenta o contraseña incorrectos");
     		
     	}else {
-    		ResultSet rs = SQLClientService.getSQLClientService().read(SQLClientServiceAdapter(user,password));
-    		while (rs.next()){
-    			if (rs.getAdmin() == true){
-    				Builder admin = rs.getFields();
-    			}
-    			else{
-    				Builder client = rs.getFields() ;
-    			}
+    		User us = SQLClientServiceAdapter(user,password);
+    		
+    		if(us != null){
+    			ResultSet rs = SQLClientService.getSQLLoginService().read(SQLClientServiceAdapter(user,password));
+    			while (rs.next()){
+    				Boolean validation = rs.getField("admin");
+    				if (validation == true){
+    					//Admin 
+    					AdminBuilder.setRut(rs.getField("rut"));
+    					AdminBuilder.setName(rs.getField("name"));
+    					AdminBuilder.setPassword(rs.getField("password"));
+    					AdminBuilder.setNumber(rs.getField("number"));
+    					
+    				}
+    				else{
+    					//Client 
+    					ClientBuilder.setRut(rs.getField("rut"));
+    					ClientBuilder.setName(rs.getField("name"));
+    					ClientBuilder.setPassword(rs.getField("password"));
+    					ClientBuilder.setNumber(rs.getField("number"));
+    				}
     			
+    			}
+    		}
+    		else {
+    			System.out.print("El usuario o la contraseña son incorrectos");
     		}
     	}
         //NUEVO FUNCIONAMIENTO 
