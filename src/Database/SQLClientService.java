@@ -24,7 +24,7 @@ public class SQLClientService implements ISQLGenericRepository<User>{
     public void create(User t) {
         // Register
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO user(rut,admin,nombre,password,numero_telefono,correo) VALUES (?,false,?,?,null,?)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO usuario(rut,admin,nombre,password,numero_telefono,correo) VALUES (?,false,?,?,null,?)");
             statement.setString(1,t.getRut());
             statement.setString(2,t.getName());  
             statement.setString(3,t.getPassword());   

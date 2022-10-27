@@ -12,6 +12,9 @@ import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import Domain.Admin;
 import Domain.Client;
 
@@ -206,7 +209,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Login
 
     private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
-        RegisterFrame rf = new RegisterFrame();
+    	RegisterFrame rf = new RegisterFrame();
         this.setVisible(false);
         rf.setVisible(true);
         
