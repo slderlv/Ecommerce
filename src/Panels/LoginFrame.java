@@ -170,11 +170,8 @@ public class LoginFrame extends javax.swing.JFrame {
             user = RutFormat.formatToDatabase(user);
             password = CryptoService.getCryptoService().encodePassword(password);
             String format = user + "," + password;
-            System.out.println(format);
             User us = SQLClientServiceAdapter.loginData(format);
             ResultSet rs = SQLClientService.getSQLLoginService().read(us);
-            System.out.println(us);
-            System.out.println(rs);
             if (rs.next()){
                 //si existe
                 String validation = rs.getString("admin");
@@ -183,13 +180,8 @@ public class LoginFrame extends javax.swing.JFrame {
                 password = rs.getString("password");
                 String mail = rs.getString("correo");
 
-                System.out.println("ACA?");
-                System.out.println(validation);
-                System.out.println(rs.getString("admin"));
-                System.out.println(rs.getString("password"));
                 if (validation.equals("t")){
                     //Admin 
-                    System.out.println("ENTRE");
                     format = name + ","+ mail + ","+ password + ","+ rut;
                     AdminBuilder adminBuilder = new AdminBuilder();
                     UserDirector.getUserDirector().createUser(adminBuilder,format ); 
