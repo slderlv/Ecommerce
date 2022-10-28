@@ -29,7 +29,7 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             statement.setString(2,t.getName());  
             statement.setString(3,t.getPassword());   
             statement.setString(4,t.getMail()); 
-            statement.executeQuery();
+            statement.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -59,7 +59,7 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             statement.setString(2,t.getPassword());
             statement.setString(3, t.getMail());
             statement.setString(4, t.getRut());
-            statement.executeQuery();
+            statement.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -72,7 +72,7 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE * FROM usuario WHERE rut = ?");
             //+ borrar todo lo relacionado a EL USUARIO
             statement.setString(1, t.getRut());
-            statement.executeQuery();
+            statement.execute();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
