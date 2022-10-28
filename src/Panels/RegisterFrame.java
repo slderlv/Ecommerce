@@ -48,7 +48,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         nameText = new javax.swing.JTextField();
         passwordText = new javax.swing.JPasswordField();
         emailText = new javax.swing.JTextField();
-        phoneText = new javax.swing.JTextField();
+        password2Text = new javax.swing.JPasswordField();
         registerButtom = new javax.swing.JButton();
         loginText = new javax.swing.JLabel();
 
@@ -68,27 +68,27 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Rut");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("ContraseÃ±a");
+        jLabel3.setText("Contraseña");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Email");
+        jLabel5.setText("Contraseña");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/email.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Telefono");
+        jLabel7.setText("Email");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/phone.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/email.png"))); // NOI18N
 
         nameText.setBackground(new java.awt.Color(255, 174, 167));
         nameText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -99,8 +99,8 @@ public class RegisterFrame extends javax.swing.JFrame {
         emailText.setBackground(new java.awt.Color(255, 174, 167));
         emailText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        phoneText.setBackground(new java.awt.Color(255, 174, 167));
-        phoneText.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        password2Text.setBackground(new java.awt.Color(255, 174, 167));
+        password2Text.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         registerButtom.setBackground(new java.awt.Color(255, 27, 157));
         registerButtom.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -134,12 +134,12 @@ public class RegisterFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(password2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(phoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,11 +193,11 @@ public class RegisterFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel7))
-                            .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(password2Text, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -236,15 +236,29 @@ public class RegisterFrame extends javax.swing.JFrame {
     	//JOptionPane.showMessageDialog(null, "EL BOTON FUNCIONA");
     	String rut = nameText.getText();
         String password = passwordText.getText();
-        password = CryptoService.getCryptoService().encodePassword(password);
-        String email = emailText.getText();
-        //String number = phoneText.getText();
-        if(RutFormat.isValid(rut)) {
-        	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
-        	User us = SQLClientServiceAdapter.userData(format);
-        	SQLClientService.getSQLLoginService().create(us);        	
+        String password2 = password2Text.getText();
+        
+     
+        
+        if(password.equals(password2)) {
+            password = CryptoService.getCryptoService().encodePassword(password);
+            String email = emailText.getText();
+            //String number = phoneText.getText();
+            if(RutFormat.isValid(rut)) {
+            	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
+            	User us = SQLClientServiceAdapter.userData(format);
+            	SQLClientService.getSQLLoginService().create(us);   	
+        }
+        }
+        else {
+        	JOptionPane.showMessageDialog(null, "Contraseña no coincide");
+        	
+            	
+            }
+        
+      	
         } //ELSE -> 
-    }//GEN-LAST:event_RegisterButtom
+    //GEN-LAST:event_RegisterButtom
 
     /**
      * @param args the command line arguments
@@ -296,7 +310,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel loginText;
     private javax.swing.JTextField nameText;
     private javax.swing.JPasswordField passwordText;
-    private javax.swing.JTextField phoneText;
+    private javax.swing.JPasswordField password2Text;
     private javax.swing.JButton registerButtom;
     // End of variables declaration//GEN-END:variables
 }
