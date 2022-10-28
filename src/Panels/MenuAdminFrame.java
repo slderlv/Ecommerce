@@ -170,9 +170,7 @@ public class MenuAdminFrame extends javax.swing.JFrame {
     }                            
 
     private void Back(java.awt.event.ActionEvent evt) {                      
-        LoginFrame lf = new LoginFrame();
-        this.setVisible(false);
-        lf.setVisible(true);
+        // TODO add your handling code here:
     }                     
 
     private void ClientFound(java.awt.event.ActionEvent evt) {                             
