@@ -14,6 +14,9 @@ import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SQLOutputImpl;
+
 import Domain.Admin;
 import Domain.Client;
 
@@ -170,15 +173,13 @@ public class LoginFrame extends javax.swing.JFrame {
             String format = user + "," + password;
             User us = SQLClientServiceAdapter.loginData(format);
             ResultSet rs = SQLClientService.getSQLLoginService().read(us);
-
             if (rs.next()){
                 //si existe
                 String validation = rs.getString("admin");
                 String rut = rs.getString("rut");
-                String name = rs.getString("nombre");
+                String name = rs.getString("name");
                 password = rs.getString("password");
-                String mail = rs.getString("correo");
-
+                String mail = rs.getString("mail");
                 if (validation.equals("t")){
                     //Admin 
                     format = name + ","+ mail + ","+ password + ","+ rut;
@@ -191,10 +192,13 @@ public class LoginFrame extends javax.swing.JFrame {
                 }
                 else{
                     //Client 
-                    format = name + ","+ mail + ","+ password + ","+ rut;
+                    format = name + "," + mail + ","+ password + ","+ rut;
                     ClientBuilder clientBuilder = new ClientBuilder();
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
+                    ClientFrame cf = new ClientFrame();
+                    cf.setVisible(true);
+                    this.setVisible(false);
                 }
             } else {
                 errorLogin.setText("Cuenta o contraseña incorrectos");

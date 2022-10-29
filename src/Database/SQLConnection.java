@@ -10,9 +10,9 @@ public class SQLConnection {
 	// USER --> postgres
 	// password --> PASSWORD INGRESADA EN PGADMIN
 	
-	private static final String url = "jdbc:postgresql://localhost/PPAV";
-	private static final String user = "postgres";
-	private static final String password = "anashe123";
+	private static final String url = "CAMBIAR";
+	private static final String user = "CAMBIAR";
+	private static final String password = "CAMBIAR";
 	private static Connection connection =  null;
 	private static SQLConnection sqlConnection = null;
     
