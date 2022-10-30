@@ -12,6 +12,7 @@ public class MenuAdminFrame extends javax.swing.JFrame {
      */
     public MenuAdminFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

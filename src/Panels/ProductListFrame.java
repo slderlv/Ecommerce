@@ -17,6 +17,7 @@ public class ProductListFrame extends javax.swing.JFrame {
      */
     public ProductListFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -15,6 +15,7 @@ public class AddEditProduct extends javax.swing.JFrame {
      */
     public AddEditProduct() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

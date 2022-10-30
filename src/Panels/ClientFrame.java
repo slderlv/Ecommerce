@@ -15,6 +15,7 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     public ClientFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -71,13 +72,13 @@ public class ClientFrame extends javax.swing.JFrame {
         jLabel1.setText("Rut:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("ContraseÃ±a:");
+        jLabel2.setText("Contraseña:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("DirecciÃ³n:");
+        jLabel3.setText("Dirección:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("TelÃ©fono:");
+        jLabel4.setText("Teléfono:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Datos Personales");

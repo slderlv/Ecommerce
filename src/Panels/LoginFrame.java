@@ -73,7 +73,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 174, 167));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setText("Â¿No tienes cuenta? Registrate aqui");
+        jButton1.setText("¿No tienes cuenta? Regístrate aquí");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Register(evt);
@@ -82,7 +82,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 174, 167));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setText("Iniciar Sesion");
+        jButton2.setText("Iniciar Sesión");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -165,7 +165,7 @@ public class LoginFrame extends javax.swing.JFrame {
     	String password = passwordText.getText();
     	
     	if(password.isEmpty() || user.isEmpty()) {
-    		errorLogin.setText("Falta algun campo");
+    		errorLogin.setText("Falta algún campo");
     		
     	}else {
             user = RutFormat.formatToDatabase(user);
@@ -201,7 +201,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     this.setVisible(false);
                 }
             } else {
-                errorLogin.setText("Cuenta o contraseÃ±a incorrectos");
+                errorLogin.setText("Cuenta o contraseña incorrecta");
 
             }
     		

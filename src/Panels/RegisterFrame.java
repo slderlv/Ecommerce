@@ -24,6 +24,7 @@ public class RegisterFrame extends javax.swing.JFrame {
      */
     public RegisterFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -111,7 +112,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             }
         });
 
-        loginText.setText("Â¿Ya tienes cuenta? Inicia sesion");
+        loginText.setText("¿Ya tienes cuenta? Inicia sesión");
         loginText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginText(evt);
