@@ -30,7 +30,6 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             statement.setString(3,t.getPassword());   
             statement.setString(4,t.getMail()); 
             statement.execute();
-            SQLConnection.getSQLConnection().close();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -44,7 +43,6 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             statement.setString(1,t.getRut());
             statement.setString(2,t.getPassword());
             ResultSet response = statement.executeQuery();
-            SQLConnection.getSQLConnection().close();
             return response;
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
@@ -62,7 +60,6 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             //statement.setString(3, t.getNumber());
             statement.setString(4, t.getRut());
             statement.execute();
-            SQLConnection.getSQLConnection().close();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -76,7 +73,6 @@ public class SQLClientService implements ISQLGenericRepository<User>{
             //+ borrar todo lo relacionado a EL USUARIO
             statement.setString(1, t.getRut());
             statement.execute();
-            SQLConnection.getSQLConnection().close();
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
