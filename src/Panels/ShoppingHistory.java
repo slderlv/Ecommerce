@@ -7,6 +7,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
      */
     public ShoppingHistory() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
