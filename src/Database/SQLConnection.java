@@ -12,15 +12,11 @@ public class SQLConnection {
 	
 	private static final String url = "CAMBIAR";
 	private static final String user = "CAMBIAR";
-	private static final String password = "CAMBIAR";
+	private static final String password = "CAMBIAR-CAMBIAR";
 	private static Connection connection =  null;
 	private static SQLConnection sqlConnection = null;
     
 	private SQLConnection(){}
-    //ABSTRACT
-	// HEREDABLE PARA TODO los distintos servicios 
-	// SQLService --> Usuario
-	// SQLSERVICE --> 
 	static public SQLConnection getSQLConnection() {
  
         if (sqlConnection == null) {

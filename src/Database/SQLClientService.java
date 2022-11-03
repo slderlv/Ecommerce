@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import Domain.User;
 
-public class SQLClientService implements ISQLGenericRepository<User>{
+public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQLRead<User>, ISQLUpdate<User>{
     //All user querys, from admin and client
     private static SQLClientService service = null;
 
