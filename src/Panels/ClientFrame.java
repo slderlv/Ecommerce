@@ -4,6 +4,10 @@
  */
 package Panels;
 
+import java.awt.Color;
+import javax.swing.JFileChooser;
+import Assets.JTextFieldLimit;
+
 public class ClientFrame extends javax.swing.JFrame {
 
     /**
@@ -11,7 +15,6 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     public ClientFrame() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -23,6 +26,7 @@ public class ClientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         backButton = new javax.swing.JButton();
@@ -35,38 +39,44 @@ public class ClientFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         historyButton = new javax.swing.JButton();
         historyLabel = new javax.swing.JLabel();
-        userPhotoPanel = new javax.swing.JPanel();
         editButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         rutLabel = new javax.swing.JLabel();
         rutField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JTextField();
         addressLabel = new javax.swing.JLabel();
         addressField = new javax.swing.JTextField();
         telephoneLabel = new javax.swing.JLabel();
         telephoneField = new javax.swing.JTextField();
+        invalidRutLabel = new javax.swing.JLabel();
+        invalidPasswordLabel = new javax.swing.JLabel();
+        invalidAddressLabel = new javax.swing.JLabel();
+        invalidTelephoneLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        userPhotoPanel = new javax.swing.JPanel();
+        userPhoto = new javax.swing.JLabel();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ecommerce - Menú de usuario");
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 212, 171));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel2.setBackground(new java.awt.Color(255, 174, 167));
+        jPanel2.setBackground(secondColor);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
         backButton.setContentAreaFilled(false);
         backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         backButton.setFocusPainted(false);
 
-        jPanel3.setBackground(new java.awt.Color(255, 174, 167));
+        jPanel3.setBackground(secondColor);
 
         productButton.setBackground(new java.awt.Color(255, 212, 171));
         productButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        productButton.setForeground(new java.awt.Color(0, 0, 0));
+        productButton.setForeground(black);
         productButton.setText("Productos");
         productButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         productButton.setFocusPainted(false);
@@ -95,12 +105,12 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 174, 167));
+        jPanel4.setBackground(secondColor);
         jPanel4.setPreferredSize(new java.awt.Dimension(258, 67));
 
         cartButton.setBackground(new java.awt.Color(255, 212, 171));
         cartButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        cartButton.setForeground(new java.awt.Color(0, 0, 0));
+        cartButton.setForeground(black);
         cartButton.setText("Carrito");
         cartButton.setToolTipText("");
         cartButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -135,12 +145,12 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 174, 167));
+        jPanel5.setBackground(secondColor);
         jPanel5.setPreferredSize(new java.awt.Dimension(258, 67));
 
         historyButton.setBackground(new java.awt.Color(255, 212, 171));
         historyButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        historyButton.setForeground(new java.awt.Color(0, 0, 0));
+        historyButton.setForeground(black);
         historyButton.setText("Historial");
         historyButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         historyButton.setFocusPainted(false);
@@ -197,22 +207,9 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addGap(0, 250, Short.MAX_VALUE))
         );
 
-        userPhotoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout userPhotoPanelLayout = new javax.swing.GroupLayout(userPhotoPanel);
-        userPhotoPanel.setLayout(userPhotoPanelLayout);
-        userPhotoPanelLayout.setHorizontalGroup(
-            userPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        userPhotoPanelLayout.setVerticalGroup(
-            userPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
         editButton.setBackground(new java.awt.Color(255, 111, 156));
         editButton.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        editButton.setForeground(new java.awt.Color(0, 0, 0));
+        editButton.setForeground(black);
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         editButton.setText("Editar datos");
         editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -227,61 +224,79 @@ public class ClientFrame extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 212, 171));
         jPanel7.setFocusable(false);
 
-        rutLabel.setBackground(new java.awt.Color(255, 174, 167));
+        rutLabel.setBackground(secondColor);
         rutLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        rutLabel.setForeground(new java.awt.Color(0, 0, 0));
+        rutLabel.setForeground(black);
         rutLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         rutLabel.setText("Rut");
         rutLabel.setOpaque(true);
 
         rutField.setEditable(false);
-        rutField.setBackground(new java.awt.Color(255, 174, 167));
+        rutField.setBackground(secondColor);
         rutField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        rutField.setForeground(new java.awt.Color(0, 0, 0));
+        rutField.setForeground(black);
         rutField.setText("jTextField1");
         rutField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        passwordLabel.setBackground(new java.awt.Color(255, 174, 167));
+        passwordLabel.setBackground(secondColor);
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        passwordLabel.setForeground(new java.awt.Color(0, 0, 0));
+        passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passwordLabel.setText("Contraseña");
         passwordLabel.setOpaque(true);
 
-        passwordField.setEditable(false);
-        passwordField.setBackground(new java.awt.Color(255, 174, 167));
-        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(0, 0, 0));
-        passwordField.setText("jTextField2");
-        passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
-
-        addressLabel.setBackground(new java.awt.Color(255, 174, 167));
+        addressLabel.setBackground(secondColor);
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        addressLabel.setForeground(new java.awt.Color(0, 0, 0));
+        addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         addressLabel.setText("Dirección");
         addressLabel.setOpaque(true);
 
         addressField.setEditable(false);
-        addressField.setBackground(new java.awt.Color(255, 174, 167));
+        addressField.setBackground(secondColor);
         addressField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        addressField.setForeground(new java.awt.Color(0, 0, 0));
+        addressField.setForeground(black);
+        addressField.setDocument(new JTextFieldLimit(29));
         addressField.setText("jTextField3");
         addressField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
-
-        telephoneLabel.setBackground(new java.awt.Color(255, 174, 167));
+        
+        telephoneLabel.setBackground(secondColor);
         telephoneLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        telephoneLabel.setForeground(new java.awt.Color(0, 0, 0));
+        telephoneLabel.setForeground(black);
         telephoneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         telephoneLabel.setText("Teléfono");
         telephoneLabel.setOpaque(true);
 
         telephoneField.setEditable(false);
-        telephoneField.setBackground(new java.awt.Color(255, 174, 167));
+        telephoneField.setBackground(secondColor);
         telephoneField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        telephoneField.setForeground(new java.awt.Color(0, 0, 0));
+        telephoneField.setForeground(black);
+        telephoneField.setDocument(new JTextFieldLimit(12));
         telephoneField.setText("jTextField4");
         telephoneField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+
+        invalidRutLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidRutLabel.setForeground(mainColor);
+        invalidRutLabel.setText("Rut inválido");
+
+        invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidPasswordLabel.setForeground(mainColor);
+        invalidPasswordLabel.setText("Contraseña inválida");
+
+        invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidAddressLabel.setForeground(mainColor);
+        invalidAddressLabel.setText("Dirección inválida");
+
+        invalidTelephoneLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidTelephoneLabel.setForeground(mainColor);
+        invalidTelephoneLabel.setText("Teléfono inválido");
+
+        passwordField.setEditable(false);
+        passwordField.setBackground(secondColor);
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        passwordField.setForeground(black);
+        passwordField.setText("jPasswordField1");
+        passwordField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -289,44 +304,77 @@ public class ClientFrame extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addComponent(rutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rutField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rutField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invalidRutLabel)
+                            .addComponent(invalidPasswordLabel)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(telephoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(invalidAddressLabel)
+                            .addComponent(addressField)
+                            .addComponent(invalidTelephoneLabel)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(telephoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rutField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addComponent(invalidRutLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rutField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(invalidPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(invalidAddressLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telephoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(invalidTelephoneLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telephoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telephoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        userPhoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
+        userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userPhotoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout userPhotoPanelLayout = new javax.swing.GroupLayout(userPhotoPanel);
+        userPhotoPanel.setLayout(userPhotoPanelLayout);
+        userPhotoPanelLayout.setHorizontalGroup(
+            userPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(userPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        userPhotoPanelLayout.setVerticalGroup(
+            userPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(userPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -336,15 +384,16 @@ public class ClientFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(335, 335, 335)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(userPhotoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 175, Short.MAX_VALUE))
+                            .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,11 +401,11 @@ public class ClientFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(55, 55, 55)
                 .addComponent(userPhotoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editButton)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -372,11 +421,12 @@ public class ClientFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>                        
 
     private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -385,7 +435,86 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                          
+    	// Edit to save changes
+    	
+        if(editButton.getText().equals("Editar datos")) {
+            
+        	passwordField.setEditable(true);
+            passwordField.setEchoChar((char)0);
+            prevPassword = passwordField.getPassword();
+            
+            addressField.setEditable(true);
+            prevAddress = addressField.getText();
+            
+            telephoneField.setEditable(true);
+            prevTelephone = telephoneField.getText();
+                     
+            editButton.setText("Guardar");
+        }
+        // Save changes
+        else {
+        	
+        	// If password is not valid
+        	if(passwordField.getPassword().length<4) {
+        		invalidPasswordLabel.setForeground(red);
+        		passwordField.setText(new String(prevPassword));
+        	} else {
+        		invalidPasswordLabel.setForeground(mainColor);
+        		prevPassword = passwordField.getPassword();
+        	}
+        	
+        	// If address is not valid
+        	if(addressField.getText().length()<4) {
+        		invalidAddressLabel.setForeground(red);
+        		addressField.setText(prevAddress);
+        	} else { // If address is valid
+        		prevAddress = addressField.getText();
+        		invalidAddressLabel.setForeground(mainColor);
+        	}
+        	
+        	// If telephone is not valid
+        	if(!telephoneIsValid(telephoneField.getText())) {
+        		invalidTelephoneLabel.setForeground(red);
+        		telephoneField.setText(prevTelephone);
+        	} else { // If telephone is valid
+        		prevTelephone = telephoneField.getText();
+        		invalidTelephoneLabel.setForeground(mainColor);
+        	}
+        	
+        	passwordField.setEchoChar('*');
+        	passwordField.setEditable(false);
+        	addressField.setEditable(false);
+        	telephoneField.setEditable(false);
+        	editButton.setText("Editar datos");
+        }
+        
+    }                                    
+
+    private void userPhotoMouseClicked(java.awt.event.MouseEvent evt) {                                       
+        // TODO add your handling code here:
+    	JFileChooser jf = new JFileChooser();
+        jf.setMultiSelectionEnabled(false);
+        if(jf.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+            String fileName = jf.getSelectedFile().getName();
+            String path = "src/images/"+fileName+".png";
+            //rsdragdropfiles.RSDragDropFiles.setCopiar(jf.getSelectedFile().toString(),path);
+            //userPhotoPanel.setIcon(new javax.swing.ImageIcon("src/images/"+fileName+".png"));
+        }
+    }                                      
+    
+    public static boolean telephoneIsValid(String t) {
+    	double doubleValue;
+    	if(!t.startsWith("+56")|| t.length()!=12) return false;
+    	try {
+    		doubleValue = Double.parseDouble(t.substring(1));
+    		String str = doubleValue + "";
+    		if(str.indexOf(".")>1) return false;
+    	} catch (NumberFormatException e) {
+    		return false;
+    	}
+    	
+    	return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -431,13 +560,18 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JButton historyButton;
     private javax.swing.JLabel historyLabel;
+    private javax.swing.JLabel invalidAddressLabel;
+    private javax.swing.JLabel invalidPasswordLabel;
+    private javax.swing.JLabel invalidRutLabel;
+    private javax.swing.JLabel invalidTelephoneLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton productButton;
     private javax.swing.JLabel productLabel;
@@ -445,7 +579,14 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel rutLabel;
     private javax.swing.JTextField telephoneField;
     private javax.swing.JLabel telephoneLabel;
+    private javax.swing.JLabel userPhoto;
     private javax.swing.JPanel userPhotoPanel;
+    private Color mainColor = new Color(255,212,171);
+    private Color black = new Color(0,0,0);
+    private Color red = new Color(255,0,0);
+    private Color secondColor = new Color(255, 174, 167);
+    private char[] prevPassword;
+	private String prevAddress;
+	private String prevTelephone;
     // End of variables declaration                   
 }
-
