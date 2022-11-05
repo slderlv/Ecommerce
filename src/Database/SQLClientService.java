@@ -58,7 +58,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, phone_number = ?, name = ? WHERE rut = ?");
             statement.setString(1,t.getMail());
             statement.setString(2,t.getPassword());
-            statement.setString(3, Integer.toString(t.getNumber()));
+            statement.setInt(3, t.getNumber());
             statement.setString(4, t.getName());
             statement.setString(5, t.getRut());
             statement.execute();
@@ -74,8 +74,8 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, name = ? WHERE rut = ?");
             statement.setString(1,user.getMail());
             statement.setString(2,user.getPassword());
-            statement.setString(4, user.getName());
-            statement.setString(5, user.getRut());
+            statement.setString(3, user.getName());
+            statement.setString(4, user.getRut());
             statement.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);

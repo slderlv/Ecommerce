@@ -18,11 +18,6 @@ public class Admin extends User implements ICategoryAdmin,ICommentsAdmin,IUsersA
         
     }
     @Override
-    public void editCategory() {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
     public void deleteCategory() {
         // TODO Auto-generated method stub
         
