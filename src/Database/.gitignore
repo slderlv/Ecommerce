@@ -2,3 +2,9 @@
 /ISQLRepository.class
 /SQLClientService.class
 /SQLConnection.class
+/ISQLCreate.class
+/ISQLDelete.class
+/ISQLRead.class
+/ISQLUpdate.class
+/ISQLProductService.class
+/SQLCategoryService.class

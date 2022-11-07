@@ -7,6 +7,7 @@ public class ClientBuilder implements IUserBuilder{
     private int number;
     private String mail;
     private Transactions transactions;
+    private String address;
 
     // + LISTAS
     @Override
@@ -40,9 +41,13 @@ public class ClientBuilder implements IUserBuilder{
     public void setTransactions(Transactions transactions){
         this.transactions = transactions;
     }
+    
+    public void setAddress(String address){
+    	this.address = address;
+    }
 
     public Client getResult(){
-        return new Client (rut, name, password, mail, number, transactions);
+        return new Client (rut, name, password, mail, number, transactions, address);
     }
     //setNumber
     //get --> llama al constructor

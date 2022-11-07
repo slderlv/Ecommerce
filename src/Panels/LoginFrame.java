@@ -186,7 +186,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     AdminBuilder adminBuilder = new AdminBuilder();
                     UserDirector.getUserDirector().createUser(adminBuilder,format ); 
                     Admin admin = adminBuilder.getResult();
-                    MenuAdminFrame af = new MenuAdminFrame();
+                    MenuAdminEdit af = new MenuAdminEdit();
                     af.setVisible(true);
                     this.setVisible(false);
                 }
@@ -196,7 +196,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     ClientBuilder clientBuilder = new ClientBuilder();
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
-                    ClientFrame cf = new ClientFrame();
+                    ClientFrame cf = new ClientFrame(client);
                     cf.setVisible(true);
                     this.setVisible(false);
                 }
@@ -270,5 +270,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JTextField usernameText;
+    private static Client client;
     // End of variables declaration//GEN-END:variables
 }
