@@ -23,7 +23,6 @@ public class SQLBuyService implements ISQLRead<Client> {
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM buys INNER JOIN products_buys ON buys.id = products_buys.buy_id  WHERE user_rut=? AND state = 'COMPRADO'");
             statement.setString(1,t.getRut());
-            
             ResultSet response = statement.executeQuery();
             return response;
         }catch (SQLException e){
