@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import Domain.Product;
+import Domain.ProductInfo;
 
 public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Product>, ISQLDelete<Product>, ISQLRead<String>{
 
@@ -46,15 +47,45 @@ public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Produ
         return null;
 	}
 
+	public ResultSet lastId() {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT id FROM products ORDER BY id ASC LIMIT 1");
+            ResultSet response = statement.executeQuery();
+            return response;
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+        return null;
+	}
+		
 	@Override
 	public void delete(Product t) {
-		// TODO Auto-generated method stub
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM producto WHERE id = ?");
+            statement.setInt(1, t.getId());
+            statement.executeQuery();            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+        
 		
 	}
 
 	@Override
 	public void update(Product t) {
-		// TODO Auto-generated method stub
+		String sql = "UPDATE products SET name = ?, price = ?, description = ?, stock = ?, img_path = ?";
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement(sql);
+            ProductInfo product = t.getInfo();
+            statement.setString(1, product.getName());
+            statement.setInt(2, product.getPrice());
+            statement.setString(3, product.getDescription());
+            statement.setInt(4, product.getStock());
+            statement.setString(5,product.getImg_path());
+            statement.executeQuery();            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
 		
 	}
 	
