@@ -1,13 +1,13 @@
 package Domain;
 
-public class CardsInfo {
+public class CardInfo {
 	private int id;
 	private int cvv;
 	private int carNumber;
 	private int expirationMonth;
 	private int expirationDay;
 	
-	public CardsInfo(int id, int cvv, int carNumber, int expirationMonth, int expirationDay) {
+	public CardInfo(int id, int cvv, int carNumber, int expirationMonth, int expirationDay) {
 		this.id = id;
 		this.cvv = cvv;
 		this.carNumber = carNumber;
