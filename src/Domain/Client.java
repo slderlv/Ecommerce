@@ -9,8 +9,9 @@ public class Client extends User{
     private String address;    
     private ArrayList<Card> cards;
     private String img_path;
-	public Client(int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path) {
-		super();
+   
+	public Client(String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path) {
+		super(rut, name, password, mail);
 		this.number = number;
 		this.transactions = transactions;
 		this.address = address;

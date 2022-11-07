@@ -11,7 +11,7 @@ public class ClientBuilder implements IUserBuilder{
     private Transactions transactions;
     private String address;
     private ArrayList<Card> cards;
-
+    private String img_path ;
     // + LISTAS
     @Override
     public void setRut(String rut) {
@@ -50,7 +50,7 @@ public class ClientBuilder implements IUserBuilder{
     }
 
     public Client getResult(){
-        return new Client (rut, name, password, mail, number, transactions, address,cards);
+        return new Client (rut, name, password, mail,number, transactions, address, cards, img_path);
     }
     //setNumber
     //get --> llama al constructor
