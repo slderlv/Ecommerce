@@ -9,8 +9,18 @@ import javax.swing.JOptionPane;
 import Domain.Product;
 import Domain.ProductInfo;
 
-public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Product>, ISQLDelete<Product>, ISQLRead<String>{
+public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Product>, ISQLDelete<Product>, ISQLRead<String>{
 
+	private static SQLProductService service = null;
+
+    private SQLProductService(){}
+	static public SQLProductService getSQLProductService() {
+        if (service == null) {
+            service = new SQLProductService();
+        }
+        return service;
+    }	
+	
 	public void create(String category) {
 		// TODO Auto-generated method stub
 		try{  
@@ -46,24 +56,14 @@ public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Produ
         }
         return null;
 	}
-
-	public ResultSet lastId() {
-		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT id FROM products ORDER BY id ASC LIMIT 1");
-            ResultSet response = statement.executeQuery();
-            return response;
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
-        }
-        return null;
-	}
 		
 	@Override
 	public void delete(Product t) {
+		//BORRAR TODO DESPUES (si se elimina el producto)
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM producto WHERE id = ?");
             statement.setInt(1, t.getId());
-            statement.executeQuery();            
+            statement.execute();            
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -82,7 +82,7 @@ public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Produ
             statement.setString(3, product.getDescription());
             statement.setInt(4, product.getStock());
             statement.setString(5,product.getImg_path());
-            statement.executeQuery();            
+            statement.execute();            
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
