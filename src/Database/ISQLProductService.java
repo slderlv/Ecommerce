@@ -37,7 +37,7 @@ public class ISQLProductService implements ISQLCreate<String> , ISQLUpdate<Produ
 	
 	public ResultSet read() {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE category=?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products");
             ResultSet response = statement.executeQuery();
             return response;
         }catch (SQLException e){
