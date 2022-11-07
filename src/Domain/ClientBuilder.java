@@ -1,5 +1,7 @@
 package Domain;
 
+import java.util.ArrayList;
+
 public class ClientBuilder implements IUserBuilder{
     private String rut;
     private String name;
@@ -8,6 +10,7 @@ public class ClientBuilder implements IUserBuilder{
     private String mail;
     private Transactions transactions;
     private String address;
+    private ArrayList<Card> cards;
 
     // + LISTAS
     @Override
@@ -47,7 +50,7 @@ public class ClientBuilder implements IUserBuilder{
     }
 
     public Client getResult(){
-        return new Client (rut, name, password, mail, number, transactions, address);
+        return new Client (rut, name, password, mail, number, transactions, address,cards);
     }
     //setNumber
     //get --> llama al constructor

@@ -7,7 +7,15 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String>{
+	private static SQLCategoryService service = null;
 
+    private SQLCategoryService(){}
+	static public SQLCategoryService getSQLCategoryService() {
+        if (service == null) {
+            service = new SQLCategoryService();
+        }
+        return service;
+    }
 	@Override
 	public void create(String t) {
 		try{  
