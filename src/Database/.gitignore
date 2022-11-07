@@ -8,3 +8,6 @@
 /ISQLUpdate.class
 /ISQLProductService.class
 /SQLCategoryService.class
+/SQLBuyService.class
+/SQLProductService.class
+/SQLShoppingCart.class
