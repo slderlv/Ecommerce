@@ -5,12 +5,14 @@ public class Client extends User{
     private int number;
     private Transactions transactions;
     private String address;
+    
     public Client(String rut, String name, String password, String mail, int number, Transactions transactions, String address) {
         super(rut, name, password, mail);
         this.number = number;
         this.transactions = transactions;
         this.address = address;
     }
+    
     public int getNumber() {
         return number;
     }
