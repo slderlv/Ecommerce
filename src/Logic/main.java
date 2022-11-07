@@ -10,8 +10,7 @@ public class main {
 		// loginFrame.setVisible(true);
 		
 		// Client Frame example
-		Domain.Client client = new Domain.Client("15234156-8", "Pedro", "123123", "correo@algo.com", 949314109, null, "La Florida #153",null);
-		// QUIEN FUE ??? XDDDD
+		Domain.Client client = new Domain.Client("15234156-8", "Pedro", "123123", "correo@algo.com", 949314109, null, "La Florida #153",null, null);
 		Panels.ClientFrame cf = new ClientFrame(client);
 		cf.setVisible(true);
 		
