@@ -33,6 +33,10 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM category WHERE name = ?");
             statement.setString(1,t);
             statement.execute();
+            
+            PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = 'NO-ASIGNADO' WHERE category = ?");
+            statementProducts.setString(1, t);
+            statementProducts.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -50,6 +54,20 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 		return null;
 	}
 	
-	
+	public void update(String categoryName, String newCategoryName) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE category SET name = ? WHERE name = ?");
+            statement.setString(1, newCategoryName);
+            statement.setString(2, categoryName);
+            statement.execute();
+            
+            PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = ? WHERE category = ?");
+            statementProducts.setString(1, newCategoryName);
+            statementProducts.setString(2, categoryName);
+            statementProducts.execute();
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+	}
 
 }
