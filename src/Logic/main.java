@@ -7,8 +7,9 @@ import Panels.*;
 public class main {
 	public static void main(String[] args) {	
 		
-		System system = System.getSystem();
+		SystemService system = SystemService.getSystem();
 		system.refreshLists();
+		System.out.println(system.getCategorys());
 		system.start();
 		//system.refreshLists();
 		//system.start();

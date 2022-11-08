@@ -10,18 +10,18 @@ import Domain.Product;
 import Domain.ProductInfo;
 import Panels.LoginFrame;
 
-public class System {
+public class SystemService {
 	private ArrayList<Product> products;
 	private ArrayList<String> categorys;
-	private static System service = null;
-	private System() {
+	private static SystemService service = null;
+	private SystemService() {
 		products = null;
 		categorys = null;
 	}
 
-	static public System getSystem() {
+	static public SystemService getSystem() {
         if (service == null) {
-            service = new System();
+            service = new SystemService();
         }
         return service;
     }	

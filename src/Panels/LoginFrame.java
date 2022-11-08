@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.serial.SQLOutputImpl;
 
-import Logic.System;
+import Logic.SystemService;
 import Domain.Admin;
 import Domain.Client;
 
@@ -33,7 +33,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        System.getSystem().refreshLists();
+        SystemService.getSystem().refreshLists();
     }
 
     /**
