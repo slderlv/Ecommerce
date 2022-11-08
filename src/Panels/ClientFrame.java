@@ -5,7 +5,18 @@
 package Panels;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
 import Assets.JTextFieldLimit;
 import Domain.Client;
 
@@ -376,7 +387,7 @@ public class ClientFrame extends javax.swing.JFrame {
         );
 
         userPhoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
+        userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/juan_bekios.jpeg")))); // NOI18N
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -447,37 +458,31 @@ public class ClientFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     	dispose();
     	LoginFrame lf = new LoginFrame();
     	lf.setVisible(true);
     }
     
     private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     	dispose();
     	ProductListFrame plf = new ProductListFrame();
     	plf.setVisible(true);
     }  
 
     private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     	dispose();
     	ShoppingCart sc = new ShoppingCart();
     	sc.setVisible(true);
     }
     
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     	dispose();
     	ShoppingHistory sh = new ShoppingHistory();
     	sh.setVisible(true);
     }
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     	// Edit to save changes
-    	
         if(editButton.getText().equals("Editar datos")) {
             
         	passwordField.setEditable(true);
@@ -531,27 +536,33 @@ public class ClientFrame extends javax.swing.JFrame {
         	// UPDATE BASE DE DATOS AQUI ----------------------------------------------
         	String password = new String(passwordField.getPassword());
         	String address = addressField.getText();
-        	String number = phoneNumberField.getText().substring(3); // ignore +56
-        	System.out.println(number);
-        	
+        	String number = phoneNumberField.getText().substring(3); // ignore +56	
         	// ------------------------------------------------------------------------
         }
-        
     }                                    
 
     private void userPhotoMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        // TODO add your handling code here:
-    	JFileChooser jf = new JFileChooser();
-        jf.setMultiSelectionEnabled(false);
-        if(jf.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
-            String fileName = jf.getSelectedFile().getName();
-            String path = "src/images/"+fileName+".png";
-            //rsdragdropfiles.RSDragDropFiles.setCopiar(jf.getSelectedFile().toString(),path);
-            //userPhotoPanel.setIcon(new javax.swing.ImageIcon("src/images/"+fileName+".png"));
-        }
+    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Seleccione una imagen");
+		jfc.setAcceptAllFileFilterUsed(false);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg", "gif");
+		jfc.addChoosableFileFilter(filter);
+		int returnValue = jfc.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			// System.out.println(jfc.getSelectedFile().getPath());
+			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
+	        userPhoto.setIcon(userIcon);
+			userPhoto.repaint();
+		}
     }                                      
     
-    public static boolean phoneNumberIsValid(String t) {
+    private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
+    	Image img = imageIcon.getImage();
+		img = img.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+	}
+
+	public static boolean phoneNumberIsValid(String t) {
     	if(!t.startsWith("+56")){
     		return false;
     	}
