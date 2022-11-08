@@ -15,8 +15,8 @@ public class SystemService {
 	private ArrayList<String> categorys;
 	private static SystemService service = null;
 	private SystemService() {
-		products = null;
-		categorys = null;
+		products = new ArrayList<Product>();
+		categorys =  new ArrayList<String>();
 	}
 
 	static public SystemService getSystem() {
