@@ -2,6 +2,8 @@ package Panels;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+
+import Assets.ArrayToString;
 import Domain.Product;
 public class MenuAdminEdit extends javax.swing.JFrame {
 
@@ -161,7 +163,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         categoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         categoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
         categoryComboBox.setMaximumRowCount(20);
-        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(getStringArray(categoriesList)));
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
 
         productListButton.setBackground(new java.awt.Color(255, 174, 167));
         productListButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -254,14 +256,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private String[] getStringArray(LinkedList<String> categoriesList2) {
-		// TODO Auto-generated method stub
-    	String[] array = new String[categoriesList.size()];
-    	for(int i=0; i<categoriesList.size(); i++) {
-    		array[i] = categoriesList.get(i);
-    	}
-		return array;
-	}
+
 
 	private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
@@ -288,13 +283,13 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     private void addCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     	categoriesList.add(addCategoryField.getText());
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(getStringArray(categoriesList)));
+    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
     }         
     
     private void deleteCategoryButtonActionPerformed(ActionEvent evt) {
 		// TODO add your handling code here:
     	categoriesList.remove(deleteCategoryField.getText());
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(getStringArray(categoriesList)));
+    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
 	}
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
