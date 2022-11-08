@@ -1,5 +1,10 @@
 package Panels;
 
+import java.util.ArrayList;
+
+import Assets.ArrayToString;
+import Logic.SystemService;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -15,9 +20,13 @@ public class ProductListFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddProductFrame
      */
+	private ArrayList<String> categorys;
     public ProductListFrame() {
+    	SystemService.getSystem().refreshLists();
+    	categorys = SystemService.getSystem().getCategorys();
         initComponents();
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -72,7 +81,7 @@ public class ProductListFrame extends javax.swing.JFrame {
         filterText.setPreferredSize(new java.awt.Dimension(73, 32));
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categorys)));
         jComboBox1.setPreferredSize(new java.awt.Dimension(256, 32));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
