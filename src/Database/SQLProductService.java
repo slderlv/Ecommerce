@@ -24,7 +24,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	public void create(String category) {
 		// TODO Auto-generated method stub
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path) VALUES (default,null,null,null,null,?,null");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path,blocked) VALUES (default,null,null,null,null,?,null,false");
             statement.setString(1,category);
             statement.execute();
         }catch (SQLException e){
@@ -35,7 +35,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	@Override
 	public ResultSet read(String t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE category=?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE category=? AND blocked = false");
             statement.setString(1,t);
             
             ResultSet response = statement.executeQuery();
@@ -48,7 +48,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	
 	public ResultSet read() {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE blocked = false");
             ResultSet response = statement.executeQuery();
             return response;
         }catch (SQLException e){
@@ -61,7 +61,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	public void delete(Product t) {
 		//BORRAR TODO DESPUES (si se elimina el producto)
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE producto SET blocked = true WHERE id = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET blocked = true WHERE id = ?");
             statement.setInt(1, t.getId());
             statement.execute();            
         }catch (SQLException e){
@@ -93,6 +93,17 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE name Like ?");
             statement.setString(1, t.getInfo().getName() + "%");
+            ResultSet response = statement.executeQuery();
+            return response;            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		return null;
+	}
+	
+	public ResultSet lastId() {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * products order by id asc LIMIT 1");
             ResultSet response = statement.executeQuery();
             return response;            
         }catch (SQLException e){

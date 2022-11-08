@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.serial.SQLOutputImpl;
 
+import Logic.System;
 import Domain.Admin;
 import Domain.Client;
 
@@ -32,6 +33,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        System.getSystem().refreshLists();
     }
 
     /**
@@ -73,7 +75,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 174, 167));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setText("¿No tienes cuenta? Regístrate aquí");
+        jButton1.setText("ï¿½No tienes cuenta? Regï¿½strate aquï¿½");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Register(evt);
@@ -82,13 +84,13 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 174, 167));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setText("Iniciar Sesión");
+        jButton2.setText("Iniciar Sesiï¿½n");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     Login(evt);
                 } catch (Exception e) {
-                    System.out.println("oli");
+                    //System.out.println("oli");
                 }
             }
         });
@@ -165,7 +167,7 @@ public class LoginFrame extends javax.swing.JFrame {
     	String password = passwordText.getText();
     	
     	if(password.isEmpty() || user.isEmpty()) {
-    		errorLogin.setText("Falta algún campo");
+    		errorLogin.setText("Falta algï¿½n campo");
     		
     	}else {
             user = RutFormat.formatToDatabase(user);
@@ -182,6 +184,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 String mail = rs.getString("mail");
                 if (validation.equals("t")){
                     //Admin 
+                	//BUILD ASSET
                     format = name + ","+ mail + ","+ password + ","+ rut;
                     AdminBuilder adminBuilder = new AdminBuilder();
                     UserDirector.getUserDirector().createUser(adminBuilder,format ); 
@@ -192,6 +195,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 }
                 else{
                     //Client 
+                	//BUILD ASSET
                     format = name + "," + mail + ","+ password + ","+ rut;
                     ClientBuilder clientBuilder = new ClientBuilder();
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
@@ -201,7 +205,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     this.setVisible(false);
                 }
             } else {
-                errorLogin.setText("Cuenta o contraseña incorrecta");
+                errorLogin.setText("Cuenta o contraseï¿½a incorrecta");
 
             }
     		

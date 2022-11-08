@@ -7,14 +7,12 @@ public class Product {
 	private int buy_quantity;
 	private ProductInfo info;
 	private ArrayList<Comment> comments;
-	private ArrayList<String> specifications;
-	public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity, ArrayList<String> specifications) {
+	public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity) {
 		super();
 		this.info = info;
 		this.id = id;
 		this.comments = comments;
 		this.buy_quantity = buy_quantity;
-		this.specifications = specifications;
 	}
 	public ProductInfo getInfo() {
 		return info;
@@ -35,12 +33,6 @@ public class Product {
 		this.comments = comments;
 	}
 
-	public ArrayList<String> getSpecifications() {
-		return specifications;
-	}
-	public void setSpecifications(ArrayList<String> specifications) {
-		this.specifications = specifications;
-	}
 	public int getBuy_quantity() {
 		return buy_quantity;
 	}
