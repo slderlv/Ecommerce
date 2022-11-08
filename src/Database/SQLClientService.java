@@ -25,11 +25,10 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void create(User t) {
         // Register
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path) VALUES (?,false,?,?,null,?,null)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path,street,blocked) VALUES (?,false,null,?,null,?,null,null,false)");
             statement.setString(1,t.getRut());
-            statement.setString(2,t.getName());  
-            statement.setString(3,t.getPassword());   
-            statement.setString(4,t.getMail()); 
+            statement.setString(2,t.getPassword());   
+            statement.setString(3,t.getMail()); 
             statement.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
@@ -40,7 +39,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public ResultSet read(User t) {
         // login
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM users WHERE rut=? and password=?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM users WHERE rut=? and password=? AND blocked = false");
             statement.setString(1,t.getRut());
             statement.setString(2,t.getPassword());
             ResultSet response = statement.executeQuery();
@@ -55,12 +54,14 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void update(Client t) {
         // EDIT
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, phone_number = ?, name = ? WHERE rut = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, phone_number = ?, name = ?, address = ?, img_path = ? WHERE rut = ?");
             statement.setString(1,t.getMail());
             statement.setString(2,t.getPassword());
             statement.setInt(3, t.getNumber());
             statement.setString(4, t.getName());
-            statement.setString(5, t.getRut());
+            statement.setString(5, t.getAddress());
+            statement.setString(6, t.getImg_path());
+            statement.setString(7, t.getRut());
             statement.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
@@ -86,8 +87,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void delete(User t) {
         // Admin/USER Delete
         try{
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM users WHERE rut = ?");
-            //+ borrar todo lo relacionado a EL USUARIO
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET blocked = true WHERE rut = ?");
             statement.setString(1, t.getRut());
             statement.execute();
         } catch (SQLException e){
