@@ -19,7 +19,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	@Override
 	public void create(String t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO category(name) VALUES (?)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO categorys(name) VALUES (?)");
             statement.setString(1,t);
             statement.execute();
         }catch (SQLException e){
@@ -30,7 +30,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	@Override
 	public void delete(String t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM category WHERE name = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM categorys WHERE name = ?");
             statement.setString(1,t);
             statement.execute();
             
@@ -45,7 +45,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	
 	public ResultSet read() {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT  * FROM category");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT  * FROM categorys");
             ResultSet response = statement.executeQuery();
             return response;
         }catch (SQLException e){
@@ -56,7 +56,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	
 	public void update(String categoryName, String newCategoryName) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE category SET name = ? WHERE name = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE categorys SET name = ? WHERE name = ?");
             statement.setString(1, newCategoryName);
             statement.setString(2, categoryName);
             statement.execute();
