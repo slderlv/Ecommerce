@@ -4,6 +4,13 @@
  */
 package Panels;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
 /**
  *
  * @author sketc
@@ -169,7 +176,25 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void editImage(java.awt.event.ActionEvent evt) {                           
         // TODO add your handling code here:
-    }                          
+    	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Seleccione una imagen");
+		jfc.setAcceptAllFileFilterUsed(false);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg", "gif");
+		jfc.addChoosableFileFilter(filter);
+		int returnValue = jfc.showOpenDialog(null);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			// System.out.println(jfc.getSelectedFile().getPath());
+			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
+			image.setIcon(userIcon);
+			image.repaint();
+		}
+    } 
+    
+    private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
+    	Image img = imageIcon.getImage();
+		img = img.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+	}
 
     private void AddStock(java.awt.event.ActionEvent evt) {                          
         // TODO add your handling code here:
@@ -185,6 +210,9 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void Back(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
+    	dispose();
+    	MenuAdminEdit mae = new MenuAdminEdit();
+    	mae.setVisible(true);
     }                     
 
     /**
