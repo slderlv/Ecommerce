@@ -61,7 +61,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	public void delete(Product t) {
 		//BORRAR TODO DESPUES (si se elimina el producto)
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM producto WHERE id = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE producto SET blocked = true WHERE id = ?");
             statement.setInt(1, t.getId());
             statement.execute();            
         }catch (SQLException e){
