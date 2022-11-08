@@ -89,4 +89,16 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 		
 	}
 	
+	public ResultSet read2(Product t) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE name Like ?");
+            statement.setString(1, t.getInfo().getName() + "%");
+            ResultSet response = statement.executeQuery();
+            return response;            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		return null;
+	}
+	
 }
