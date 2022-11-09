@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import Assets.ArrayToString;
+import Assets.GhostText;
 import Database.SQLCategoryService;
 import Domain.Client;
 import Domain.Product;
@@ -47,7 +48,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addUserButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Menï¿½ de Administrador");
+        setTitle("Ecommerce - Menú de Administrador");
         setBackground(new java.awt.Color(255, 212, 171));
         setBounds(new java.awt.Rectangle(0, 0, 1280, 720));
         setResizable(false);
@@ -74,8 +75,8 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         editUserField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editUserField.setForeground(new java.awt.Color(0, 0, 0));
         editUserField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        editUserField.setText("editUserField");
         editUserField.setCaretColor(new java.awt.Color(0, 0, 0));
+        new GhostText(editUserField," Ingrese rut");
 
         editUserButton.setBackground(new java.awt.Color(255, 174, 167));
         editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -94,14 +95,14 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addCategoryField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryField.setForeground(new java.awt.Color(0, 0, 0));
         addCategoryField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        addCategoryField.setText("addCategoryField");
+        new GhostText(addCategoryField," Ingrese nombre");
         addCategoryField.setAutoscrolls(false);
         addCategoryField.setCaretColor(new java.awt.Color(0, 0, 0));
 
         addCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         addCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categorï¿½a");
+        addCategoryButton.setText("Agregar categoría");
         addCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addCategoryButton.setFocusPainted(false);
         addCategoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -114,7 +115,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         deleteCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         deleteCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         deleteCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar categorï¿½a");
+        deleteCategoryButton.setText("Eliminar categoría");
         deleteCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteCategoryButton.setFocusPainted(false);
         deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +147,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         editProductField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editProductField.setForeground(new java.awt.Color(0, 0, 0));
         editProductField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        editProductField.setText("editProductField");
+        new GhostText(editProductField," Ingrese id");
         editProductField.setAutoscrolls(false);
         editProductField.setCaretColor(new java.awt.Color(0, 0, 0));
 
@@ -177,7 +178,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         editCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         editCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        editCategoryButton.setText("Editar categorï¿½a");
+        editCategoryButton.setText("Editar categoría");
         editCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editCategoryButton.setFocusPainted(false);
         editCategoryButton.addActionListener(new java.awt.event.ActionListener() {
