@@ -17,8 +17,11 @@ public class main {
 		//system.start();
 		SystemService system = SystemService.getSystem();
 		system.refreshLists();
-		MenuAdminEdit mae = new MenuAdminEdit();
-		mae.setVisible(true);
+		ProductListFrame pf = new ProductListFrame();
+		pf.setVisible(true);
+		
+		//MenuAdminEdit mae = new MenuAdminEdit();
+		//mae.setVisible(true);
 		
 		//DEV WORKING AGAIN
 	}

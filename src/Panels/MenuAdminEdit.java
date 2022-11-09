@@ -12,11 +12,9 @@ import Logic.SystemService;
 public class MenuAdminEdit extends javax.swing.JFrame {
 
     public MenuAdminEdit() {
-    	// categoriesList = SystemService.getSystem().getCategorys();
-    	categoriesList = new ArrayList<>();
-        categoriesList.add("Tecnología");
-        categoriesList.add("Cocina");
-        categoriesList.add("Muebles");
+
+    	categoriesList = SystemService.getSystem().getCategorys();
+        
     	initComponents();
     }
 
@@ -49,7 +47,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addUserButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Menú de Administrador");
+        setTitle("Ecommerce - Menï¿½ de Administrador");
         setBackground(new java.awt.Color(255, 212, 171));
         setBounds(new java.awt.Rectangle(0, 0, 1280, 720));
         setResizable(false);
@@ -103,7 +101,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         addCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categoría");
+        addCategoryButton.setText("Agregar categorï¿½a");
         addCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addCategoryButton.setFocusPainted(false);
         addCategoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -116,7 +114,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         deleteCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         deleteCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         deleteCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar categoría");
+        deleteCategoryButton.setText("Eliminar categorï¿½a");
         deleteCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteCategoryButton.setFocusPainted(false);
         deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +177,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         editCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         editCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         editCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        editCategoryButton.setText("Editar categoría");
+        editCategoryButton.setText("Editar categorï¿½a");
         editCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editCategoryButton.setFocusPainted(false);
         editCategoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +347,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
 
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-    	JOptionPane.showMessageDialog(null, "Producto creado con éxito, iD: "+2124124+" y categoría: "+addProductComboBox.getSelectedItem());
+    	JOptionPane.showMessageDialog(null, "Producto creado con ï¿½xito, iD: "+2124124+" y categorï¿½a: "+addProductComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
     }                               
@@ -370,12 +368,14 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     private void editCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     	String category = editCategoryComboBox.getSelectedItem().toString();
-    	category = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categoría", JOptionPane.INFORMATION_MESSAGE);
-    	if(category!=null) {
-    		if(!category.strip().equals("")) {
-    			updateCategoriesList(editCategoryComboBox.getSelectedItem().toString(), category);
-            	updateComboBoxes();
-    		}
+    	String newCategory = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categorï¿½a", JOptionPane.INFORMATION_MESSAGE);
+    	SQLCategoryService.getSQLCategoryService().update(category, newCategory);
+    	
+    
+    	if(!category.strip().equals("")) {
+    		SystemService.getSystem().refreshCategory();
+    		categoriesList = SystemService.getSystem().getCategorys();
+            updateComboBoxes();
     	}
     }  
     

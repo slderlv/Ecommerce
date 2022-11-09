@@ -3,10 +3,7 @@ package Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
-import Domain.Client;
 import Domain.Product;
 
 public class SQLCommentsService implements ISQLRead<Product>{
@@ -30,7 +27,7 @@ public class SQLCommentsService implements ISQLRead<Product>{
 	            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
 	        }
 			return null;
-		}
 	}
+	
 	
 }
