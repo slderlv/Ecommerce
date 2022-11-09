@@ -217,7 +217,7 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void Save(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
-    	
+    	SQLProductService.getSQLProductService().update(p);
     }                     
 
     private void RemoveProduct(java.awt.event.ActionEvent evt) {                               
