@@ -39,9 +39,11 @@ public class SystemService {
 	}
 	
 	
-	public void refreshLists() {
+	public void refreshCategory() {
 		
 		try {
+			categorys = null;
+			categorys = new ArrayList<String>();
 			ResultSet response = SQLCategoryService.getSQLCategoryService().read();
 			while (response.next()) {
 				String name = response.getString("name");
@@ -63,6 +65,15 @@ public class SystemService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void refreshProducts() {
+		return;
+	}
+	
+	public void refreshLists() {
+		refreshCategory();
+		refreshProducts();
 	}
 	
 	public void start() {

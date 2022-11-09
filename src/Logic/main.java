@@ -15,7 +15,8 @@ public class main {
 		*/
 		//system.refreshLists();
 		//system.start();
-	
+		SystemService system = SystemService.getSystem();
+		system.refreshLists();
 		MenuAdminEdit mae = new MenuAdminEdit();
 		mae.setVisible(true);
 		

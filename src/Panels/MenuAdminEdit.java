@@ -1,23 +1,23 @@
 package Panels;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import Assets.ArrayToString;
+import Database.SQLCategoryService;
 import Domain.Client;
 import Domain.Product;
+import Logic.SystemService;
 public class MenuAdminEdit extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
     public MenuAdminEdit() {
+    	categoriesList = SystemService.getSystem().getCategorys();
     	// SE DEBERIA PASARLE UNA LINKED LIST AL FRAME, ESTO ES EJEMPLO
-    	categoriesList = new LinkedList<>();
-    	categoriesList.add("Hogar");
-    	categoriesList.add("Patio");
-    	categoriesList.add("Tecnología");
-    	categoriesList.add("Vestuario");
+    	
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -46,7 +46,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         productListButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menú de Administrador");
+        setTitle("Menï¿½ de Administrador");
         setBackground(new java.awt.Color(255, 212, 171));
         setBounds(new java.awt.Rectangle(0, 0, 1280, 720));
 
@@ -95,7 +95,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         addCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categoría");
+        addCategoryButton.setText("Agregar categorï¿½a");
         addCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addCategoryButton.setFocusPainted(false);
         addCategoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -151,7 +151,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         deleteCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
         deleteCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         deleteCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar Categoría");
+        deleteCategoryButton.setText("Eliminar Categorï¿½a");
         deleteCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteCategoryButton.setFocusPainted(false);
         deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +164,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         categoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         categoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
         categoryComboBox.setMaximumRowCount(20);
-        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
 
         productListButton.setBackground(new java.awt.Color(255, 174, 167));
         productListButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -273,7 +273,7 @@ public class MenuAdminEdit extends javax.swing.JFrame {
 
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-    	JOptionPane.showMessageDialog(null, "Producto creado con éxito, iD: "+2124124+" y categoría: "+categoryComboBox.getSelectedItem());
+    	JOptionPane.showMessageDialog(null, "Producto creado con ï¿½xito, iD: "+2124124+" y categorï¿½a: "+categoryComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
     	
@@ -288,14 +288,19 @@ public class MenuAdminEdit extends javax.swing.JFrame {
 
     private void addCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
-    	categoriesList.add(addCategoryField.getText());
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
+    	//categoriesList.add(addCategoryField.getText());
+    	SQLCategoryService.getSQLCategoryService().create(addCategoryField.getText());
+    	SystemService.getSystem().refreshCategory();
+    	categoriesList = SystemService.getSystem().getCategorys();
+    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
     }         
     
     private void deleteCategoryButtonActionPerformed(ActionEvent evt) {
 		// TODO add your handling code here:
-    	categoriesList.remove(deleteCategoryField.getText());
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringLinked(categoriesList)));
+    	SQLCategoryService.getSQLCategoryService().delete(deleteCategoryField.getText());
+    	SystemService.getSystem().refreshCategory();
+    	categoriesList = SystemService.getSystem().getCategorys();
+    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
 	}
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -364,6 +369,6 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     private javax.swing.JTextField editUserField;
     private javax.swing.JButton productListButton;
     private javax.swing.JPanel jPanel1;
-    private LinkedList<String> categoriesList;
+    private ArrayList<String> categoriesList;
     // End of variables declaration                   
 }

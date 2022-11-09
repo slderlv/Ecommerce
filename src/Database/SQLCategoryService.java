@@ -30,6 +30,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	@Override
 	public void delete(String t) {
 		try{  
+			if(t.equals("NO-ASIGNADO"))return;
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM categorys WHERE name = ?");
             statement.setString(1,t);
             statement.execute();
