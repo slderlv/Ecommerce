@@ -40,7 +40,6 @@ public class SystemService {
 	
 	
 	public void refreshCategory() {
-		
 		try {
 			categorys = null;
 			categorys = new ArrayList<String>();
@@ -49,26 +48,87 @@ public class SystemService {
 				String name = response.getString("name");
 				categorys.add(name);
 			}
-			//ResultSet response = SQLProductService.getSQLProductService().read();
-			//while(response.next()) {
-			//	int id = response.getInt("id");
-			//	int price = response.getInt("price");
-			//	int stock = response.getInt("stock");
-			//	String name = response.getString("name");
-			//	String description = response.getString("description");
-			//	String category = response.getString("category");
-			//	String img_path = response.getString("img_path");
-			//	ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
-			//	Product product = new Product(info, id, null, 0);
-			//	// faltan los comments 
-			//}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void refreshProducts() {
+		ResultSet response = SQLProductService.getSQLProductService().read();
+		products = null;
+		products = new ArrayList<Product>();
+		try {
+			
+			while(response.next()) {
+				int id = response.getInt("id");
+				int price = response.getInt("price");
+				int stock = response.getInt("stock");
+				String name = response.getString("name");
+				String description = response.getString("description");
+				String category = response.getString("category");
+				String img_path = response.getString("img_path");
+				ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
+				Product product = new Product(info, id, null, 0);
+				products.add(product);
+				// faltan los comments 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return;
+	}
+	
+	public void refreshProducts(String categoryFilter, String filter) {
+		if (filter.equals("")) {
+			ResultSet response = SQLProductService.getSQLProductService().read();
+			products = null;
+			products = new ArrayList<Product>();
+			try {
+				
+				while(response.next()) {
+					int id = response.getInt("id");
+					int price = response.getInt("price");
+					int stock = response.getInt("stock");
+					String name = response.getString("name");
+					String description = response.getString("description");
+					String category = response.getString("category");
+					String img_path = response.getString("img_path");
+					ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
+					Product product = new Product(info, id, null, 0);
+					if(category.equals(categoryFilter))products.add(product);
+					// faltan los comments 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}else {
+			ResultSet response = SQLProductService.getSQLProductService().read2(filter);
+			products = null;
+			products = new ArrayList<Product>();
+			try {
+				
+				while(response.next()) {
+					int id = response.getInt("id");
+					int price = response.getInt("price");
+					int stock = response.getInt("stock");
+					String name = response.getString("name");
+					String description = response.getString("description");
+					String category = response.getString("category");
+					String img_path = response.getString("img_path");
+					ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
+					Product product = new Product(info, id, null, 0);
+					if(category.equals(categoryFilter))products.add(product);
+					// faltan los comments 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			
+		}
+
 	}
 	
 	public void refreshLists() {

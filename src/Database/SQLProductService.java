@@ -73,15 +73,16 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 
 	@Override
 	public void update(Product t) {
-		String sql = "UPDATE products SET name = ?, price = ?, description = ?, stock = ?, img_path = ?";
+		String sql = "UPDATE products SET name = ?, price = ?, description = ?, stock = ?, img_path = ? WHERE id = ?";
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement(sql);
             ProductInfo product = t.getInfo();
-            statement.setString(1, product.getName());
+            statement.setString(1, product.getName().toLowerCase());
             statement.setInt(2, product.getPrice());
             statement.setString(3, product.getDescription());
             statement.setInt(4, product.getStock());
             statement.setString(5,product.getImg_path());
+            statement.setInt(6, t.getId());
             statement.execute();            
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
@@ -89,10 +90,10 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 		
 	}
 	
-	public ResultSet read2(Product t) {
+	public ResultSet read2(String name) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE name Like ?");
-            statement.setString(1, t.getInfo().getName() + "%");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE name Like ? AND blocked = false");
+            statement.setString(1, "%" + name + "%");
             ResultSet response = statement.executeQuery();
             return response;            
         }catch (SQLException e){

@@ -3,6 +3,8 @@ package Panels;
 import java.util.ArrayList;
 
 import Assets.ArrayToString;
+import Database.SQLProductService;
+import Domain.Product;
 import Logic.SystemService;
 
 /*
@@ -21,9 +23,11 @@ public class ProductListFrame extends javax.swing.JFrame {
      * Creates new form AddProductFrame
      */
 	private ArrayList<String> categorys;
+	private ArrayList<Product> products;
     public ProductListFrame() {
     	SystemService.getSystem().refreshLists();
     	categorys = SystemService.getSystem().getCategorys();
+    	products = SystemService.getSystem().getProducts();
         initComponents();
         setLocationRelativeTo(null);
         
@@ -66,7 +70,7 @@ public class ProductListFrame extends javax.swing.JFrame {
         menuPanel.setPreferredSize(new java.awt.Dimension(1024, 512));
 
         productList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = ArrayToString.getStringArrayFromProducts(products);
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -170,7 +174,15 @@ public class ProductListFrame extends javax.swing.JFrame {
     }                                        
 
     private void Filter(java.awt.event.ActionEvent evt) {                        
-        // TODO add your handling code here:
+        String filter = filterText.getText();
+        String category = (String) jComboBox1.getSelectedItem();
+        SystemService.getSystem().refreshProducts(category,filter);
+        products = SystemService.getSystem().getProducts();
+        productList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = ArrayToString.getStringArrayFromProducts(products);
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
     }                       
 
     private void Back(java.awt.event.ActionEvent evt) {                      
