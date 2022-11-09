@@ -25,7 +25,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void create(User t) {
         // Register
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path,street,blocked) VALUES (?,false,null,?,null,?,null,null,false)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path,street,blocked) VALUES (?,false,'',?,null,?,null,'',false)");
             statement.setString(1,t.getRut());
             statement.setString(2,t.getPassword());   
             statement.setString(3,t.getMail()); 
@@ -54,7 +54,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void update(Client t) {
         // EDIT
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, phone_number = ?, name = ?, address = ?, img_path = ? WHERE rut = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE users SET mail = ?, password = ?, phone_number = ?, name = ?, street = ?, img_path = ? WHERE rut = ?");
             statement.setString(1,t.getMail());
             statement.setString(2,t.getPassword());
             statement.setInt(3, t.getNumber());

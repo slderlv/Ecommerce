@@ -198,6 +198,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 	//BUILD ASSET
                     format = name + "," + mail + ","+ password + ","+ rut;
                     ClientBuilder clientBuilder = new ClientBuilder();
+                    clientBuilder.setAddress(rs.getString("street"));
+                    clientBuilder.setName(rs.getString("name"));
+                    clientBuilder.setNumber(rs.getInt("phone_number"));
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
                     ClientFrame cf = new ClientFrame(client);

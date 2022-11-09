@@ -6,7 +6,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import Domain.Client;
+import Assets.CryptoService;
 import Assets.ValidateMail;
+import Database.SQLClientService;
 
 public class ClientFrame extends JFrame {
 
@@ -65,7 +67,7 @@ public class ClientFrame extends JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Menú de usuario");
+        setTitle("Ecommerce - Menï¿½ de usuario");
         setResizable(false);
 
         jPanel1.setBackground(mainColor);
@@ -250,14 +252,14 @@ public class ClientFrame extends JFrame {
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordLabel.setText("Contraseña");
+        passwordLabel.setText("Contraseï¿½a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        addressLabel.setText("Dirección");
+        addressLabel.setText("Direcciï¿½n");
         addressLabel.setOpaque(true);
 
         addressField.setEditable(false);
@@ -277,19 +279,19 @@ public class ClientFrame extends JFrame {
         
         invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPasswordLabel.setForeground(mainColor);
-        invalidPasswordLabel.setText("Contraseña inválida");
+        invalidPasswordLabel.setText("Contraseï¿½a invï¿½lida");
         invalidAddressLabel.setVisible(true);
 
         invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidAddressLabel.setForeground(mainColor);
-        invalidAddressLabel.setText("Dirección inválida");
+        invalidAddressLabel.setText("Direcciï¿½n invï¿½lida");
         invalidAddressLabel.setVisible(true);
 
         passwordField.setEditable(false);
         passwordField.setBackground(secondColor);
         passwordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordField.setForeground(black);
-        passwordField.setText(client.getPassword());
+        passwordField.setText(CryptoService.getCryptoService().decodePassword(client.getPassword()));
         passwordField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         nameField.setEditable(false);
@@ -383,7 +385,7 @@ public class ClientFrame extends JFrame {
 
         invalidEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidEmailLabel.setForeground(mainColor);
-        invalidEmailLabel.setText("Correo inválido");
+        invalidEmailLabel.setText("Correo invï¿½lido");
         invalidEmailLabel.setVisible(true);
 
         emailLabel.setBackground(secondColor);
@@ -402,7 +404,7 @@ public class ClientFrame extends JFrame {
 
         invalidPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPhoneNumberLabel.setForeground(mainColor);
-        invalidPhoneNumberLabel.setText("Teléfono inválido");
+        invalidPhoneNumberLabel.setText("Telï¿½fono invï¿½lido");
         invalidPhoneNumberLabel.setVisible(true);
 
         phoneNumberField.setEditable(false);
@@ -416,7 +418,7 @@ public class ClientFrame extends JFrame {
         phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        phoneNumberLabel.setText("Teléfono");
+        phoneNumberLabel.setText("Telï¿½fono");
         phoneNumberLabel.setOpaque(true);
 
         GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
@@ -602,9 +604,16 @@ public class ClientFrame extends JFrame {
         	editButton.setText("Editar datos");
         	
         	// UPDATE BASE DE DATOS AQUI ----------------------------------------------
-        	String password = new String(passwordField.getPassword());
-        	String address = addressField.getText();
-        	String number = phoneNumberField.getText().substring(3); // ignore +56	
+        	try {
+        		String name = nameField.getText();
+        		String password = CryptoService.getCryptoService().encodePassword(new String(passwordField.getPassword()));
+        		String address = addressField.getText();
+        		int number = Integer.parseInt(phoneNumberField.getText().substring(3)); // ignore +56	
+        		client.setPassword(password); client.setAddress(address); client.setNumber(number);client.setName(name);
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        	}
+        	SQLClientService.getSQLLoginService().update(client);
         	// ------------------------------------------------------------------------
         }
     }                                    
