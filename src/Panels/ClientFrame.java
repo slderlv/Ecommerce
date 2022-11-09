@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Panels;
 
 import java.awt.Color;
@@ -347,7 +343,9 @@ public class ClientFrame extends JFrame {
         );
 
         userPhoto.setHorizontalAlignment(SwingConstants.CENTER);
-        userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/juan_bekios.jpeg"))));
+        if(client.getImg_path()==null||client.getImg_path()=="") {
+        	userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/juan_bekios.jpeg"))));
+        }
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

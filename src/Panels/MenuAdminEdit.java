@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import Assets.ArrayToString;
+import Domain.Client;
 import Domain.Product;
 public class MenuAdminEdit extends javax.swing.JFrame {
 
@@ -260,8 +261,13 @@ public class MenuAdminEdit extends javax.swing.JFrame {
 
 	private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
+		
+		// if(editUserField existe en la base de datos){
+		// editUserField.getText() buscar
+		// }
 		dispose();
-		ManageUser manageUser = new ManageUser();
+		Client client = new Client("15234156-8", "Pedro", "123123", "correo@algo.com", 949314109, null, "La Florida #153",null, null);
+		ManageUser manageUser = new ManageUser(client);
 		manageUser.setVisible(true);
     }                                              
 
