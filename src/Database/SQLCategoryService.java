@@ -31,13 +31,14 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	public void delete(String t) {
 		try{  
 			if(t.equals("NO-ASIGNADO"))return;
+			PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = 'NO-ASIGNADO' WHERE category = ?");
+			statementProducts.setString(1, t);
+			statementProducts.execute();
+			
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM categorys WHERE name = ?");
             statement.setString(1,t);
             statement.execute();
             
-            PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = 'NO-ASIGNADO' WHERE category = ?");
-            statementProducts.setString(1, t);
-            statementProducts.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
@@ -57,15 +58,16 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	
 	public void update(String categoryName, String newCategoryName) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE categorys SET name = ? WHERE name = ?");
-            statement.setString(1, newCategoryName);
-            statement.setString(2, categoryName);
+			create(newCategoryName);
+			PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = ? WHERE category = ?");
+			statementProducts.setString(1, newCategoryName);
+			statementProducts.setString(2, categoryName);
+			statementProducts.execute();
+			
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE FROM categorys WHERE name = ?");
+            statement.setString(1, categoryName);
             statement.execute();
             
-            PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = ? WHERE category = ?");
-            statementProducts.setString(1, newCategoryName);
-            statementProducts.setString(2, categoryName);
-            statementProducts.execute();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
