@@ -5,11 +5,13 @@
 package Panels;
 
 import java.awt.Image;
-
+import Domain.Product;
+import Database.SQLProductService;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -20,8 +22,19 @@ public class EditProduct extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+	private Product p;
+	
     public EditProduct() {
         initComponents();
+    }
+    public EditProduct(Product p) {
+    	this.p = p;
+    	initComponents();
+    	SpinnerNumberModel snm = new SpinnerNumberModel();
+    	snm.setMinimum(0);
+    	snm.setValue(p.getInfo().getStock());
+    	stock.setModel(snm);
+    	
     }
 
     /**
@@ -68,12 +81,12 @@ public class EditProduct extends javax.swing.JFrame {
 
         nameProduct.setBackground(new java.awt.Color(255, 174, 167));
         nameProduct.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        nameProduct.setText("Nombre del Producto");
+        nameProduct.setText(p.getInfo().getName());//nameProduct si p es null, no corre la ventana
 
         description.setBackground(new java.awt.Color(255, 174, 167));
         description.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         description.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        description.setText("Descripcion");
+        description.setText(p.getInfo().getDescription());//description si p es null, no corre la ventana
 
         addStockButtom.setBackground(new java.awt.Color(228, 0, 180));
         addStockButtom.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -104,7 +117,7 @@ public class EditProduct extends javax.swing.JFrame {
 
         price.setBackground(new java.awt.Color(255, 174, 167));
         price.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        price.setText("precio");
+        price.setText(p.getInfo().getPrice()+"");//si p es null, no corre la ventana
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,14 +211,19 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void AddStock(java.awt.event.ActionEvent evt) {                          
         // TODO add your handling code here:
+    	int st = Integer.parseInt(stock.getValue().toString());
+    	p.getInfo().setStock(st);
     }                         
 
     private void Save(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
+    	
     }                     
 
     private void RemoveProduct(java.awt.event.ActionEvent evt) {                               
         // TODO add your handling code here:
+    	SQLProductService.getSQLProductService().delete(p);
+    	
     }                              
 
     private void Back(java.awt.event.ActionEvent evt) {                      
