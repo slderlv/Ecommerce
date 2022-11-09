@@ -11,15 +11,13 @@ import Domain.Product;
 import Logic.SystemService;
 public class MenuAdminEdit extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
     public MenuAdminEdit() {
-    	categoriesList = SystemService.getSystem().getCategorys();
-    	// SE DEBERIA PASARLE UNA LINKED LIST AL FRAME, ESTO ES EJEMPLO
-    	
-        initComponents();
-        setLocationRelativeTo(null);
+    	// categoriesList = SystemService.getSystem().getCategorys();
+    	categoriesList = new ArrayList<>();
+        categoriesList.add("Tecnología");
+        categoriesList.add("Cocina");
+        categoriesList.add("Muebles");
+    	initComponents();
     }
 
     /**
@@ -32,78 +30,32 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        editUserButton = new javax.swing.JButton();
-        addProductButton = new javax.swing.JButton();
-        editProductButton = new javax.swing.JButton();
-        addCategoryButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        addCategoryField = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         editUserField = new javax.swing.JTextField();
-        editProductField = new javax.swing.JTextField();
-        deleteCategoryField = new javax.swing.JTextField();
+        editUserButton = new javax.swing.JButton();
+        addCategoryField = new javax.swing.JTextField();
+        addCategoryButton = new javax.swing.JButton();
         deleteCategoryButton = new javax.swing.JButton();
-        categoryComboBox = new javax.swing.JComboBox<>();
-        productListButton = new javax.swing.JButton();
+        addProductComboBox = new javax.swing.JComboBox<>();
+        addProductButton = new javax.swing.JButton();
+        editProductField = new javax.swing.JTextField();
+        editProductButton = new javax.swing.JButton();
+        editCategoryComboBox = new javax.swing.JComboBox<>();
+        deleteCategoryComboBox = new javax.swing.JComboBox<>();
+        editCategoryButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        showProductListButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menï¿½ de Administrador");
+        setTitle("Ecommerce - Menú de Administrador");
         setBackground(new java.awt.Color(255, 212, 171));
         setBounds(new java.awt.Rectangle(0, 0, 1280, 720));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 212, 171));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-
-        editUserButton.setBackground(new java.awt.Color(255, 174, 167));
-        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editUserButton.setForeground(new java.awt.Color(0, 0, 0));
-        editUserButton.setText("Administrar usuarios");
-        editUserButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editUserButton.setFocusPainted(false);
-        editUserButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        editUserButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUserButtonActionPerformed(evt);
-            }
-        });
-
-        addProductButton.setBackground(new java.awt.Color(255, 174, 167));
-        addProductButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addProductButton.setForeground(new java.awt.Color(0, 0, 0));
-        addProductButton.setText("Agregar producto");
-        addProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addProductButton.setFocusPainted(false);
-        addProductButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        addProductButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addProductButtonActionPerformed(evt);
-            }
-        });
-
-        editProductButton.setBackground(new java.awt.Color(255, 174, 167));
-        editProductButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editProductButton.setForeground(new java.awt.Color(0, 0, 0));
-        editProductButton.setText("Editar producto");
-        editProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editProductButton.setFocusPainted(false);
-        editProductButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        editProductButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editProductButtonActionPerformed(evt);
-            }
-        });
-
-        addCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
-        addCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categorï¿½a");
-        addCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addCategoryButton.setFocusPainted(false);
-        addCategoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        addCategoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCategoryButtonActionPerformed(evt);
-            }
-        });
 
         backButton.setBackground(new java.awt.Color(255, 212, 171));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
@@ -118,6 +70,28 @@ public class MenuAdminEdit extends javax.swing.JFrame {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(255, 212, 171));
+
+        editUserField.setBackground(new java.awt.Color(255, 255, 255));
+        editUserField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editUserField.setForeground(new java.awt.Color(0, 0, 0));
+        editUserField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        editUserField.setText("editUserField");
+        editUserField.setCaretColor(new java.awt.Color(0, 0, 0));
+
+        editUserButton.setBackground(new java.awt.Color(255, 174, 167));
+        editUserButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editUserButton.setForeground(new java.awt.Color(0, 0, 0));
+        editUserButton.setText("Administrar usuarios");
+        editUserButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editUserButton.setFocusPainted(false);
+        editUserButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserButtonActionPerformed(evt);
+            }
+        });
+
         addCategoryField.setBackground(new java.awt.Color(255, 255, 255));
         addCategoryField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryField.setForeground(new java.awt.Color(0, 0, 0));
@@ -126,12 +100,49 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         addCategoryField.setAutoscrolls(false);
         addCategoryField.setCaretColor(new java.awt.Color(0, 0, 0));
 
-        editUserField.setBackground(new java.awt.Color(255, 255, 255));
-        editUserField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        editUserField.setForeground(new java.awt.Color(0, 0, 0));
-        editUserField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        editUserField.setText("editUserField");
-        editUserField.setCaretColor(new java.awt.Color(0, 0, 0));
+        addCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
+        addCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
+        addCategoryButton.setText("Agregar categoría");
+        addCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addCategoryButton.setFocusPainted(false);
+        addCategoryButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCategoryButtonActionPerformed(evt);
+            }
+        });
+
+        deleteCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
+        deleteCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        deleteCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
+        deleteCategoryButton.setText("Eliminar categoría");
+        deleteCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteCategoryButton.setFocusPainted(false);
+        deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCategoryButtonActionPerformed(evt);
+            }
+        });
+
+        addProductComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        addProductComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addProductComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        addProductComboBox.setMaximumRowCount(20);
+        addProductComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
+
+        addProductButton.setBackground(new java.awt.Color(255, 174, 167));
+        addProductButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addProductButton.setForeground(new java.awt.Color(0, 0, 0));
+        addProductButton.setText("Agregar producto");
+        addProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addProductButton.setFocusPainted(false);
+        addProductButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProductButtonActionPerformed(evt);
+            }
+        });
 
         editProductField.setBackground(new java.awt.Color(255, 255, 255));
         editProductField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -141,42 +152,142 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         editProductField.setAutoscrolls(false);
         editProductField.setCaretColor(new java.awt.Color(0, 0, 0));
 
-        deleteCategoryField.setBackground(new java.awt.Color(255, 255, 255));
-        deleteCategoryField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteCategoryField.setForeground(new java.awt.Color(0, 0, 0));
-        deleteCategoryField.setText("deleteCategoryField");
-        deleteCategoryField.setCaretColor(new java.awt.Color(0, 0, 0));
-        deleteCategoryField.setCaretPosition(16);
-
-        deleteCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
-        deleteCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar Categorï¿½a");
-        deleteCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleteCategoryButton.setFocusPainted(false);
-        deleteCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+        editProductButton.setBackground(new java.awt.Color(255, 174, 167));
+        editProductButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editProductButton.setForeground(new java.awt.Color(0, 0, 0));
+        editProductButton.setText("Editar producto");
+        editProductButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editProductButton.setFocusPainted(false);
+        editProductButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCategoryButtonActionPerformed(evt);
+                editProductButtonActionPerformed(evt);
             }
         });
 
-        categoryComboBox.setBackground(new java.awt.Color(255, 255, 255));
-        categoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        categoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
-        categoryComboBox.setMaximumRowCount(20);
-        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
+        editCategoryComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        editCategoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editCategoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        editCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
 
-        productListButton.setBackground(new java.awt.Color(255, 174, 167));
-        productListButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        productListButton.setForeground(new java.awt.Color(0, 0, 0));
-        productListButton.setText("Ver Lista de Productos");
-        productListButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        productListButton.setFocusPainted(false);
-        productListButton.addActionListener(new java.awt.event.ActionListener() {
+        
+        deleteCategoryComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        deleteCategoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        deleteCategoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        deleteCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
+
+        editCategoryButton.setBackground(new java.awt.Color(255, 174, 167));
+        editCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editCategoryButton.setForeground(new java.awt.Color(0, 0, 0));
+        editCategoryButton.setText("Editar categoría");
+        editCategoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editCategoryButton.setFocusPainted(false);
+        editCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productListButtonActionPerformed(evt);
+                editCategoryButtonActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editProductField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addProductComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editProductButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(editUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(addCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(addCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(deleteCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deleteCategoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteCategoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteCategoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addProductComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editProductField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 212, 171));
+
+        showProductListButton.setBackground(new java.awt.Color(255, 174, 167));
+        showProductListButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        showProductListButton.setForeground(new java.awt.Color(0, 0, 0));
+        showProductListButton.setText("Ver lista de productos");
+        showProductListButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showProductListButton.setFocusPainted(false);
+        showProductListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showProductListButtonActionPerformed(evt);
+            }
+        });
+
+        addUserButton.setBackground(new java.awt.Color(255, 174, 167));
+        addUserButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addUserButton.setForeground(new java.awt.Color(0, 0, 0));
+        addUserButton.setText("Agregar usuario");
+        addUserButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addUserButton.setFocusPainted(false);
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(showProductListButton, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+            .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(showProductListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,59 +295,25 @@ public class MenuAdminEdit extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(375, 375, 375)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(deleteCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editProductField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editProductButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addCategoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addProductButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(editUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(productListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(373, 373, 373))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(backButton)
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteCategoryField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editProductField, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(productListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(227, 227, 227)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 102, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,22 +321,21 @@ public class MenuAdminEdit extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-
-
-	private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
 		
 		// if(editUserField existe en la base de datos){
@@ -273,35 +349,52 @@ public class MenuAdminEdit extends javax.swing.JFrame {
 
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-    	JOptionPane.showMessageDialog(null, "Producto creado con ï¿½xito, iD: "+2124124+" y categorï¿½a: "+categoryComboBox.getSelectedItem());
+    	JOptionPane.showMessageDialog(null, "Producto creado con éxito, iD: "+2124124+" y categoría: "+addProductComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
-    	
-    }                                                
+    }                               
+    
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    	dispose();
+    	RegisterFrame registerFrame = new RegisterFrame();
+    	registerFrame.setVisible(true);
+    } 
 
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     	EditProduct editProduct = new EditProduct();
     	editProduct.setVisible(true);
-    	
     }                                                 
 
-    private void addCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void editCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    	String category = editCategoryComboBox.getSelectedItem().toString();
+    	category = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categoría", JOptionPane.INFORMATION_MESSAGE);
+    	if(category!=null) {
+    		if(!category.strip().equals("")) {
+    			updateCategoriesList(editCategoryComboBox.getSelectedItem().toString(), category);
+            	updateComboBoxes();
+    		}
+    	}
+    }  
+    
+	private void addCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     	//categoriesList.add(addCategoryField.getText());
     	SQLCategoryService.getSQLCategoryService().create(addCategoryField.getText());
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
-    }         
+    	updateComboBoxes();
+	}         
     
     private void deleteCategoryButtonActionPerformed(ActionEvent evt) {
 		// TODO add your handling code here:
-    	SQLCategoryService.getSQLCategoryService().delete(deleteCategoryField.getText());
+    	SQLCategoryService.getSQLCategoryService().delete(deleteCategoryComboBox.getSelectedItem().toString());
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();
-    	categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
-	}
+    	updateComboBoxes();
+    }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
@@ -310,14 +403,26 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     	lf.setVisible(true);
     }                                          
 
-                                        
-
-    private void productListButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void showProductListButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	dispose();
     	ProductListFrame productListFrame = new ProductListFrame();
     	productListFrame.setVisible(true);
-    }                                        
+    }                 
+    
+    private void updateComboBoxes() {
+    	editCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
+    	deleteCategoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
+    	addProductComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));    	
+    }
+
+	private void updateCategoriesList(String oldName, String newName) {
+		for(int i=0; i<categoriesList.size(); i++) {
+			if(categoriesList.get(i).equals(oldName)) {
+				categoriesList.set(i, newName);
+			}
+		}
+	}
 
     /**
      * @param args the command line arguments
@@ -359,16 +464,21 @@ public class MenuAdminEdit extends javax.swing.JFrame {
     private javax.swing.JButton addCategoryButton;
     private javax.swing.JTextField addCategoryField;
     private javax.swing.JButton addProductButton;
+    private javax.swing.JComboBox<String> addProductComboBox;
+    private javax.swing.JButton addUserButton;
     private javax.swing.JButton backButton;
-    private javax.swing.JComboBox<String> categoryComboBox;
     private javax.swing.JButton deleteCategoryButton;
-    private javax.swing.JTextField deleteCategoryField;
+    private javax.swing.JComboBox<String> deleteCategoryComboBox;
+    private javax.swing.JButton editCategoryButton;
+    private javax.swing.JComboBox<String> editCategoryComboBox;
     private javax.swing.JButton editProductButton;
     private javax.swing.JTextField editProductField;
     private javax.swing.JButton editUserButton;
     private javax.swing.JTextField editUserField;
-    private javax.swing.JButton productListButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton showProductListButton;
     private ArrayList<String> categoriesList;
     // End of variables declaration                   
 }
