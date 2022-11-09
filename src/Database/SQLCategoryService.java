@@ -23,7 +23,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
             statement.setString(1,t);
             statement.execute();
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+            JOptionPane.showMessageDialog(null, "Error, la categoria ya existe");
         }
 	}
 

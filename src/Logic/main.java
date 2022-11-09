@@ -17,8 +17,9 @@ public class main {
 		//system.start();
 		SystemService system = SystemService.getSystem();
 		system.refreshLists();
-		ProductListFrame pf = new ProductListFrame();
-		pf.setVisible(true);
+		system.start();
+		//ProductListFrame pf = new ProductListFrame();
+		//pf.setVisible(true);
 		
 		//MenuAdminEdit mae = new MenuAdminEdit();
 		//mae.setVisible(true);

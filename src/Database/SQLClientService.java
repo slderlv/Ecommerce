@@ -31,7 +31,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
             statement.setString(3,t.getMail()); 
             statement.execute();
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+            JOptionPane.showMessageDialog(null, "Error, el rut ya existe");
         }
     }
 
