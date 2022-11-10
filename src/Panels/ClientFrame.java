@@ -626,7 +626,7 @@ public class ClientFrame extends JFrame {
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			// System.out.println(jfc.getSelectedFile().getPath());
+			// .println(jfc.getSelectedFile().getPath());
 			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
 	        userPhoto.setIcon(userIcon);
 			userPhoto.repaint();

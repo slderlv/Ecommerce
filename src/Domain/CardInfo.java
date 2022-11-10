@@ -7,10 +7,10 @@ public class CardInfo {
 	private int expirationMonth;
 	private int expirationDay;
 	
-	public CardInfo(int id, int cvv, int carNumber, int expirationMonth, int expirationDay) {
+	public CardInfo(int id, int cvv, int cardNumber, int expirationMonth, int expirationDay) {
 		this.id = id;
 		this.cvv = cvv;
-		this.carNumber = carNumber;
+		this.carNumber = cardNumber;
 		this.expirationMonth = expirationMonth;
 		this.expirationDay = expirationDay;
 	}

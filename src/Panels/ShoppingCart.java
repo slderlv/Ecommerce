@@ -14,6 +14,7 @@ public class ShoppingCart extends javax.swing.JFrame {
      */
     public ShoppingCart() {
         initComponents();
+        setLocationRelativeTo(null);
         String[] columnNames = {"Nombre","Unidades","Subtotal"};
         String[] rowData = {"hola","20","12414"};
         

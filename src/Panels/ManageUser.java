@@ -16,7 +16,6 @@ public class ManageUser extends JFrame {
      * Creates new form ClientFrame
      */
     public ManageUser(Client client) {
-    	System.out.println("ola");
     	ManageUser.client = client;
         initComponents();
     }

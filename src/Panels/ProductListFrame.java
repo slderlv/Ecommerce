@@ -33,7 +33,6 @@ public class ProductListFrame extends javax.swing.JFrame {
     	SystemService.getSystem().refreshLists();
     	categorys = SystemService.getSystem().getCategorys();
     	products = SystemService.getSystem().getProducts();
-    	System.out.println(user.getClass());
         initComponents();
         setLocationRelativeTo(null);
         

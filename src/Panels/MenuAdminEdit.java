@@ -346,14 +346,11 @@ public class MenuAdminEdit extends JFrame {
 		// }
 		dispose();
 		ResultSet response = SQLClientService.getSQLClientService().read(RutFormat.formatToDatabase(editUserField.getText()));
-		System.out.println("OLA");
 		try {
 			if (response.next()) {
 				//String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path)
-				System.out.println("OLA ANTES");
 				Client client = new Client(response.getString("rut"), response.getString("name"), CryptoService.getCryptoService().decodePassword(response.getString("password")), response.getString("mail"), response.getInt("phone_number"), null, response.getString("street"),null, "");
-				System.out.println("OLA");
-				System.out.println(RutFormat.formatToDatabase(response.getString("rut")));
+				//
 				ManageUser manageUser = new ManageUser(client);
 				manageUser.setVisible(true);
 			}
@@ -367,12 +364,9 @@ public class MenuAdminEdit extends JFrame {
     	dispose();
     	SQLProductService.getSQLProductService().create(addProductComboBox.getSelectedItem().toString());
     	ResultSet response = SQLProductService.getSQLProductService().lastId();
-    	System.out.println(response);
-    	System.out.println("ola");
     	try {
     		if(response.next()) {
     			int id = response.getInt("id");
-    			System.out.println();
     			ProductInfo info = new ProductInfo("",0,"",0,addProductComboBox.getSelectedItem().toString(),"");
     			Product p = new Product(info,id,null,0);
     			EditProduct ep = new EditProduct(p);	
@@ -402,7 +396,6 @@ public class MenuAdminEdit extends JFrame {
     	ResultSet response = SQLProductService.getSQLProductService().readById(id);
     	try {
 			if(response.next()) {
-	    			//System.out.println();
 	    			ProductInfo info = new ProductInfo(response.getString("name"),response.getInt("price"),response.getString("description"),response.getInt("stock"),response.getString("category"),response.getString("img_path"));
 	    			Product p = new Product(info,id,null,0);
 	    			EditProduct ep = new EditProduct(p);	

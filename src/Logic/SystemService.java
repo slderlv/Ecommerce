@@ -70,9 +70,9 @@ public class SystemService {
 				ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
 				Product product = new Product(info, id, null, 0);
 				products.add(product);
-				Boolean blocked = response.getBoolean("blocked");
-				System.out.print(id + " ");
-				System.out.println(blocked);
+				//Boolean blocked = response.getBoolean("blocked");
+				//System.out.print(id + " ");
+				//System.out.println(blocked);
 				// faltan los comments 
 			}
 		} catch (SQLException e) {
