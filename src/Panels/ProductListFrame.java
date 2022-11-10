@@ -194,19 +194,14 @@ public class ProductListFrame extends javax.swing.JFrame {
     private void Back(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
     	dispose();
-    	prevFrame(user);
+    	if(user instanceof Admin) {
+    		MenuAdminEdit mae = new MenuAdminEdit(null);
+        	mae.setVisible(true);
+    	} else {
+    		ClientFrame cf = new ClientFrame((Client) user);
+        	cf.setVisible(true);
+    	}
     } 
-    
-
-	private static void prevFrame(Client client) {
-    	ClientFrame cf = new ClientFrame(client);
-    	cf.setVisible(true);
-    }
-    
-    private static void prevFrame(Admin admin) {
-    	MenuAdminEdit mae = new MenuAdminEdit(admin);
-    	mae.setVisible(true);
-    }
 
     /**
      * @param args the command line arguments
