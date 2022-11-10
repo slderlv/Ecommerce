@@ -4,7 +4,10 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+
+import Assets.CryptoService;
 import Assets.ValidateMail;
+import Database.SQLClientService;
 import Domain.Client;
 
 public class ManageUser extends JFrame {
@@ -522,7 +525,13 @@ public class ManageUser extends JFrame {
     	// UPDATE BASE DE DATOS AQUI ----------------------------------------------
     	String password = new String(passwordField.getPassword());
     	String address = addressField.getText();
-    	String number = phoneNumberField.getText().substring(3); // ignore +56	
+    	int number = Integer.parseInt(phoneNumberField.getText().substring(3)); // ignore +56
+    
+    	client.setPassword(CryptoService.getCryptoService().encodePassword(password));
+    	client.setAddress(address);
+    	client.setNumber(number);
+    	client.setName(nameField.getText());
+    	SQLClientService.getSQLClientService().update(client);
     	// ------------------------------------------------------------------------
     }                                          
 
@@ -579,7 +588,8 @@ public class ManageUser extends JFrame {
     }                 
     
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-    	
+    	SQLClientService.getSQLClientService().delete(client);
+    	JOptionPane.showMessageDialog(null, "BLOQUEADO");
     }
 
     /**

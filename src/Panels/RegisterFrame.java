@@ -257,7 +257,8 @@ public class RegisterFrame extends javax.swing.JFrame {
             if(RutFormat.isValid(rut)) {
             	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
             	User us = SQLClientServiceAdapter.userData(format);
-            	SQLClientService.getSQLClientService().create(us);   	
+            	SQLClientService.getSQLClientService().create(us);   
+            	JOptionPane.showMessageDialog(null, "REGISTRADO");
         }
         }
         else {
