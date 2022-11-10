@@ -7,6 +7,7 @@ public class Purchase extends javax.swing.JFrame {
      */
     public Purchase() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
