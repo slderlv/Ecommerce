@@ -528,7 +528,7 @@ public class ClientFrame extends JFrame {
 
     private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	ShoppingCart sc = new ShoppingCart();
+    	ShoppingCart sc = new ShoppingCart(null);
     	sc.setVisible(true);
     }
     

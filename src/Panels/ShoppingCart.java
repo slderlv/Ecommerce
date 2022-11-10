@@ -1,34 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Panels;
+
+import java.util.ArrayList;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import Domain.Product;
 
 public class ShoppingCart extends javax.swing.JFrame {
 
     /**
      * Creates new form Cart
      */
-    public ShoppingCart() {
-        initComponents();
-        setLocationRelativeTo(null);
-        String[] columnNames = {"Nombre","Unidades","Subtotal"};
-        String[] rowData = {"hola","20","12414"};
-        
-        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
-        for(int i=0; i<50; i++){
-        	rowData[0] = i + "";
-            model.addRow(rowData);
-        }
-        
-        shoppingCartTable.setModel(model);
-        for (int c = 0; c < shoppingCartTable.getColumnCount(); c++){
-            Class<?> col_class = shoppingCartTable.getColumnClass(c);
-            shoppingCartTable.setDefaultEditor(col_class, null);        // remove editor
-        }
+    public ShoppingCart(ArrayList<Product> productList) {
+        ShoppingCart.productList = productList;
+    	initComponents();
     }
 
     /**
@@ -73,7 +59,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Unidades", "Subtotal"
             }
         ));
         shoppingCartTable.setGridColor(new java.awt.Color(0, 0, 0));
@@ -247,13 +233,36 @@ public class ShoppingCart extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
+        
+        String[] columnNames = {"Nombre","Unidades","Subtotal"};
+        String[] rowData = new String[3];
+        
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
+        int sum = 0;
+        for(int i=0; i<productList.size(); i++){
+        	rowData[0] = productList.get(i).getInfo().getName();
+        	rowData[1] = productList.get(i).getBuy_quantity()+"";
+        	rowData[2] = (productList.get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
+        	model.addRow(rowData);
+        	sum+=Integer.parseInt(rowData[2]);
+        }
+        totalAmountField.setText(sum+"");
+        shoppingCartTable.setModel(model);
+        for (int c = 0; c < shoppingCartTable.getColumnCount(); c++){
+            Class<?> col_class = shoppingCartTable.getColumnClass(c);
+            shoppingCartTable.setDefaultEditor(col_class, null);        // remove editor
+        }
+        
+        
         pack();
     }// </editor-fold>                        
     
-    private void selectedRowActionPerformed(ListSelectionEvent evt) {                                                 
-    	String productName = (String) shoppingCartTable.getModel().getValueAt(shoppingCartTable.getSelectedRow(), 0);
-    	selectedProductField.setText(productName);
+    private void selectedRowActionPerformed(ListSelectionEvent evt) {                  
+    	if(shoppingCartTable.getSelectedRowCount()==1) {
+    		String productName = (String) shoppingCartTable.getModel().getValueAt(shoppingCartTable.getSelectedRow(), 0);
+        	selectedProductField.setText(productName);
+    	}
+    	
     } 
     
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -303,7 +312,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShoppingCart().setVisible(true);
+                new ShoppingCart(productList).setVisible(true);
             }
         });
     }
@@ -322,5 +331,6 @@ public class ShoppingCart extends javax.swing.JFrame {
     private javax.swing.JTable shoppingCartTable;
     private javax.swing.JTextField totalAmountField;
     private javax.swing.JLabel totalAmountLabel;
+    private static ArrayList<Product> productList;
     // End of variables declaration                   
 }

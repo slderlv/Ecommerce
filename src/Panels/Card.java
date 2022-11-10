@@ -4,6 +4,8 @@
  */
 package Panels;
 
+import Domain.Client;
+
 /**
  *
  * @author matias valencia
@@ -222,8 +224,8 @@ public class Card extends javax.swing.JFrame {
     
     private void Pay(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
-        SQLCardService sqlcs= SQLCardService.getSQLCardService();
-        Card card = new Card(new CardInfo(sqlcs.read(c),Integer.parseInt(CVV.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText())), c); 
+        // SQLCardService sqlcs= SQLCardService.getSQLCardService();
+        // Card card = new Card(new CardInfo(sqlcs.read(c),Integer.parseInt(CVV.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText())), c); 
     }      
     
 
