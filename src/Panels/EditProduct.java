@@ -6,6 +6,7 @@ package Panels;
 
 import java.awt.Image;
 import Domain.Product;
+import Domain.ProductInfo;
 import Database.SQLProductService;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -247,7 +248,7 @@ public class EditProduct extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 	    
-	ProductInfo pi = new ProductInfo( "name", 0,  "description",  5,  "limpieza", "/ProductIcons/cellphone.png");
+    	ProductInfo pi = new ProductInfo( "name", 0,  "description",  5,  "limpieza", "/ProductIcons/cellphone.png");
     	Product p = new Product( pi,  1, null, 0);
 	    
         try {
@@ -271,7 +272,7 @@ public class EditProduct extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditProduct().setVisible(true);
+                new EditProduct(p).setVisible(true);
             }
         });
     }
