@@ -35,7 +35,7 @@ public class EditProduct extends javax.swing.JFrame {
     	snm.setMinimum(0);
     	snm.setValue(p.getInfo().getStock());
     	stock.setModel(snm);
-    	
+    	setLocationRelativeTo(null);
     }
 
     /**
