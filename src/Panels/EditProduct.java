@@ -222,6 +222,11 @@ public class EditProduct extends javax.swing.JFrame {
 
     private void Save(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
+    	p.getInfo().setDescription(description.getText());
+    	//p.getInfo().setImg_path(getName());
+    	p.getInfo().setName(nameProduct.getText());
+    	p.getInfo().setPrice(Integer.parseInt(price.getText()));
+    	p.getInfo().setStock((Integer) stock.getValue());
     	SQLProductService.getSQLProductService().update(p);
     }                     
 
