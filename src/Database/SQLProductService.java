@@ -104,7 +104,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	
 	public ResultSet lastId() {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * products order by id asc LIMIT 1");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products order by id asc LIMIT 1");
             ResultSet response = statement.executeQuery();
             return response;            
         }catch (SQLException e){

@@ -2,6 +2,8 @@ package Panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -10,9 +12,12 @@ import java.util.logging.Level;
 import Assets.ArrayToString;
 import Assets.GhostText;
 import Database.SQLCategoryService;
+import Database.SQLProductService;
 import Domain.Admin;
 import Domain.Client;
+import Domain.Comment;
 import Domain.Product;
+import Domain.ProductInfo;
 import Logic.SystemService;
 
 public class MenuAdminEdit extends JFrame {
@@ -340,7 +345,25 @@ public class MenuAdminEdit extends JFrame {
 		manageUser.setVisible(true);
     }                                              
 
-    private void addProductButtonActionPerformed(ActionEvent evt) {                                                 
+    private void addProductButtonActionPerformed(ActionEvent evt) {    
+    	ResultSet response = SQLProductService.getSQLProductService().lastId();
+    	System.out.println(response);
+    	System.out.println("ola");
+    	try {
+    		if(response.next()) {
+    			int id = response.getInt("id");
+    			ProductInfo info = new ProductInfo("",0,"",0,addProductComboBox.getSelectedItem().toString(),"");
+    			Product p = new Product(info,id,null,0);
+    			EditProduct ep = new EditProduct(p);	
+    			ep.setVisible(true);
+    		}
+    		return;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
+    	//String name, int price, String description, int stock, String category, String img_path
     	JOptionPane.showMessageDialog(null, "Producto creado con �xito, iD: "+2124124+" y categor�a: "+addProductComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
