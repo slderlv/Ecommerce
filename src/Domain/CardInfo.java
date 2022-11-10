@@ -3,16 +3,16 @@ package Domain;
 public class CardInfo {
 	private int id;
 	private int cvv;
-	private int carNumber;
+	private String cardNumber;
 	private int expirationMonth;
-	private int expirationDay;
+	private int expirationYear;
 	
-	public CardInfo(int id, int cvv, int cardNumber, int expirationMonth, int expirationDay) {
+	public CardInfo(int id, int cvv, String cardNumber, int expirationMonth, int expirationYear) {
 		this.id = id;
 		this.cvv = cvv;
-		this.carNumber = cardNumber;
+		this.cardNumber = cardNumber;
 		this.expirationMonth = expirationMonth;
-		this.expirationDay = expirationDay;
+		this.expirationYear = expirationYear;
 	}
 
 	public int getId() {
@@ -31,13 +31,6 @@ public class CardInfo {
 		this.cvv = cvv;
 	}
 
-	public int getCarNumber() {
-		return carNumber;
-	}
-
-	public void setCarNumber(int carNumber) {
-		this.carNumber = carNumber;
-	}
 
 	public int getExpirationMonth() {
 		return expirationMonth;
@@ -47,13 +40,23 @@ public class CardInfo {
 		this.expirationMonth = expirationMonth;
 	}
 
-	public int getExpirationDay() {
-		return expirationDay;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setExpirationDay(int expirationDay) {
-		this.expirationDay = expirationDay;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
+
+	public int getExpirationYear() {
+		return expirationYear;
+	}
+
+	public void setExpirationYear(int expirationYear) {
+		this.expirationYear = expirationYear;
+	}
+
+	
 	
 
 	
