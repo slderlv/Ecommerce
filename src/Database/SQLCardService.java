@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import Domain.Card;
 import Domain.Client;
 
-public class SQLCardService implements ISQLRead<Client>, ISQLCreate<Card>{
+public class SQLCardService implements ISQLRead<Client>{
 	private static SQLCardService service = null;
 
     private SQLCardService(){}
@@ -31,15 +31,20 @@ public class SQLCardService implements ISQLRead<Client>, ISQLCreate<Card>{
 	        }
 			return null;
 	}
-	@Override
-	public void create(Card t) {
+	public void create(Card t,Client client) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards(id,cvv,card_number,expiration_month,expiration_year) VALUES (default,?,?,?,?)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards(cvv,card_number,expiration_month,expiration_year) VALUES (?,?,?,?)");
             statement.setInt(1,t.getCardInfo().getCvv());
             statement.setString(2,t.getCardInfo().getCardNumber());   
             statement.setInt(3,t.getCardInfo().getExpirationMonth()); 
             statement.setInt(4, t.getCardInfo().getExpirationYear());
             statement.execute();
+            
+            PreparedStatement statement2 = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards_users(id,user_rut,card_number) VALUES (default,?,?)");
+            statement.setString(1,client.getRut());
+            statement.setString(2,t.getCardInfo().getCardNumber());   
+            statement2.execute();
+            
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error");
         }
