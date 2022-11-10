@@ -125,7 +125,14 @@ public class AdminShoppingCart extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>   
+    
+    private void jButton1(java.awt.event.ActionEvent evt) {                      
+        // TODO add your handling code here:
+    	dispose();
+    	MenuAdminEdit mae = new MenuAdminEdit(null);
+    	mae.setVisible(true);
+    }                    
 
     /**
      * @param args the command line arguments
