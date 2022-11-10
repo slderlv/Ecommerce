@@ -226,11 +226,11 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
         dispose();
-    	if(user instanceof Client) {
+    	if(user==null) {
     		LoginFrame login = new LoginFrame();
             login.setVisible(true);
-        } else {
-        	MenuAdminEdit mae = new MenuAdminEdit((Admin) user);
+        } else { 	
+            MenuAdminEdit mae = new MenuAdminEdit((Admin) user);
         	mae.setVisible(true);
         }
     	

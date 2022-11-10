@@ -226,7 +226,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Login
 
     private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
-    	RegisterFrame rf = new RegisterFrame(client);
+    	RegisterFrame rf = new RegisterFrame(null);
         this.setVisible(false);
         rf.setVisible(true);
         
