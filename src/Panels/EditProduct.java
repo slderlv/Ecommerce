@@ -234,7 +234,7 @@ public class EditProduct extends javax.swing.JFrame {
     private void Back(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
     	dispose();
-    	MenuAdminEdit mae = new MenuAdminEdit();
+    	MenuAdminEdit mae = new MenuAdminEdit(null);
     	mae.setVisible(true);
     }                     
 

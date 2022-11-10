@@ -10,13 +10,14 @@ import java.util.logging.Level;
 import Assets.ArrayToString;
 import Assets.GhostText;
 import Database.SQLCategoryService;
+import Domain.Admin;
 import Domain.Client;
 import Domain.Product;
 import Logic.SystemService;
 
 public class MenuAdminEdit extends JFrame {
-
-    public MenuAdminEdit() {
+    public MenuAdminEdit(Admin admin) {
+    	MenuAdminEdit.admin = admin;
     	categoriesList = SystemService.getSystem().getCategorys();
     	initComponents();
     }
@@ -43,7 +44,7 @@ public class MenuAdminEdit extends JFrame {
         addUserButton = new JButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Menú de Administrador");
+        setTitle("Ecommerce - Menï¿½ de Administrador");
         setBackground(new Color(255, 212, 171));
         setBounds(new Rectangle(0, 0, 1280, 720));
         setResizable(false);
@@ -97,7 +98,7 @@ public class MenuAdminEdit extends JFrame {
         addCategoryButton.setBackground(new Color(255, 174, 167));
         addCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryButton.setForeground(new Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categoría");
+        addCategoryButton.setText("Agregar categorï¿½a");
         addCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         addCategoryButton.setFocusPainted(false);
         addCategoryButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -110,7 +111,7 @@ public class MenuAdminEdit extends JFrame {
         deleteCategoryButton.setBackground(new Color(255, 174, 167));
         deleteCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         deleteCategoryButton.setForeground(new Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar categoría");
+        deleteCategoryButton.setText("Eliminar categorï¿½a");
         deleteCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deleteCategoryButton.setFocusPainted(false);
         deleteCategoryButton.addActionListener(new ActionListener() {
@@ -173,7 +174,7 @@ public class MenuAdminEdit extends JFrame {
         editCategoryButton.setBackground(new Color(255, 174, 167));
         editCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         editCategoryButton.setForeground(new Color(0, 0, 0));
-        editCategoryButton.setText("Editar categoría");
+        editCategoryButton.setText("Editar categorï¿½a");
         editCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         editCategoryButton.setFocusPainted(false);
         editCategoryButton.addActionListener(new ActionListener() {
@@ -392,7 +393,7 @@ public class MenuAdminEdit extends JFrame {
 
     private void showProductListButtonActionPerformed(ActionEvent evt) {                                         
     	dispose();
-    	ProductListFrame productListFrame = new ProductListFrame();
+    	ProductListFrame productListFrame = new ProductListFrame(admin);
     	productListFrame.setVisible(true);
     }                 
     
@@ -433,7 +434,7 @@ public class MenuAdminEdit extends JFrame {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdminEdit().setVisible(true);
+                new MenuAdminEdit(admin).setVisible(true);
             }
         });
     }
@@ -458,5 +459,6 @@ public class MenuAdminEdit extends JFrame {
     private JPanel jPanel3;
     private JButton showProductListButton;
     private ArrayList<String> categoriesList;
+    private static Admin admin;
     // End of variables declaration                   
 }

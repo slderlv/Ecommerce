@@ -1,10 +1,14 @@
 package Panels;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import Assets.ArrayToString;
 import Database.SQLProductService;
+import Domain.Admin;
+import Domain.Client;
 import Domain.Product;
+import Domain.User;
 import Logic.SystemService;
 
 /*
@@ -24,10 +28,12 @@ public class ProductListFrame extends javax.swing.JFrame {
      */
 	private ArrayList<String> categorys;
 	private ArrayList<Product> products;
-    public ProductListFrame() {
+    public ProductListFrame(User user) {
+    	ProductListFrame.user = user;
     	SystemService.getSystem().refreshLists();
     	categorys = SystemService.getSystem().getCategorys();
     	products = SystemService.getSystem().getProducts();
+    	System.out.println(user.getClass());
         initComponents();
         setLocationRelativeTo(null);
         
@@ -187,7 +193,20 @@ public class ProductListFrame extends javax.swing.JFrame {
 
     private void Back(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
-    }                     
+    	dispose();
+    	prevFrame(user);
+    } 
+    
+
+	private static void prevFrame(Client client) {
+    	ClientFrame cf = new ClientFrame(client);
+    	cf.setVisible(true);
+    }
+    
+    private static void prevFrame(Admin admin) {
+    	MenuAdminEdit mae = new MenuAdminEdit(admin);
+    	mae.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
@@ -219,7 +238,7 @@ public class ProductListFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductListFrame().setVisible(true);
+                new ProductListFrame(user).setVisible(true);
             }
         });
     }
@@ -233,5 +252,6 @@ public class ProductListFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JList<String> productList;
+    private static User user;
     // End of variables declaration                   
 }

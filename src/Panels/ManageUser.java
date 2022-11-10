@@ -206,14 +206,14 @@ public class ManageUser extends JFrame {
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordLabel.setText("Contraseña");
+        passwordLabel.setText("Contraseï¿½a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        addressLabel.setText("Dirección");
+        addressLabel.setText("Direcciï¿½n");
         addressLabel.setOpaque(true);
 
         addressField.setBackground(secondColor);
@@ -244,11 +244,11 @@ public class ManageUser extends JFrame {
 
         invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPasswordLabel.setForeground(mainColor);
-        invalidPasswordLabel.setText("Contraseña inválida");
+        invalidPasswordLabel.setText("Contraseï¿½a invï¿½lida");
 
         invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidAddressLabel.setForeground(mainColor);
-        invalidAddressLabel.setText("Dirección inválida");
+        invalidAddressLabel.setText("Direcciï¿½n invï¿½lida");
 
         GroupLayout jPanel7Layout = new GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -357,16 +357,16 @@ public class ManageUser extends JFrame {
         phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        phoneNumberLabel.setText("Teléfono");
+        phoneNumberLabel.setText("Telï¿½fono");
         phoneNumberLabel.setOpaque(true);
 
         invalidPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPhoneNumberLabel.setForeground(mainColor);
-        invalidPhoneNumberLabel.setText("Teléfono inválido");
+        invalidPhoneNumberLabel.setText("Telï¿½fono invï¿½lido");
 
         invalidEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidEmailLabel.setForeground(mainColor);
-        invalidEmailLabel.setText("Correo inválido");
+        invalidEmailLabel.setText("Correo invï¿½lido");
 
         GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -561,7 +561,7 @@ public class ManageUser extends JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	MenuAdminEdit menuAdminEdit = new MenuAdminEdit();
+    	MenuAdminEdit menuAdminEdit = new MenuAdminEdit(null);
     	menuAdminEdit.setVisible(true);
     }                                          
 

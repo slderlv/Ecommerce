@@ -189,7 +189,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     AdminBuilder adminBuilder = new AdminBuilder();
                     UserDirector.getUserDirector().createUser(adminBuilder,format ); 
                     Admin admin = adminBuilder.getResult();
-                    MenuAdminEdit af = new MenuAdminEdit();
+                    MenuAdminEdit af = new MenuAdminEdit(admin);
                     af.setVisible(true);
                     this.setVisible(false);
                 }

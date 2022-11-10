@@ -522,7 +522,7 @@ public class ClientFrame extends JFrame {
     
     private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	ProductListFrame plf = new ProductListFrame();
+    	ProductListFrame plf = new ProductListFrame(client);
     	plf.setVisible(true);
     }  
 
