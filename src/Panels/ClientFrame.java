@@ -346,7 +346,7 @@ public class ClientFrame extends JFrame {
 
         userPhoto.setHorizontalAlignment(SwingConstants.CENTER);
         if(client.getImg_path()==null||client.getImg_path()=="") {
-        	userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/juan_bekios.jpeg"))));
+        	userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
         }
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
