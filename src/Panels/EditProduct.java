@@ -253,7 +253,7 @@ public class EditProduct extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 	    
-    	ProductInfo pi = new ProductInfo( "name", 0,  "description",  5,  "limpieza", "/ProductIcons/cellphone.png");
+    	ProductInfo pi = new ProductInfo( "name", 0,  "PANTALLA: IPS FullView RGB-W QHD de 5,9 pulgadas 16:9. 2560 x 1440p 2K 441 ppp y 730 nits /n DIMENSIONES: 77,8 x 8,4 x 150,5 mm, 186 gramos/n PROCESADOR: Huawei Kirin 970 /n NÚCLEOS: 8 núcleos 4 x 2,4GHz Cortex A73 + 4 x 1,8 GHz Cortex A53 /n TARJETA GRÁFICA: Mali G72Mp12 (de doce núcleos) /n RAM: 4 GB /n MEMORIA: 64 GB  + microSD /n SISTEMA OPERATIVO: Android 8 Oreo con EMUI 8 /n CONECTIVIDAD: LTE Quad Antenna, 4x4 MIMO+256 AM, Cat.18, DL 3CC, , Wifi a , Dual Bluetooth y NFC /n BATERÍA: 4.000 mAh /n CÁMARA TRASERA:	20 megapíxeles monocromo + 12 megapíxeles RGB dual, f/1.6 + f/1.6 OIS, flash, autofocus híbrido 4-en-1. Lente Leica SUMILUX-G, RAW /n CÁMARA FRONTAL:	8 megapíxeles /n DESTACA: Sensor de huellas IP63, dual SIM 4G",  5,  "limpieza", "/ProductIcons/cellphone.png");
     	Product p = new Product( pi,  1, null, 0);
 	    
         try {
