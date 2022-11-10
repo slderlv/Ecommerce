@@ -24,7 +24,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	public void create(String category) {
 		// TODO Auto-generated method stub
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path,blocked) VALUES (default,null,null,null,null,?,null,false");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path,blocked) VALUES (default,null,null,null,null,?,null,false)");
             statement.setString(1,category);
             statement.execute();
         }catch (SQLException e){
@@ -104,7 +104,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	
 	public ResultSet lastId() {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products order by id asc LIMIT 1");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products order by id desc LIMIT 1");
             ResultSet response = statement.executeQuery();
             return response;            
         }catch (SQLException e){
@@ -112,5 +112,16 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
         }
 		return null;
 	}
-	
+
+	public ResultSet readById(int id ) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM products WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet response = statement.executeQuery();
+            return response;            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		return null;
+	}
 }

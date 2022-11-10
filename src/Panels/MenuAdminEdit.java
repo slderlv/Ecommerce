@@ -346,12 +346,15 @@ public class MenuAdminEdit extends JFrame {
     }                                              
 
     private void addProductButtonActionPerformed(ActionEvent evt) {    
+    	dispose();
+    	SQLProductService.getSQLProductService().create(addProductComboBox.getSelectedItem().toString());
     	ResultSet response = SQLProductService.getSQLProductService().lastId();
     	System.out.println(response);
     	System.out.println("ola");
     	try {
     		if(response.next()) {
     			int id = response.getInt("id");
+    			System.out.println();
     			ProductInfo info = new ProductInfo("",0,"",0,addProductComboBox.getSelectedItem().toString(),"");
     			Product p = new Product(info,id,null,0);
     			EditProduct ep = new EditProduct(p);	
@@ -373,9 +376,27 @@ public class MenuAdminEdit extends JFrame {
     	dispose();
     	RegisterFrame registerFrame = new RegisterFrame(admin);
     	registerFrame.setVisible(true);
+    	
     } 
 
-    private void editProductButtonActionPerformed(ActionEvent evt) {                                                  
+    private void editProductButtonActionPerformed(ActionEvent evt) {               
+    	int id = Integer.parseInt(editProductField.getText());
+    	ResultSet response = SQLProductService.getSQLProductService().readById(id);
+    	try {
+			if(response.next()) {
+	    			//System.out.println();
+	    			ProductInfo info = new ProductInfo(response.getString("name"),response.getInt("price"),response.getString("description"),response.getInt("stock"),response.getString("category"),response.getString("img_path"));
+	    			Product p = new Product(info,id,null,0);
+	    			EditProduct ep = new EditProduct(p);	
+	    			ep.setVisible(true);
+	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
+	    			//String name, int price, String description, int stock, String category, String img_path
+				
+			}
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
     	EditProduct editProduct = new EditProduct();
     	editProduct.setVisible(true);
     }                                                 
