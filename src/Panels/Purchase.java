@@ -119,6 +119,9 @@ public class Purchase extends javax.swing.JFrame {
 
     private void exitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+        dispose();
+    	ShoppingHistory sh = new ShoppingHistory();
+    	sh.setVisible(true);
     }                                          
 
     /**
