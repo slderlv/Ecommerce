@@ -13,7 +13,12 @@ public class Card extends javax.swing.JFrame {
     /**
      * Creates new form Tarjeta
      */
+    private Client c;
     public Card() {
+        initComponents();
+    }
+    public Card(Client c) {
+        this.c = c; 
         initComponents();
     }
 
@@ -206,7 +211,22 @@ public class Card extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>
+    
+    private void Back(java.awt.event.ActionEvent evt) {                      
+        // TODO add your handling code here:
+    	dispose();
+    	MenuAdminEdit mae = new MenuAdminEdit(null);
+    	mae.setVisible(true);
+    }      
+    
+    private void Pay(java.awt.event.ActionEvent evt) {                      
+        // TODO add your handling code here:
+        SQLCardService sqlcs= SQLCardService.getSQLCardService();
+        Card card = new Card(new CardInfo(sqlcs.read(c),Integer.parseInt(CVV.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText())), c); 
+    }      
+    
+
 
     /**
      * @param args the command line arguments
