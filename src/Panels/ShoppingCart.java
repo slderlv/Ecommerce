@@ -4,10 +4,9 @@
  */
 package Panels;
 
-/**
- *
- * @author matias valencia
- */
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 public class ShoppingCart extends javax.swing.JFrame {
 
     /**
@@ -15,7 +14,20 @@ public class ShoppingCart extends javax.swing.JFrame {
      */
     public ShoppingCart() {
         initComponents();
-        setLocationRelativeTo(null);
+        String[] columnNames = {"Nombre","Unidades","Subtotal"};
+        String[] rowData = {"hola","20","12414"};
+        
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
+        for(int i=0; i<50; i++){
+        	rowData[0] = i + "";
+            model.addRow(rowData);
+        }
+        
+        shoppingCartTable.setModel(model);
+        for (int c = 0; c < shoppingCartTable.getColumnCount(); c++){
+            Class<?> col_class = shoppingCartTable.getColumnClass(c);
+            shoppingCartTable.setDefaultEditor(col_class, null);        // remove editor
+        }
     }
 
     /**
@@ -28,99 +40,200 @@ public class ShoppingCart extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        pay = new javax.swing.JButton();
-        total = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        items = new javax.swing.JList<>();
-        back = new javax.swing.JLabel();
-        moreProduct = new javax.swing.JButton();
-        lessProduct = new javax.swing.JButton();
+        shoppingCartScrollPane = new javax.swing.JScrollPane();
+        shoppingCartTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        selectedProductLabel = new javax.swing.JLabel();
+        selectedProductField = new javax.swing.JTextField();
+        addUnitButton = new javax.swing.JButton();
+        removeUnitButton = new javax.swing.JButton();
+        payButton = new javax.swing.JButton();
+        totalAmountField = new javax.swing.JTextField();
+        totalAmountLabel = new javax.swing.JLabel();
+        cardsComboBox = new javax.swing.JComboBox<>();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 212, 171));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(228, 0, 180));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("\nProducto1\n\n\n\n");
-        jScrollPane1.setViewportView(jTextArea1);
+        shoppingCartScrollPane.setBackground(new java.awt.Color(255, 111, 156));
+        shoppingCartScrollPane.setForeground(new java.awt.Color(0, 0, 0));
 
-        pay.setBackground(new java.awt.Color(228, 0, 180));
-        pay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pay.setText("Pagar");
-        pay.addActionListener(new java.awt.event.ActionListener() {
+        shoppingCartTable.setBackground(new java.awt.Color(255, 255, 255));
+        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        shoppingCartTable.setForeground(new java.awt.Color(0, 0, 0));
+        shoppingCartTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        shoppingCartTable.setGridColor(new java.awt.Color(0, 0, 0));
+        shoppingCartTable.setShowGrid(true);
+        shoppingCartTable.setShowHorizontalLines(false);
+        shoppingCartTable.getTableHeader().setResizingAllowed(false);
+        shoppingCartTable.getTableHeader().setReorderingAllowed(false);
+        shoppingCartTable.getTableHeader().setBackground(new java.awt.Color(255,111,156));
+        shoppingCartTable.getTableHeader().setForeground(new java.awt.Color(0,0,0));
+        shoppingCartTable.getSelectionModel().addListSelectionListener(new ListSelectionListener () {
+			public void valueChanged(ListSelectionEvent evt) {
+				selectedRowActionPerformed(evt);
+			}
+        });
+        
+        shoppingCartScrollPane.setViewportView(shoppingCartTable);
+
+        jPanel2.setBackground(new java.awt.Color(255, 212, 171));
+
+        selectedProductLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        selectedProductLabel.setForeground(new java.awt.Color(0, 0, 0));
+        selectedProductLabel.setText("Producto seleccionado:");
+
+        selectedProductField.setEditable(false);
+        selectedProductField.setBackground(new java.awt.Color(255, 255, 255));
+        selectedProductField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        selectedProductField.setForeground(new java.awt.Color(0, 0, 0));
+        selectedProductField.setText("nombre producto");
+
+        addUnitButton.setBackground(new java.awt.Color(255, 111, 156));
+        addUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addUnitButton.setForeground(new java.awt.Color(0, 0, 0));
+        addUnitButton.setText("Agregar unidad");
+        addUnitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addUnitButton.setFocusPainted(false);
+        addUnitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payActionPerformed(evt);
+                addUnitButtonActionPerformed(evt);
             }
         });
 
-        total.setBackground(new java.awt.Color(228, 0, 180));
-        total.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        total.setText("Total");
-
-        items.setBackground(new java.awt.Color(255, 174, 167));
-        items.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12", "Item 13", "Item 14", "Item 15", "Item 16", "Item 17", "Item 18", "Item 19" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        removeUnitButton.setBackground(new java.awt.Color(255, 111, 156));
+        removeUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        removeUnitButton.setForeground(new java.awt.Color(0, 0, 0));
+        removeUnitButton.setText("Eliminar unidad");
+        removeUnitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeUnitButton.setFocusPainted(false);
+        removeUnitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeUnitButtonActionPerformed(evt);
+            }
         });
-        jScrollPane2.setViewportView(items);
 
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
+        payButton.setBackground(new java.awt.Color(255, 111, 156));
+        payButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        payButton.setForeground(new java.awt.Color(0, 0, 0));
+        payButton.setText("Pagar");
+        payButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        payButton.setFocusPainted(false);
+        payButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payButtonActionPerformed(evt);
+            }
+        });
 
-        moreProduct.setBackground(new java.awt.Color(255, 174, 167));
-        moreProduct.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        moreProduct.setText("+");
+        totalAmountField.setEditable(false);
+        totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
+        totalAmountField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
+        totalAmountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        totalAmountField.setText("20.000");
+        totalAmountField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalAmountFieldActionPerformed(evt);
+            }
+        });
 
-        lessProduct.setBackground(new java.awt.Color(255, 174, 167));
-        lessProduct.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lessProduct.setText("-");
+        totalAmountLabel.setBackground(new java.awt.Color(255, 255, 255));
+        totalAmountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalAmountLabel.setForeground(new java.awt.Color(0, 0, 0));
+        totalAmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalAmountLabel.setText("Total a pagar:");
+
+        cardsComboBox.setBackground(new java.awt.Color(255, 255, 255));
+        cardsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cardsComboBox.setForeground(new java.awt.Color(0, 0, 0));
+        cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1111 1111 1111 1111", "2222 2222 2222 2222", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(addUnitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(removeUnitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(selectedProductField)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(selectedProductLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(totalAmountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(totalAmountField)
+                    .addComponent(payButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(selectedProductLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedProductField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addUnitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeUnitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalAmountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(payButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
+        backButton.setBorderPainted(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(moreProduct)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lessProduct))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(56, 56, 56))
+                .addGap(62, 62, 62)
+                .addComponent(shoppingCartScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(back)
+                .addComponent(backButton)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(back)
-                .addGap(110, 110, 110)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backButton)
                         .addGap(18, 18, 18)
-                        .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(moreProduct)
-                    .addComponent(lessProduct))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addComponent(shoppingCartScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,15 +244,32 @@ public class ShoppingCart extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>                        
-
-    private void payActionPerformed(java.awt.event.ActionEvent evt) {                                    
+    
+    private void selectedRowActionPerformed(ListSelectionEvent evt) {                                                 
+    	String productName = (String) shoppingCartTable.getModel().getValueAt(shoppingCartTable.getSelectedRow(), 0);
+    	selectedProductField.setText(productName);
+    } 
+    
+    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }                                   
+    }                                         
+
+    private void addUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void removeUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
+
+    private void totalAmountFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }                                                
 
     /**
      * @param args the command line arguments
@@ -167,8 +297,8 @@ public class ShoppingCart extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ShoppingCart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-
+        //</editor-fold>        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -178,15 +308,18 @@ public class ShoppingCart extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JLabel back;
-    private javax.swing.JList<String> items;
+    private javax.swing.JButton addUnitButton;
+    private javax.swing.JComboBox<String> cardsComboBox;
+    private javax.swing.JButton backButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JButton lessProduct;
-    private javax.swing.JButton moreProduct;
-    private javax.swing.JButton pay;
-    private javax.swing.JButton total;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton payButton;
+    private javax.swing.JButton removeUnitButton;
+    private javax.swing.JTextField selectedProductField;
+    private javax.swing.JLabel selectedProductLabel;
+    private javax.swing.JScrollPane shoppingCartScrollPane;
+    private javax.swing.JTable shoppingCartTable;
+    private javax.swing.JTextField totalAmountField;
+    private javax.swing.JLabel totalAmountLabel;
     // End of variables declaration                   
 }
