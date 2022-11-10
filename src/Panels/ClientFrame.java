@@ -613,7 +613,7 @@ public class ClientFrame extends JFrame {
         	} catch (Exception e) {
         		e.printStackTrace();
         	}
-        	SQLClientService.getSQLLoginService().update(client);
+        	SQLClientService.getSQLClientService().update(client);
         	// ------------------------------------------------------------------------
         }
     }                                    

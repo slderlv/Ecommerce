@@ -77,13 +77,13 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("Contraseï¿½a");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Contraseña");
+        jLabel5.setText("Contraseï¿½a");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
@@ -114,7 +114,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             }
         });
 
-        loginText.setText("¿Ya tienes cuenta? Inicia sesión");
+        loginText.setText("ï¿½Ya tienes cuenta? Inicia sesiï¿½n");
         loginText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginText(evt);
@@ -257,11 +257,11 @@ public class RegisterFrame extends javax.swing.JFrame {
             if(RutFormat.isValid(rut)) {
             	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
             	User us = SQLClientServiceAdapter.userData(format);
-            	SQLClientService.getSQLLoginService().create(us);   	
+            	SQLClientService.getSQLClientService().create(us);   	
         }
         }
         else {
-        	JOptionPane.showMessageDialog(null, "Contraseña no coincide");
+        	JOptionPane.showMessageDialog(null, "Contraseï¿½a no coincide");
         	
             	
             }

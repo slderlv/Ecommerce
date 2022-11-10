@@ -14,7 +14,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     private static SQLClientService service = null;
 
     private SQLClientService(){}
-	static public SQLClientService getSQLLoginService() {
+	static public SQLClientService getSQLClientService() {
         if (service == null) {
             service = new SQLClientService();
         }

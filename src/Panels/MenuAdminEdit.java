@@ -10,14 +10,19 @@ import javax.swing.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import Assets.ArrayToString;
+import Assets.CryptoService;
 import Assets.GhostText;
+import Assets.RutFormat;
 import Database.SQLCategoryService;
+import Database.SQLClientService;
 import Database.SQLProductService;
 import Domain.Admin;
+import Domain.Card;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
+import Domain.Transactions;
 import Logic.SystemService;
 
 public class MenuAdminEdit extends JFrame {
@@ -340,9 +345,22 @@ public class MenuAdminEdit extends JFrame {
 		// editUserField.getText() buscar
 		// }
 		dispose();
-		Client client = new Client("15234156-8", "Pedro", "123123", "correo@algo.com", 949314109, null, "La Florida #153",null, null);
-		ManageUser manageUser = new ManageUser(client);
-		manageUser.setVisible(true);
+		ResultSet response = SQLClientService.getSQLClientService().read(RutFormat.formatToDatabase(editUserField.getText()));
+		System.out.println("OLA");
+		try {
+			if (response.next()) {
+				//String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path)
+				System.out.println("OLA ANTES");
+				Client client = new Client(response.getString("rut"), response.getString("name"), CryptoService.getCryptoService().decodePassword(response.getString("password")), response.getString("mail"), response.getInt("phone_number"), null, response.getString("street"),null, "");
+				System.out.println("OLA");
+				System.out.println(RutFormat.formatToDatabase(response.getString("rut")));
+				ManageUser manageUser = new ManageUser(client);
+				manageUser.setVisible(true);
+			}
+			return;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
     }                                              
 
     private void addProductButtonActionPerformed(ActionEvent evt) {    

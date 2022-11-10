@@ -174,7 +174,7 @@ public class LoginFrame extends javax.swing.JFrame {
             password = CryptoService.getCryptoService().encodePassword(password);
             String format = user + "," + password;
             User us = SQLClientServiceAdapter.loginData(format);
-            ResultSet rs = SQLClientService.getSQLLoginService().read(us);
+            ResultSet rs = SQLClientService.getSQLClientService().read(us);
             if (rs.next()){
                 //si existe
                 String validation = rs.getString("admin");
