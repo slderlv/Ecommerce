@@ -32,7 +32,6 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
-        setLocationRelativeTo(null);
         SystemService.getSystem().refreshLists();
     }
 
@@ -159,6 +158,7 @@ public class LoginFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Login(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_Login
@@ -226,7 +226,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Login
 
     private void Register(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register
-    	RegisterFrame rf = new RegisterFrame();
+    	RegisterFrame rf = new RegisterFrame(client);
         this.setVisible(false);
         rf.setVisible(true);
         

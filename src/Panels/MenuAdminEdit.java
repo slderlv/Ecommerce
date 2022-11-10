@@ -348,7 +348,7 @@ public class MenuAdminEdit extends JFrame {
     
     private void addUserButtonActionPerformed(ActionEvent evt) {                                         
     	dispose();
-    	RegisterFrame registerFrame = new RegisterFrame();
+    	RegisterFrame registerFrame = new RegisterFrame(admin);
     	registerFrame.setVisible(true);
     } 
 

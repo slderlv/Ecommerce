@@ -11,6 +11,8 @@ import Assets.SQLClientServiceAdapter;
 import Assets.RutFormat;
 import Database.SQLClientService;
 import Database.SQLConnection;
+import Domain.Admin;
+import Domain.Client;
 import Domain.User;
 
 /**
@@ -22,9 +24,9 @@ public class RegisterFrame extends javax.swing.JFrame {
     /**
      * Creates new form RegisterFrame
      */
-    public RegisterFrame() {
-        initComponents();
-        setLocationRelativeTo(null);
+    public RegisterFrame(User user) {
+        RegisterFrame.user = user;
+    	initComponents();
     }
 
     /**
@@ -219,12 +221,19 @@ public class RegisterFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
-        this.setVisible(false);
+        dispose();
+    	if(user instanceof Client) {
+    		LoginFrame login = new LoginFrame();
+            login.setVisible(true);
+        } else {
+        	MenuAdminEdit mae = new MenuAdminEdit((Admin) user);
+        	mae.setVisible(true);
+        }
+    	
     }//GEN-LAST:event_Back
 
     private void LoginText(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginText
@@ -291,7 +300,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterFrame().setVisible(true);
+                new RegisterFrame(user).setVisible(true);
             }
         });
     }
@@ -313,5 +322,6 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JPasswordField password2Text;
     private javax.swing.JButton registerButtom;
+    private static User user;
     // End of variables declaration//GEN-END:variables
 }
