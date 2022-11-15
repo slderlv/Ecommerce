@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -21,7 +20,7 @@ public class ClientFrame extends JFrame {
      * Creates new form ClientFrame
      */
     public ClientFrame(Client client) {
-    	ClientFrame.client = client;
+    	// ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "aaaaa");
         initComponents();
     }
 
@@ -34,7 +33,6 @@ public class ClientFrame extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jButton1 = new JButton();
         jPanel1 = new JPanel();
         jPanel2 = new JPanel();
         backButton = new JButton();
@@ -69,10 +67,8 @@ public class ClientFrame extends JFrame {
         phoneNumberField = new JTextField();
         phoneNumberLabel = new JLabel();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Men� de usuario");
+        setTitle("Ecommerce - Men\u00fa de usuario");
         setResizable(false);
 
         jPanel1.setBackground(mainColor);
@@ -257,14 +253,14 @@ public class ClientFrame extends JFrame {
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordLabel.setText("Contrase�a");
+        passwordLabel.setText("Contrase\u00f1a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        addressLabel.setText("Direcci�n");
+        addressLabel.setText("Direcci\u00f3n");
         addressLabel.setOpaque(true);
 
         addressField.setEditable(false);
@@ -284,12 +280,12 @@ public class ClientFrame extends JFrame {
         
         invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPasswordLabel.setForeground(mainColor);
-        invalidPasswordLabel.setText("Contrase�a inv�lida");
+        invalidPasswordLabel.setText("Contrase\u00f1a inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
         invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidAddressLabel.setForeground(mainColor);
-        invalidAddressLabel.setText("Direcci�n inv�lida");
+        invalidAddressLabel.setText("Direcci\u00f3n inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
         passwordField.setEditable(false);
@@ -392,7 +388,7 @@ public class ClientFrame extends JFrame {
 
         invalidEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidEmailLabel.setForeground(mainColor);
-        invalidEmailLabel.setText("Correo inv�lido");
+        invalidEmailLabel.setText("Correo inv\u00e1lido");
         invalidEmailLabel.setVisible(true);
 
         emailLabel.setBackground(secondColor);
@@ -411,7 +407,7 @@ public class ClientFrame extends JFrame {
 
         invalidPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPhoneNumberLabel.setForeground(mainColor);
-        invalidPhoneNumberLabel.setText("Tel�fono inv�lido");
+        invalidPhoneNumberLabel.setText("Tel\u00e9fono inv\u00e1lido");
         invalidPhoneNumberLabel.setVisible(true);
 
         phoneNumberField.setEditable(false);
@@ -425,7 +421,7 @@ public class ClientFrame extends JFrame {
         phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        phoneNumberLabel.setText("Tel�fono");
+        phoneNumberLabel.setText("Tel\u00e9fono");
         phoneNumberLabel.setOpaque(true);
 
         GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
@@ -638,11 +634,11 @@ public class ClientFrame extends JFrame {
 	        userPhoto.setIcon(userIcon);
 			userPhoto.repaint();
 			File original = new File(imagePath);
-			if(client.getImg_path()==null) {
-				client.setImg_path(imagePath);
-			}
 			File copy = new File("UserIcons/"+client.getRut()+".png");
 			// pendiente hacer el caso de jpeg
+			if(client.getImg_path()==null) {
+				client.setImg_path(copy.toPath().toString());
+			}
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
@@ -722,7 +718,6 @@ public class ClientFrame extends JFrame {
     private JLabel invalidEmailLabel;
     private JLabel invalidPasswordLabel;
     private JLabel invalidPhoneNumberLabel;
-    private JButton jButton1;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JPanel jPanel3;

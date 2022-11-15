@@ -54,7 +54,7 @@ public class MenuAdminEdit extends JFrame {
         addUserButton = new JButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ecommerce - Men� de Administrador");
+        setTitle("Ecommerce - Men\u00fa de Administrador");
         setBackground(new Color(255, 212, 171));
         setBounds(new Rectangle(0, 0, 1280, 720));
         setResizable(false);
@@ -108,7 +108,7 @@ public class MenuAdminEdit extends JFrame {
         addCategoryButton.setBackground(new Color(255, 174, 167));
         addCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         addCategoryButton.setForeground(new Color(0, 0, 0));
-        addCategoryButton.setText("Agregar categor�a");
+        addCategoryButton.setText("Agregar categor\u00eda");
         addCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         addCategoryButton.setFocusPainted(false);
         addCategoryButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -121,7 +121,7 @@ public class MenuAdminEdit extends JFrame {
         deleteCategoryButton.setBackground(new Color(255, 174, 167));
         deleteCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         deleteCategoryButton.setForeground(new Color(0, 0, 0));
-        deleteCategoryButton.setText("Eliminar categor�a");
+        deleteCategoryButton.setText("Eliminar categor\u00eda");
         deleteCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         deleteCategoryButton.setFocusPainted(false);
         deleteCategoryButton.addActionListener(new ActionListener() {
@@ -184,7 +184,7 @@ public class MenuAdminEdit extends JFrame {
         editCategoryButton.setBackground(new Color(255, 174, 167));
         editCategoryButton.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         editCategoryButton.setForeground(new Color(0, 0, 0));
-        editCategoryButton.setText("Editar categor�a");
+        editCategoryButton.setText("Editar categor\u00eda");
         editCategoryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         editCategoryButton.setFocusPainted(false);
         editCategoryButton.addActionListener(new ActionListener() {
@@ -379,7 +379,7 @@ public class MenuAdminEdit extends JFrame {
 		}
     	//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
     	//String name, int price, String description, int stock, String category, String img_path
-    	JOptionPane.showMessageDialog(null, "Producto creado con �xito, iD: "+2124124+" y categor�a: "+addProductComboBox.getSelectedItem());
+    	JOptionPane.showMessageDialog(null, "Producto creado con \u00e9xito, iD: "+2124124+" y categor\u00eda: "+addProductComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
     }                               
@@ -414,7 +414,7 @@ public class MenuAdminEdit extends JFrame {
 
     private void editCategoryButtonActionPerformed(ActionEvent evt) {                                                  
     	String category = editCategoryComboBox.getSelectedItem().toString();
-    	String newCategory = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categor�a", JOptionPane.INFORMATION_MESSAGE);
+    	String newCategory = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categor\u00eda", JOptionPane.INFORMATION_MESSAGE);
     	SQLCategoryService.getSQLCategoryService().update(category, newCategory);
     	
     

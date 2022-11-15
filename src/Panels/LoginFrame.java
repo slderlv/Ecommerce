@@ -14,9 +14,7 @@ import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.sql.rowset.serial.SQLOutputImpl;
-
 import Logic.SystemService;
 import Domain.Admin;
 import Domain.Client;
@@ -54,7 +52,7 @@ public class LoginFrame extends javax.swing.JFrame {
         errorLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Eccomerce - Login");
+        setTitle("Ecommerce - Login");
         setBackground(new java.awt.Color(255, 212, 171));
         setName("Login"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -74,7 +72,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 174, 167));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton1.setText("�No tienes cuenta? Reg�strate aqu�");
+        jButton1.setText("\u00bfNo tienes cuenta? Reg\u00edstrate aqu\u00ed");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Register(evt);
@@ -83,7 +81,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 174, 167));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton2.setText("Iniciar Sesi�n");
+        jButton2.setText("Iniciar Sesi\u00f3n");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -208,7 +206,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     this.setVisible(false);
                 }
             } else {
-                errorLogin.setText("Cuenta o contrase�a incorrecta");
+                errorLogin.setText("Cuenta o contrase\u00f1a incorrecta");
 
             }
     		
