@@ -77,13 +77,13 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Contrase�a");
+        jLabel3.setText("Contrase\u00f1a");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Contrase�a");
+        jLabel5.setText("Confirmar contrase\u00f1a");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
@@ -114,7 +114,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             }
         });
 
-        loginText.setText("�Ya tienes cuenta? Inicia sesi�n");
+        loginText.setText("\u00bfYa tienes cuenta? Inicia sesi\u00f3n");
         loginText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginText(evt);
@@ -262,7 +262,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         }
         }
         else {
-        	JOptionPane.showMessageDialog(null, "Contrase�a no coincide");
+        	JOptionPane.showMessageDialog(null, "Contrase\u00f1a no coincide");
         	
             	
             }
