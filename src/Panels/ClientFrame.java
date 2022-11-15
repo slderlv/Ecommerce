@@ -2,6 +2,11 @@ package Panels;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -345,8 +350,10 @@ public class ClientFrame extends JFrame {
         );
 
         userPhoto.setHorizontalAlignment(SwingConstants.CENTER);
-        if(client.getImg_path()==null||client.getImg_path()=="") {
+        if(client.getImg_path()==null) {
         	userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
+        } else {
+        	userPhoto.setIcon(new ImageIcon(client.getImg_path()));
         }
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -622,14 +629,27 @@ public class ClientFrame extends JFrame {
     	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Seleccione una imagen");
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg", "gif");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg");
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			// .println(jfc.getSelectedFile().getPath());
-			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
+			String imagePath = jfc.getSelectedFile().getPath();
+			ImageIcon userIcon = resizeImageIcon(new ImageIcon(imagePath));
 	        userPhoto.setIcon(userIcon);
 			userPhoto.repaint();
+			File original = new File(imagePath);
+			if(client.getImg_path()==null) {
+				client.setImg_path(imagePath);
+			}
+			File copy = new File("UserIcons/"+client.getRut()+".png");
+			// pendiente hacer el caso de jpeg
+			try {
+				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
     }                                      
     
