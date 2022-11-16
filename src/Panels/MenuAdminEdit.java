@@ -408,7 +408,7 @@ public class MenuAdminEdit extends JFrame {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-    	EditProduct editProduct = new EditProduct();
+    	EditProduct editProduct = new EditProduct(null);
     	editProduct.setVisible(true);
     }                                                 
 
