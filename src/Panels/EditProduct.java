@@ -6,13 +6,16 @@ package Panels;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-
 import Assets.WordWrapCellRenderer;
 import Database.SQLProductService;
 import Domain.Product;
@@ -356,6 +359,10 @@ public class EditProduct extends javax.swing.JFrame {
         );
 
         pack();
+        
+        prevName = nameField.getText();
+        prevPrice = Integer.parseInt(priceField.getText());
+        
     }// </editor-fold>                        
     
     private void backButtonActionPerformed(ActionEvent evt) {
@@ -372,18 +379,48 @@ public class EditProduct extends javax.swing.JFrame {
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			// System.out.println(jfc.getSelectedFile().getPath());
 			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
 			imageButton.setIcon(userIcon);
 			imageButton.repaint();
 		}
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			String imagePath = jfc.getSelectedFile().getPath();
+			ImageIcon productIcon = resizeImageIcon(new ImageIcon(imagePath));
+	        imageButton.setIcon(productIcon);
+			imageButton.repaint();
+			File original = new File(imagePath);
+			File copy = new File("ProductIcons/"+product.getId()+".png");
+			// pendiente hacer el caso de jpeg
+			if(product.getInfo()==null) {
+				product.getInfo().setImg_path(copy.toPath().toString());
+			}
+			try {
+				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
     
     private void saveButtonActionPerformed(ActionEvent evt) {
+    	
+    	if(nameField.getText().strip().equals("")) {
+    		JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
+    		nameField.setText(prevName);
+    	} else {
+    		product.getInfo().setName(nameField.getText());
+    	}
+    	
+    	try {
+    		int intValue = Integer.parseInt(priceField.getText());
+    		product.getInfo().setPrice(Integer.parseInt(priceField.getText()));
+    	} catch (NumberFormatException e) {
+    		JOptionPane.showMessageDialog(null, "Precio ingresado es inválido", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
+    		priceField.setText(prevPrice+"");
+    	}
+    	
     	product.getInfo().setDescription(descriptionArea.getText());
     	//p.getInfo().setImg_path(getName());
-    	product.getInfo().setName(nameField.getText());
-    	product.getInfo().setPrice(Integer.parseInt(priceField.getText()));
     	product.getInfo().setStock((Integer) stockSpinner.getValue());
     	product.getInfo().setCategory(categoryComboBox.getSelectedItem().toString());
     	SQLProductService.getSQLProductService().update(product);		
@@ -463,5 +500,7 @@ public class EditProduct extends javax.swing.JFrame {
     private javax.swing.JLabel stockLabel;
     private javax.swing.JSpinner stockSpinner;
     private static Product product;
+    private String prevName;
+    private int prevPrice;
     // End of variables declaration                   
 }
