@@ -20,7 +20,7 @@ public class ClientFrame extends JFrame {
      * Creates new form ClientFrame
      */
     public ClientFrame(Client client) {
-    	// ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "aaaaa");
+    	// ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
         initComponents();
     }
 
@@ -347,9 +347,9 @@ public class ClientFrame extends JFrame {
 
         userPhoto.setHorizontalAlignment(SwingConstants.CENTER);
         if(client.getImg_path()==null) {
-        	userPhoto.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
+        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
         } else {
-        	userPhoto.setIcon(new ImageIcon(client.getImg_path()));
+        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/"+client.getImg_path()))));
         }
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -634,8 +634,7 @@ public class ClientFrame extends JFrame {
 	        userPhoto.setIcon(userIcon);
 			userPhoto.repaint();
 			File original = new File(imagePath);
-			File copy = new File("UserIcons/"+client.getRut()+".png");
-			// pendiente hacer el caso de jpeg
+			File copy = new File("UserIcons/"+client.getRut()+"."+getFileType(original));
 			if(client.getImg_path()==null) {
 				client.setImg_path(copy.toPath().toString());
 			}
@@ -647,7 +646,13 @@ public class ClientFrame extends JFrame {
 			}
 			
 		}
-    }                                      
+    }           
+    
+    private String getFileType(File original) {
+    	String fileName = original.getPath();
+    	int lastIndex = fileName.lastIndexOf(".");
+    	return fileName.substring(lastIndex+1);
+	}
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
     	Image img = imageIcon.getImage();

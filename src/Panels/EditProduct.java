@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -84,14 +85,13 @@ public class EditProduct extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 174, 167));
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 350));
 
-        imageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         imageButton.setContentAreaFilled(false);
         imageButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imageButton.setFocusPainted(false);
         if(product.getInfo().getImg_path()!=null) {
-        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource(product.getInfo().getImg_path()))));
+        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/"+product.getInfo().getImg_path()))));
         } else {
-        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/product.png"))));
+        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/ProductIcons/cellphone.png"))));
         }
         imageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class EditProduct extends javax.swing.JFrame {
         commentsTable.setBackground(new java.awt.Color(255, 255, 255));
         commentsTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         commentsTable.setForeground(new java.awt.Color(0, 0, 0));
-        String[] columnNames = {"Nombre del cliente", "Calificación", "Comentario"};
+        String[] columnNames = {"Nombre del cliente", "Calificaci\u00f3n", "Comentario"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for(int i=0; i<commentsList.size(); i++) {
         	Comment c = commentsList.get(i);
@@ -383,24 +383,19 @@ public class EditProduct extends javax.swing.JFrame {
     	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Seleccione una imagen");
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg", "gif");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg");
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			ImageIcon userIcon = resizeImageIcon(new ImageIcon(jfc.getSelectedFile().getPath()));
-			imageButton.setIcon(userIcon);
-			imageButton.repaint();
-		}
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			String imagePath = jfc.getSelectedFile().getPath();
 			ImageIcon productIcon = resizeImageIcon(new ImageIcon(imagePath));
 	        imageButton.setIcon(productIcon);
 			imageButton.repaint();
 			File original = new File(imagePath);
-			File copy = new File("ProductIcons/"+product.getId()+".png");
-			// pendiente hacer el caso de jpeg
-			if(product.getInfo()==null) {
+			File copy = new File("ProductIcons/"+product.getId()+"."+getFileType(original));
+			if(product.getInfo().getImg_path()==null) {
 				product.getInfo().setImg_path(copy.toPath().toString());
+				System.out.println(product.getInfo().getImg_path());
 			}
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -410,7 +405,13 @@ public class EditProduct extends javax.swing.JFrame {
 		}
 	}
     
-    private void saveButtonActionPerformed(ActionEvent evt) {
+    private String getFileType(File original) {
+    	String fileName = original.getPath();
+    	int lastIndex = fileName.lastIndexOf(".");
+    	return fileName.substring(lastIndex+1);
+	}
+
+	private void saveButtonActionPerformed(ActionEvent evt) {
     	
     	if(nameField.getText().strip().equals("")) {
     		JOptionPane.showMessageDialog(null, "El nombre no puede estar vac\u00edo", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
