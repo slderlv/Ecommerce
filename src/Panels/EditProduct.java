@@ -151,7 +151,7 @@ public class EditProduct extends javax.swing.JFrame {
 
         categoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         categoryLabel.setForeground(new java.awt.Color(0, 0, 0));
-        categoryLabel.setText("Categoría");
+        categoryLabel.setText("Categor\u00eda");
 
         categoryComboBox.setBackground(new java.awt.Color(255, 255, 255));
         categoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -174,7 +174,7 @@ public class EditProduct extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-            		"Nombre del cliente", "Calificación", "Comentario"
+            		"Nombre del cliente", "Calificaci\u00f3n", "Comentario"
             }
         ));
         commentsTable.setPreferredSize(new java.awt.Dimension(200, 400));
@@ -276,7 +276,7 @@ public class EditProduct extends javax.swing.JFrame {
 
         descriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         descriptionLabel.setForeground(new java.awt.Color(0, 0, 0));
-        descriptionLabel.setText("Descripción");
+        descriptionLabel.setText("Descripci\u00f3n");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -405,7 +405,7 @@ public class EditProduct extends javax.swing.JFrame {
     private void saveButtonActionPerformed(ActionEvent evt) {
     	
     	if(nameField.getText().strip().equals("")) {
-    		JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El nombre no puede estar vac\u00edo", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
     		nameField.setText(prevName);
     	} else {
     		product.getInfo().setName(nameField.getText());
@@ -415,7 +415,7 @@ public class EditProduct extends javax.swing.JFrame {
     		int intValue = Integer.parseInt(priceField.getText());
     		product.getInfo().setPrice(Integer.parseInt(priceField.getText()));
     	} catch (NumberFormatException e) {
-    		JOptionPane.showMessageDialog(null, "Precio ingresado es inválido", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Precio ingresado es inv\u00e1lido", "Error al guardar", JOptionPane.INFORMATION_MESSAGE);
     		priceField.setText(prevPrice+"");
     	}
     	

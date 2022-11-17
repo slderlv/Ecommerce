@@ -209,14 +209,14 @@ public class ManageUser extends JFrame {
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        passwordLabel.setText("Contrase�a");
+        passwordLabel.setText("Contrase\u00f1a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
         addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        addressLabel.setText("Direcci�n");
+        addressLabel.setText("Direcci\u00f3n");
         addressLabel.setOpaque(true);
 
         addressField.setBackground(secondColor);
@@ -247,11 +247,11 @@ public class ManageUser extends JFrame {
 
         invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPasswordLabel.setForeground(mainColor);
-        invalidPasswordLabel.setText("Contrase�a inv�lida");
+        invalidPasswordLabel.setText("Contrase\u00f1a inv\u00e1lida");
 
         invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidAddressLabel.setForeground(mainColor);
-        invalidAddressLabel.setText("Direcci�n inv�lida");
+        invalidAddressLabel.setText("Direcci\u00f3n inv\u00e1lida");
 
         GroupLayout jPanel7Layout = new GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -360,16 +360,16 @@ public class ManageUser extends JFrame {
         phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        phoneNumberLabel.setText("Tel�fono");
+        phoneNumberLabel.setText("Tel\u00e9fono");
         phoneNumberLabel.setOpaque(true);
 
         invalidPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidPhoneNumberLabel.setForeground(mainColor);
-        invalidPhoneNumberLabel.setText("Tel�fono inv�lido");
+        invalidPhoneNumberLabel.setText("Tel\u00e9fono inv\u00e1lido");
 
         invalidEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         invalidEmailLabel.setForeground(mainColor);
-        invalidEmailLabel.setText("Correo inv�lido");
+        invalidEmailLabel.setText("Correo inv\u00e1lido");
 
         GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -538,7 +538,7 @@ public class ManageUser extends JFrame {
     	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Seleccione una imagen");
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg", "gif");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg");
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {

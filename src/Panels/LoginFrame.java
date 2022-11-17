@@ -14,7 +14,6 @@ import Domain.AdminBuilder;
 import Domain.ClientBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.sql.rowset.serial.SQLOutputImpl;
 import Logic.SystemService;
 import Domain.Admin;
 import Domain.Client;
@@ -165,7 +164,7 @@ public class LoginFrame extends javax.swing.JFrame {
     	String password = passwordText.getText();
     	
     	if(password.isEmpty() || user.isEmpty()) {
-    		errorLogin.setText("Falta alg�n campo");
+    		errorLogin.setText("Falta alg\u00fan campo");
     		
     	}else {
             user = RutFormat.formatToDatabase(user);
