@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Optional;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -16,7 +14,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
-
 import Assets.WordWrapCellRenderer;
 import Database.SQLProductService;
 import Domain.Comment;
@@ -32,7 +29,7 @@ public class EditProduct extends javax.swing.JFrame {
     					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
     					20, "Tecnología", null), 10, null, 0); 
     	commentsList = new ArrayList<>();
-    	for(int i=0; i<20; i++) {
+    	for(int i=0; i<6; i++) {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
     	initComponents();
@@ -81,7 +78,9 @@ public class EditProduct extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-
+        
+        // ProductIcons/foto.png
+        
         jPanel2.setBackground(new java.awt.Color(255, 174, 167));
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 350));
 
@@ -89,7 +88,7 @@ public class EditProduct extends javax.swing.JFrame {
         imageButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imageButton.setFocusPainted(false);
         if(product.getInfo().getImg_path()!=null) {
-        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/"+product.getInfo().getImg_path()))));
+        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource(product.getInfo().getImg_path()))));
         } else {
         	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/ProductIcons/cellphone.png"))));
         }
@@ -394,8 +393,7 @@ public class EditProduct extends javax.swing.JFrame {
 			File original = new File(imagePath);
 			File copy = new File("ProductIcons/"+product.getId()+"."+getFileType(original));
 			if(product.getInfo().getImg_path()==null) {
-				product.getInfo().setImg_path(copy.toPath().toString());
-				System.out.println(product.getInfo().getImg_path());
+				product.getInfo().setImg_path("/"+copy.toPath().toString());
 			}
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -429,23 +427,35 @@ public class EditProduct extends javax.swing.JFrame {
     	}
     	
     	product.getInfo().setDescription(descriptionArea.getText());
-    	//p.getInfo().setImg_path(getName());
     	product.getInfo().setStock((Integer) stockSpinner.getValue());
     	product.getInfo().setCategory(categoryComboBox.getSelectedItem().toString());
     	SQLProductService.getSQLProductService().update(product);		
 	}
     
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {
-    			
-	}
+    	int index = commentsTable.getSelectedRow();
+    	commentsList.remove(index);
+    	String[] columnNames = {"Nombre del cliente", "Calificaci\u00f3n", "Comentario"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+    	for(int i=0; i<commentsList.size(); i++) {
+        	Comment c = commentsList.get(i);
+        	String[] rowData = {"Nombre cliente",c.getRating()+"", c.getComment()};
+        	model.addRow(rowData);
+        }
+        commentsTable.setModel(model);
+        commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
+    }
     
     private void deleteProductButtonActionPerformed(ActionEvent evt) {
-    	SQLProductService.getSQLProductService().delete(product);				
+    	SQLProductService.getSQLProductService().delete(product);
+    	dispose();
+    	MenuAdminEdit mae = new MenuAdminEdit(null);
+    	mae.setVisible(true);    	
 	}
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
     	Image img = imageIcon.getImage();
-		img = img.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(jPanel2.getPreferredSize().width, jPanel2.getPreferredSize().height,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(img);
 	}
     

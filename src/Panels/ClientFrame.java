@@ -349,7 +349,7 @@ public class ClientFrame extends JFrame {
         if(client.getImg_path()==null) {
         	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
         } else {
-        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/"+client.getImg_path()))));
+        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource(client.getImg_path()))));
         }
         userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -636,7 +636,7 @@ public class ClientFrame extends JFrame {
 			File original = new File(imagePath);
 			File copy = new File("UserIcons/"+client.getRut()+"."+getFileType(original));
 			if(client.getImg_path()==null) {
-				client.setImg_path(copy.toPath().toString());
+				client.setImg_path("/"+copy.toPath().toString());
 			}
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
