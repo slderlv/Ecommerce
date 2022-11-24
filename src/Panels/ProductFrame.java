@@ -1,7 +1,11 @@
 package Panels;
 
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import Domain.Client;
+import Domain.Comment;
 import Domain.Product;
 
 public class ProductFrame extends javax.swing.JFrame {
@@ -359,18 +363,48 @@ public class ProductFrame extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void addToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+    	int total = product.getBuy_quantity() + (int)quantitySpinner.getValue();
+    	if(total>product.getInfo().getStock()) {
+    		JOptionPane.showMessageDialog(null, "Cantidad seleccionada excede el stock disponible", "Error en la compra", JOptionPane.ERROR_MESSAGE);
+    	}
+    	product.setBuy_quantity(total);
+    	if(!shoppingCart.contains(product)) shoppingCart.add(product);
     }                                               
 
-    private void addCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+    private void addCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+    	// CONSULTA SQL: SI EL CLIENTE HA COMPRADO ESTE PRODUCTO
+    	float rating = 0; 
+    	try {
+    		rating = Float.parseFloat(JOptionPane.showInputDialog("Califique el producto de 1 a 5:"));
+    	} catch (NumberFormatException e) {
+    		JOptionPane.showMessageDialog(null, "La calificación ingresada es inválida","Error de formato",JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	if(rating<1||rating>5) {
+    		JOptionPane.showMessageDialog(null, "La calificación ingresada es inválida", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	String comment = JOptionPane.showInputDialog("Ingrese su comentario:");
+    	if(comment.isBlank()) {
+    		JOptionPane.showMessageDialog(null, "El comentario está vacío", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	};
+    	if(comment.length()>70) {
+    		JOptionPane.showMessageDialog(null, "El comentario excede el máximo de carácteres", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	// ARREGLAR ID
+    	// commentsList.add(new Comment(0,rating,comment,product,client));
+    	JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
+    	// UPDATE CAJA DE COMENTARIOS
     }                                                
 
     private void deleteCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
+    	
     }                                                   
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+    	dispose();
     	ClientFrame cf = new ClientFrame(client);
     	cf.setVisible(true);
     }                                          
@@ -437,6 +471,8 @@ public class ProductFrame extends javax.swing.JFrame {
     private javax.swing.JTextField stockField;
     private javax.swing.JLabel stockLabel;
     private static Client client;
+    private static Product product;
     private static ArrayList<Product> shoppingCart;
+    private static ArrayList<Comment> commentsList;
     // End of variables declaration                   
 }
