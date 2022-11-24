@@ -353,8 +353,10 @@ public class MenuAdminEdit extends JFrame {
 				//
 				ManageUser manageUser = new ManageUser(client);
 				manageUser.setVisible(true);
+			}else {
+				this.setVisible(true);
+				JOptionPane.showMessageDialog(null, "El usuario esta bloqueado o no existe");
 			}
-			return;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

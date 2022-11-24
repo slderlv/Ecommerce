@@ -174,7 +174,6 @@ public class LoginFrame extends javax.swing.JFrame {
             ResultSet rs = SQLClientService.getSQLClientService().read(us);
             if (rs.next()){
                 //si existe
-            	System.out.println("oli");
                 String validation = rs.getString("admin");
                 String rut = rs.getString("rut");
                 String name = rs.getString("name");
@@ -194,18 +193,14 @@ public class LoginFrame extends javax.swing.JFrame {
                 else{
                     //Client 
                 	//BUILD ASSET
-                	System.out.println("oli2");
                     format = name + "," + mail + ","+ password + ","+ rut;
                     ClientBuilder clientBuilder = new ClientBuilder();
                     clientBuilder.setAddress(rs.getString("street"));
                     clientBuilder.setName(rs.getString("name"));
                     clientBuilder.setNumber(rs.getInt("phone_number"));
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
-                    System.out.println("oli3");
                     Client client = clientBuilder.getResult();
-                    System.out.println(client.getName());
                     ClientFrame cf = new ClientFrame(client);
-                    System.out.println(client.getRut());
                     this.setVisible(false);
                     cf.setVisible(true);
                 }
