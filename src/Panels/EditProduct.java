@@ -29,7 +29,7 @@ public class EditProduct extends javax.swing.JFrame {
     					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
     					20, "Tecnología", null), 10, null, 0); 
     	commentsList = new ArrayList<>();
-    	for(int i=0; i<6; i++) {
+    	for(int i=0; i<10; i++) {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
     	initComponents();
@@ -164,7 +164,7 @@ public class EditProduct extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for(int i=0; i<commentsList.size(); i++) {
         	Comment c = commentsList.get(i);
-        	String[] rowData = {"Nombre cliente",c.getRating()+"", c.getComment()};
+        	String[] rowData = {"Nombre cliente"+i,c.getRating()+"", c.getComment()};
         	model.addRow(rowData);
         }
         commentsTable.setModel(model);
@@ -435,14 +435,7 @@ public class EditProduct extends javax.swing.JFrame {
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {
     	int index = commentsTable.getSelectedRow();
     	commentsList.remove(index);
-    	String[] columnNames = {"Nombre del cliente", "Calificaci\u00f3n", "Comentario"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-    	for(int i=0; i<commentsList.size(); i++) {
-        	Comment c = commentsList.get(i);
-        	String[] rowData = {"Nombre cliente",c.getRating()+"", c.getComment()};
-        	model.addRow(rowData);
-        }
-        commentsTable.setModel(model);
+    	((DefaultTableModel)commentsTable.getModel()).removeRow(index);
         commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
     }
     

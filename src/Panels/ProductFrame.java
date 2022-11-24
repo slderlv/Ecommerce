@@ -1,16 +1,29 @@
 package Panels;
 
+import java.awt.Image;
 import java.util.ArrayList;
-
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
+import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
+import Assets.WordWrapCellRenderer;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
+import Domain.ProductInfo;
 
 public class ProductFrame extends javax.swing.JFrame {
 
     public ProductFrame() {
+    	ProductFrame.product = new Product(
+    			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
+    					250000,
+    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnología", null), 10, null, 0);
+    	commentsList = new ArrayList<>();
+    	for(int i=0; i<10; i++) {
+            commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
+    	}
         initComponents();
     }
                         
@@ -65,13 +78,10 @@ public class ProductFrame extends javax.swing.JFrame {
 
         imageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         imageButton.setContentAreaFilled(false);
-        imageButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imageButton.setFocusPainted(false);
-        imageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imageButtonActionPerformed(evt);
-            }
-        });
+    	// imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource(product.getInfo().getImg_path()))));
+    	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/ProductIcons/cellphone.png"))));
+
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -92,7 +102,7 @@ public class ProductFrame extends javax.swing.JFrame {
         nameField.setBackground(new java.awt.Color(255, 255, 255));
         nameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameField.setForeground(new java.awt.Color(0, 0, 0));
-        nameField.setText("jTextField1");
+        nameField.setText(product.getInfo().getName());
         nameField.setCaretColor(new java.awt.Color(0, 0, 0));
 
         priceLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -104,7 +114,7 @@ public class ProductFrame extends javax.swing.JFrame {
         priceField.setBackground(new java.awt.Color(255, 255, 255));
         priceField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         priceField.setForeground(new java.awt.Color(0, 0, 0));
-        priceField.setText("jTextField2");
+        priceField.setText(product.getInfo().getPrice()+"");
         priceField.setCaretColor(new java.awt.Color(0, 0, 0));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -117,6 +127,8 @@ public class ProductFrame extends javax.swing.JFrame {
         descriptionArea.setRows(5);
         descriptionArea.setWrapStyleWord(true);
         descriptionArea.setCaretColor(new java.awt.Color(0, 0, 0));
+        descriptionArea.setText(product.getInfo().getDescription());
+        descriptionArea.setEditable(false);
         jScrollPane1.setViewportView(descriptionArea);
 
         categoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -131,21 +143,21 @@ public class ProductFrame extends javax.swing.JFrame {
         commentsTable.setBackground(new java.awt.Color(255, 255, 255));
         commentsTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         commentsTable.setForeground(new java.awt.Color(0, 0, 0));
-        commentsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        commentsTable.setPreferredSize(new java.awt.Dimension(200, 400));
         commentsTable.setRowHeight(100);
         commentsTable.setShowGrid(true);
         commentsTable.setShowVerticalLines(false);
+        String[] columnNames = {"Nombre del cliente", "Calificaci\u00f3n", "Comentario"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for(int i=0; i<commentsList.size(); i++) {
+        	Comment c = commentsList.get(i);
+        	String[] rowData = {"Nombre cliente"+i,c.getRating()+"", c.getComment()};
+        	model.addRow(rowData);
+        }
+        commentsTable.setModel(model);
+        commentsTable.setRowHeight(100);
+        commentsTable.setShowGrid(true);
+        commentsTable.setShowVerticalLines(false);
+        commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
         commentsScrollPane.setViewportView(commentsTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -186,20 +198,25 @@ public class ProductFrame extends javax.swing.JFrame {
         idField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         idField.setForeground(new java.awt.Color(0, 0, 0));
         idField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idField.setText("jTextField1");
+        idField.setText(product.getId()+"");
 
         stockField.setEditable(false);
         stockField.setBackground(new java.awt.Color(255, 255, 255));
         stockField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         stockField.setForeground(new java.awt.Color(0, 0, 0));
         stockField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        stockField.setText("jTextField2");
+        stockField.setText(product.getInfo().getStock()+"");
 
         quantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         quantityLabel.setForeground(new java.awt.Color(0, 0, 0));
         quantityLabel.setText("Cantidad:");
 
         quantitySpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SpinnerNumberModel snm = new SpinnerNumberModel();
+    	snm.setMinimum(1);
+    	snm.setValue(1);
+    	snm.setMaximum(product.getInfo().getStock());
+    	quantitySpinner.setModel(snm);
 
         addCommentButton.setBackground(new java.awt.Color(255, 174, 167));
         addCommentButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -396,26 +413,34 @@ public class ProductFrame extends javax.swing.JFrame {
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
     	JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
-    	// UPDATE CAJA DE COMENTARIOS
+    	String[] row = {"hola",rating+"",comment}; // client.getName()
+    	((DefaultTableModel)commentsTable.getModel()).addRow(row);
+    	commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
     }                                                
 
-    private void deleteCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-    	
+    private void deleteCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+    	int index = commentsTable.getSelectedRow();
+    	if(!commentsList.get(index).getClient().equals(client)) {
+    		JOptionPane.showMessageDialog(null, "Este comentario no te pertenece", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	commentsList.remove(index);
+    	((DefaultTableModel)commentsTable.getModel()).removeRow(index);
+        commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
     }                                                   
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	dispose();
     	ClientFrame cf = new ClientFrame(client);
     	cf.setVisible(true);
-    }                                          
+    }                 
+    
+    private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
+    	Image img = imageIcon.getImage();
+		img = img.getScaledInstance(jPanel2.getPreferredSize().width, jPanel2.getPreferredSize().height,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(img);
+	}
 
-    private void imageButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         
         try {
