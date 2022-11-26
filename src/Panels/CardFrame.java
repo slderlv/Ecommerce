@@ -4,22 +4,34 @@
  */
 package Panels;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import Database.SQLCardService;
+import Domain.Card;
+import Domain.CardInfo;
 import Domain.Client;
+import Domain.Transactions;
 
 /**
  *
  * @author matias valencia
  */
-public class Card extends javax.swing.JFrame {
+public class CardFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Tarjeta
      */
     private Client c;
-    public Card() {
+    public CardFrame() {
         initComponents();
+        //String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path
+        c = new Client("","","12345","",0,null,"",null,"");
     }
-    public Card(Client c) {
+    public CardFrame(Client c) {
         this.c = c; 
         initComponents();
     }
@@ -224,8 +236,25 @@ public class Card extends javax.swing.JFrame {
     
     private void Pay(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
-        // SQLCardService sqlcs= SQLCardService.getSQLCardService();
-        // Card card = new Card(new CardInfo(sqlcs.read(c),Integer.parseInt(CVV.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText())), c); 
+    	
+    	CardInfo cardInfo = new CardInfo(Integer.parseInt(cvv.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText()));
+    	Card card = new Card(cardInfo,c);
+    	ResultSet rs = SQLCardService.getSQLCardService().checkIfExists(card);
+    	System.out.println("oli");
+    	try {
+			if(rs.next()) {
+				//The card exists only link
+				SQLCardService.getSQLCardService().linkCard(card, c);
+			} else {
+				//Create the new card and link
+				SQLCardService.getSQLCardService().create(card, c);
+			}
+			JOptionPane.showMessageDialog(null, "Tarjeta creada con exito");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     }      
     
 
@@ -247,13 +276,13 @@ public class Card extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Card.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Card.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Card.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Card.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -261,7 +290,7 @@ public class Card extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Card().setVisible(true);
+                new CardFrame().setVisible(true);
             }
         });
     }

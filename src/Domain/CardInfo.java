@@ -7,8 +7,7 @@ public class CardInfo {
 	private int expirationMonth;
 	private int expirationYear;
 	
-	public CardInfo(int id, int cvv, String cardNumber, int expirationMonth, int expirationYear) {
-		this.id = id;
+	public CardInfo(int cvv, String cardNumber, int expirationMonth, int expirationYear) {
 		this.cvv = cvv;
 		this.cardNumber = cardNumber;
 		this.expirationMonth = expirationMonth;

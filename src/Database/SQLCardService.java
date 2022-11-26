@@ -41,12 +41,38 @@ public class SQLCardService implements ISQLRead<Client>{
             statement.execute();
             
             PreparedStatement statement2 = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards_users(id,user_rut,card_number) VALUES (default,?,?)");
-            statement.setString(1,client.getRut());
-            statement.setString(2,t.getCardInfo().getCardNumber());   
+            statement2.setString(1,client.getRut());
+            statement2.setString(2,t.getCardInfo().getCardNumber());   
             statement2.execute();
             
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error");
         }
 	}
+	
+	public ResultSet checkIfExists(Card c) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM cards where card_number=? ");
+            statement.setString(1,c.getCardInfo().getCardNumber());
+            ResultSet response = statement.executeQuery();
+            return response;
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		return null;
+	}
+	
+	public void linkCard(Card card,Client client) {
+		PreparedStatement statement;
+		try {
+			statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards_users(id,user_rut,card_number) VALUES (default,?,?)");
+			statement.setString(1,card.getCardInfo().getCardNumber());   
+			statement.setString(2,client.getRut());
+			statement.execute();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+		}
+	}
+	
+	
 }
