@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import Domain.Buy;
 import Domain.Client;
 import Domain.Product;
 import Domain.ProductInfo;
+import Domain.Transactions;
 
 public class ShoppingCart extends javax.swing.JFrame {
 
@@ -15,17 +18,17 @@ public class ShoppingCart extends javax.swing.JFrame {
     	Product product = new Product(
     			new ProductInfo("Led Philips Ambilight 65",
     					250000,
-    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnología", null), 10, null, 10);
+    					"Tipo	Televisores\nConexiï¿½n WiFi	Sï¿½\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sï¿½\nSintonizador digital	Sï¿½\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnologï¿½a", null), 10, null, 10);
     	
     	ShoppingCart.productList = new ArrayList<>();
     	ShoppingCart.productList.add(product);
     	// ShoppingCart.client = client;
         // ShoppingCart.productList = productList;
-    	initComponents();
+    	initComponents(client,ShoppingCart.productList);
 	}
                      
-    private void initComponents() {
+    private void initComponents(Client client,ArrayList<Product> productList) {
 
         jPanel1 = new javax.swing.JPanel();
         shoppingCartScrollPane = new javax.swing.JScrollPane();
@@ -128,12 +131,22 @@ public class ShoppingCart extends javax.swing.JFrame {
         totalAmountField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        if(client.getTransactions().getShoppingCart() != null) {
+        	int total = 0;
+        	for(int i=0; i<productList.size(); i++){ 
+        		total = total + client.getTransactions().getShoppingCart().get(i).getBuy_quantity()*productList.get(i).getInfo().getPrice();
+        	}
+        	String total2 = ""+total;
+        	totalAmountField.setText(total2);
+        }
 
         totalAmountLabel.setBackground(new java.awt.Color(255, 255, 255));
         totalAmountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         totalAmountLabel.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalAmountLabel.setText("Total a pagar:");
+        
+        
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,7 +293,21 @@ public class ShoppingCart extends javax.swing.JFrame {
     } 
     
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {   
-    	
+    	if(client.getCards().isEmpty() == true) {
+    		dispose();
+        	CardFrame cf = new CardFrame();
+        	cf.setVisible(true);
+    	}else {
+    		client.getTransactions().getBuys().add(new Buy(0,client,client.getTransactions().getShoppingCart()));
+    		for(int i=0;  i<productList.size(); i++) {
+    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+    				if(productList.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+    					int stock = productList.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+    					productList.get(i).getInfo().setStock(stock);
+    				}
+    			}
+    		}
+    	}
     } 
     
     private void addCardButtonActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -294,7 +321,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         int quantity = productList.get(rowIndex).getBuy_quantity();
         int stock = productList.get(rowIndex).getInfo().getStock();
         if(quantity==stock) {
-        	JOptionPane.showMessageDialog(null, "No hay más productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
+        	JOptionPane.showMessageDialog(null, "No hay mï¿½s productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         	return;
         }
         updateFrame(true,rowIndex,quantity);
@@ -307,7 +334,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         int quantity = productList.get(rowIndex).getBuy_quantity();
         if(quantity==1) {
         	Object[] buttons = {"Aceptar","Cancelar"};
-        	int reply = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
+        	int reply = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
         	if(reply==1) {
         		// ELIMINAR PRODUCTO

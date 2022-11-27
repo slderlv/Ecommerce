@@ -25,7 +25,7 @@ public class SQLShoppingCart implements ISQLRead<Client> {
             statement.setString(1,t.getRut());
             ResultSet response = statement.executeQuery();
             return response;
-        }catch (SQLException e){
+        }catch (SQLException e){ 
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
 		return null;
