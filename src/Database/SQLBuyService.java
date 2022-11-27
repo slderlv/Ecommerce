@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import Domain.Client;
 
-public class SQLBuyService implements ISQLRead<Client> {
+public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQLCreate<Client>{
 	private static SQLBuyService service = null;
 
     private SQLBuyService(){}
@@ -30,5 +30,31 @@ public class SQLBuyService implements ISQLRead<Client> {
         }
 		return null;
 	}
+	@Override
+	public void update(Client t) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update buys set state = true where user_rut = ?");
+            statement.setString(1,t.getRut());
+            statement.execute();
+            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		
+	}
+	@Override
+	public void create(Client t) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("insert into buys(id,state,user_rut) values (default,false,?)");
+            statement.setString(1,t.getRut());
+            statement.execute();
+            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		
+	}
+	
+	
 	
 }
