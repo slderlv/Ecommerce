@@ -6,10 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import Domain.Client;
+import Domain.Product;
 import Assets.CryptoService;
 import Assets.ValidateMail;
 import Database.SQLClientService;
@@ -19,9 +22,15 @@ public class ClientFrame extends JFrame {
     /**
      * Creates new form ClientFrame
      */
-    public ClientFrame(Client client) {
-    	ClientFrame.client = client;
-    	// ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+    public ClientFrame(Client client,ArrayList<Product> shoppingCart) {
+    	ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+
+    	//ClientFrame.client = client;
+    	if(shoppingCart==null) {
+    		ClientFrame.shoppingCart = new ArrayList<>();
+    	} else {
+    		ClientFrame.shoppingCart = shoppingCart;
+    	}
         initComponents();
     }
 
@@ -532,7 +541,7 @@ public class ClientFrame extends JFrame {
 
     private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	ShoppingCart sc = new ShoppingCart(null);
+    	ShoppingCart sc = new ShoppingCart(client, shoppingCart);
     	sc.setVisible(true);
     }
     
@@ -704,7 +713,7 @@ public class ClientFrame extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientFrame(client).setVisible(true);
+                new ClientFrame(client,shoppingCart).setVisible(true);
             }
         });
     }
@@ -752,5 +761,6 @@ public class ClientFrame extends JFrame {
 	private String prevTelephone;
 	private String prevEmail;
 	private static Client client;
+	private static ArrayList<Product> shoppingCart;
     // End of variables declaration                   
 }

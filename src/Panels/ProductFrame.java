@@ -431,7 +431,7 @@ public class ProductFrame extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	dispose();
-    	ClientFrame cf = new ClientFrame(client);
+    	ClientFrame cf = new ClientFrame(client,shoppingCart);
     	cf.setVisible(true);
     }                 
     

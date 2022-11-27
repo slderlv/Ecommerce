@@ -197,7 +197,7 @@ public class ProductListFrame extends javax.swing.JFrame {
     		MenuAdminEdit mae = new MenuAdminEdit(null);
         	mae.setVisible(true);
     	} else {
-    		ClientFrame cf = new ClientFrame((Client) user);
+    		ClientFrame cf = new ClientFrame((Client)user,null);
         	cf.setVisible(true);
     	}
     } 
