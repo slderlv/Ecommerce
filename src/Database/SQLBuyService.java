@@ -33,7 +33,7 @@ public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQL
 	@Override
 	public void update(Client t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update buys set state = true where user_rut = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update buys set state = 'COMPRADO' where user_rut = ?");
             statement.setString(1,t.getRut());
             statement.execute();
             
@@ -45,7 +45,7 @@ public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQL
 	@Override
 	public void create(Client t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("insert into buys(id,state,user_rut) values (default,false,?)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("insert into buys(id,state,user_rut) values (default,'CARRITO',?)");
             statement.setString(1,t.getRut());
             statement.execute();
             
