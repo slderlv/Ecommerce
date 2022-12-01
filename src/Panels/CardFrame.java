@@ -31,9 +31,9 @@ public class CardFrame extends javax.swing.JFrame {
         //String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path
         c = new Client("","","12345","",0,null,"",null,"");
     }
-    public CardFrame(Client c) {
+    public CardFrame(Client c, ArrayList<Product> productList)) {
         this.c = c; 
-        initComponents();
+        initComponents(c, productList);
     }
 
     /**
@@ -43,7 +43,7 @@ public class CardFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(Client c, ArrayList<Product> productList) {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -254,6 +254,24 @@ public class CardFrame extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	   
+   		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
+    				boolean bc = client.getTransactions().getShoppingCart().remove(x);
+    			}
+    		}
+    		
+    		for(int i=0;  i<productList.size(); i++) {
+   			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+    				if(productList.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+    					int stock = productList.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+    					productList.get(i).getInfo().setStock(stock);
+					
+    				}
+    			}
+    		}
+	    	SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+	    	sqls.update(c);
 		
     }      
     
