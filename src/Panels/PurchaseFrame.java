@@ -1,13 +1,27 @@
 package Panels;
 
-public class Purchase extends javax.swing.JFrame {
+import java.util.ArrayList;
+
+import Domain.Client;
+import Domain.Product;
+import Domain.ProductInfo;
+import Domain.Purchase;
+
+public class PurchaseFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Purchase
      */
-    public Purchase() {
+    public PurchaseFrame(Purchase purchase) {
+    	ArrayList<Product> p = new ArrayList<>();
+    	p.add(new Product(
+    			new ProductInfo("Led Philips Ambilight 65",
+    					250000,
+    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnología", null), 10, null, 10));
+    	purchase = new Purchase(1, p);
+    	PurchaseFrame.purchase = purchase;
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,44 +53,24 @@ public class Purchase extends javax.swing.JFrame {
 
         shoppinglist.setBackground(new java.awt.Color(255, 27, 157));
         shoppinglist.setForeground(new java.awt.Color(255, 255, 255));
-        shoppinglist.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Producto 1", "10", "10000"},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre producto", "Cantidad", "Subtotal"
-            }
-        ));
+        shoppinglist.getTableHeader().setResizingAllowed(false);
+        shoppinglist.getTableHeader().setReorderingAllowed(false);
+        shoppinglist.setShowGrid(false);
+        String[] columnNames = {"Nombre","Unidades","Subtotal"};
+        String[] rowData = new String[3];
+        
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
+        for(int i=0; i<purchase.getProducts().size(); i++){
+        	rowData[0] = purchase.getProducts().get(i).getInfo().getName();
+        	rowData[1] = purchase.getProducts().get(i).getBuy_quantity()+"";
+        	rowData[2] = (purchase.getProducts().get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
+        	model.addRow(rowData);
+        }
+        shoppinglist.setModel(model);
+        for (int c = 0; c < shoppinglist.getColumnCount(); c++){
+            Class<?> col_class = shoppinglist.getColumnClass(c);
+            shoppinglist.setDefaultEditor(col_class, null);        // remove editor
+        }
         jScrollPane3.setViewportView(shoppinglist);
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -116,12 +110,14 @@ public class Purchase extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
+
     }// </editor-fold>                        
 
     private void exitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
         dispose();
-    	ShoppingHistory sh = new ShoppingHistory();
+    	ShoppingHistory sh = new ShoppingHistory(null);
     	sh.setVisible(true);
     }                                          
 
@@ -142,20 +138,20 @@ public class Purchase extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Purchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Purchase().setVisible(true);
+                new PurchaseFrame(purchase).setVisible(true);
             }
         });
     }
@@ -165,5 +161,6 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JButton exitbutton;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable shoppinglist;
+    private static Purchase purchase;
     // End of variables declaration                   
 }

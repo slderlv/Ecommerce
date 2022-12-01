@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -547,7 +546,7 @@ public class ClientFrame extends JFrame {
     
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	ShoppingHistory sh = new ShoppingHistory();
+    	ShoppingHistory sh = new ShoppingHistory(client);
     	sh.setVisible(true);
     }
 

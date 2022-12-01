@@ -80,6 +80,9 @@ public class AdminHistoryUser extends javax.swing.JFrame {
         );
 
         pack();
+        
+        setLocationRelativeTo(null);
+        setTitle("Ecommerce - Historial de usuario");
     }// </editor-fold>                        
 
     /**

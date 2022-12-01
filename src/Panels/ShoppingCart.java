@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import Domain.Buy;
+import Domain.Purchase;
 import Domain.Client;
 import Domain.Product;
 import Domain.ProductInfo;
@@ -14,21 +13,21 @@ import Domain.Transactions;
 public class ShoppingCart extends javax.swing.JFrame {
 
 	public ShoppingCart(Client client,ArrayList<Product> productList) {
-    	ShoppingCart.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+    	ShoppingCart.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, new Transactions(), "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+    	shoppingCart = ShoppingCart.client.getTransactions().getShoppingCart();
     	Product product = new Product(
     			new ProductInfo("Led Philips Ambilight 65",
     					250000,
-    					"Tipo	Televisores\nConexiï¿½n WiFi	Sï¿½\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sï¿½\nSintonizador digital	Sï¿½\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnologï¿½a", null), 10, null, 10);
-    	
-    	ShoppingCart.productList = new ArrayList<>();
-    	ShoppingCart.productList.add(product);
+    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnología", null), 10, null, 10);
+    	shoppingCart = new ArrayList<Product>();
+    	shoppingCart.add(product);
     	// ShoppingCart.client = client;
         // ShoppingCart.productList = productList;
-    	initComponents(client,ShoppingCart.productList);
+    	initComponents();
 	}
                      
-    private void initComponents(Client client,ArrayList<Product> productList) {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         shoppingCartScrollPane = new javax.swing.JScrollPane();
@@ -61,11 +60,10 @@ public class ShoppingCart extends javax.swing.JFrame {
         
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
         int sum = 0;
-        for(int i=0; i<productList.size(); i++){
-        	rowData[0] = productList.get(i).getInfo().getName();
-        	rowData[1] = productList.get(i).getBuy_quantity()+"";
-        	System.out.println(productList.get(i).getBuy_quantity());
-        	rowData[2] = (productList.get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
+        for(int i=0; i<shoppingCart.size(); i++){
+        	rowData[0] = shoppingCart.get(i).getInfo().getName();
+        	rowData[1] = shoppingCart.get(i).getBuy_quantity()+"";
+        	rowData[2] = (shoppingCart.get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
         	model.addRow(rowData);
         	sum+=Integer.parseInt(rowData[2]);
         }
@@ -131,10 +129,10 @@ public class ShoppingCart extends javax.swing.JFrame {
         totalAmountField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        if(client.getTransactions().getShoppingCart() != null) {
+        if(shoppingCart != null) {
         	int total = 0;
-        	for(int i=0; i<productList.size(); i++){ 
-        		total = total + client.getTransactions().getShoppingCart().get(i).getBuy_quantity()*productList.get(i).getInfo().getPrice();
+        	for(int i=0; i<shoppingCart.size(); i++){ 
+        		total = total + shoppingCart.get(i).getBuy_quantity()*ShoppingCart.shoppingCart.get(i).getInfo().getPrice();
         	}
         	String total2 = ""+total;
         	totalAmountField.setText(total2);
@@ -288,7 +286,7 @@ public class ShoppingCart extends javax.swing.JFrame {
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	dispose();
-    	ClientFrame cf = new ClientFrame(client, productList);
+    	ClientFrame cf = new ClientFrame(client, shoppingCart);
     	cf.setVisible(true);
     } 
     
@@ -298,12 +296,12 @@ public class ShoppingCart extends javax.swing.JFrame {
         	CardFrame cf = new CardFrame();
         	cf.setVisible(true);
     	}else {
-    		client.getTransactions().getBuys().add(new Buy(0,client,client.getTransactions().getShoppingCart()));
-    		for(int i=0;  i<productList.size(); i++) {
+    		client.getTransactions().getPurchases().add(new Purchase(0,client.getTransactions().getShoppingCart()));
+    		for(int i=0;  i<shoppingCart.size(); i++) {
     			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-    				if(productList.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
-    					int stock = productList.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
-    					productList.get(i).getInfo().setStock(stock);
+    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+    					shoppingCart.get(i).getInfo().setStock(stock);
     				}
     			}
     		}
@@ -318,8 +316,8 @@ public class ShoppingCart extends javax.swing.JFrame {
 
     private void addUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         int rowIndex = shoppingCartTable.getSelectedRow();
-        int quantity = productList.get(rowIndex).getBuy_quantity();
-        int stock = productList.get(rowIndex).getInfo().getStock();
+        int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
+        int stock = shoppingCart.get(rowIndex).getInfo().getStock();
         if(quantity==stock) {
         	JOptionPane.showMessageDialog(null, "No hay mï¿½s productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         	return;
@@ -331,7 +329,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
 	private void removeUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
     	int rowIndex = shoppingCartTable.getSelectedRow();
-        int quantity = productList.get(rowIndex).getBuy_quantity();
+        int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
         if(quantity==1) {
         	Object[] buttons = {"Aceptar","Cancelar"};
         	int reply = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
@@ -345,7 +343,7 @@ public class ShoppingCart extends javax.swing.JFrame {
     }     
 	
 	private void updateFrame(boolean add,int rowIndex, int quantity) {
-		int price = productList.get(rowIndex).getInfo().getPrice();
+		int price = shoppingCart.get(rowIndex).getInfo().getPrice();
         int subtotal = quantity*price;
         int total = Integer.parseInt(totalAmountField.getText());
 		if(add) {
@@ -357,7 +355,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 	        subtotal -= price;
 	        total -= price;
 		}
-		productList.get(rowIndex).setBuy_quantity(quantity);
+		shoppingCart.get(rowIndex).setBuy_quantity(quantity);
         shoppingCartTable.getModel().setValueAt(quantity, rowIndex, 1);
         shoppingCartTable.getModel().setValueAt(subtotal, rowIndex, 2);
         totalAmountField.setText(total+"");
@@ -385,7 +383,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShoppingCart(client,productList).setVisible(true);
+                new ShoppingCart(client,shoppingCart).setVisible(true);
             }
         });
     }
@@ -405,8 +403,8 @@ public class ShoppingCart extends javax.swing.JFrame {
     private javax.swing.JTable shoppingCartTable;
     private javax.swing.JTextField totalAmountField;
     private javax.swing.JLabel totalAmountLabel;
-    private static ArrayList<Product> productList;
     private static Client client;
+    private static ArrayList<Product> shoppingCart;
     // End of variables declaration                   
 }
 

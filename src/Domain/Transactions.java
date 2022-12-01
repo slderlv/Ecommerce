@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Transactions {
     private ArrayList<Product> shoppingCart;
-    private ArrayList<Buy> buys;
+    private ArrayList<Purchase> purchases;
     
     public Transactions() {
     	shoppingCart = null;
-    	buys = null;
+    	purchases = null;
     }
 
 	public ArrayList<Product> getShoppingCart() {
@@ -19,12 +19,12 @@ public class Transactions {
 		this.shoppingCart = shoppingCart;
 	}
 
-	public ArrayList<Buy> getBuys() {
-		return buys;
+	public ArrayList<Purchase> getPurchases() {
+		return purchases;
 	}
 
-	public void setBuys(ArrayList<Buy> buys) {
-		this.buys = buys;
+	public void setPurchases(ArrayList<Purchase> purchases) {
+		this.purchases = purchases;
 	}
     
     
