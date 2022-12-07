@@ -10,10 +10,12 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Database.SQLBuyService;
 import Database.SQLCardService;
 import Domain.Card;
 import Domain.CardInfo;
 import Domain.Client;
+import Domain.Product;
 import Domain.Transactions;
 
 /**
@@ -25,15 +27,12 @@ public class CardFrame extends javax.swing.JFrame {
     /**
      * Creates new form Tarjeta
      */
-    private Client c;
-    public CardFrame() {
+    public CardFrame(Client client, ArrayList<Product> productList) {
+    	CardFrame.client = client;
+    	CardFrame.productList = productList;
         initComponents();
         //String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path
-        c = new Client("","","12345","",0,null,"",null,"");
-    }
-    public CardFrame(Client c, ArrayList<Product> productList)) {
-        this.c = c; 
-        initComponents(c, productList);
+        client = new Client("","","12345","",0,null,"",null,"");
     }
 
     /**
@@ -43,7 +42,7 @@ public class CardFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(Client c, ArrayList<Product> productList) {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -238,16 +237,16 @@ public class CardFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     	
     	CardInfo cardInfo = new CardInfo(Integer.parseInt(cvv.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText()));
-    	Card card = new Card(cardInfo,c);
+    	Card card = new Card(cardInfo,client);
     	ResultSet rs = SQLCardService.getSQLCardService().checkIfExists(card);
     	System.out.println("oli");
     	try {
 			if(rs.next()) {
 				//The card exists only link
-				SQLCardService.getSQLCardService().linkCard(card, c);
+				SQLCardService.getSQLCardService().linkCard(card, client);
 			} else {
 				//Create the new card and link
-				SQLCardService.getSQLCardService().create(card, c);
+				SQLCardService.getSQLCardService().create(card, client);
 			}
 			JOptionPane.showMessageDialog(null, "Tarjeta creada con exito");
 		} catch (SQLException e) {
@@ -257,7 +256,7 @@ public class CardFrame extends javax.swing.JFrame {
 	   
    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
     			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
-    				boolean bc = client.getTransactions().getShoppingCart().remove(x);
+    				// boolean bc = client.getTransactions().getShoppingCart().remove(x);
     			}
     		}
     		
@@ -271,7 +270,7 @@ public class CardFrame extends javax.swing.JFrame {
     			}
     		}
 	    	SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-	    	sqls.update(c);
+	    	sqls.update(client);
 		
     }      
     
@@ -308,7 +307,7 @@ public class CardFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CardFrame().setVisible(true);
+                new CardFrame(client, productList).setVisible(true);
             }
         });
     }
@@ -331,5 +330,7 @@ public class CardFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField month;
     private javax.swing.JButton pay;
     private javax.swing.JFormattedTextField year;
+    private static Client client;
+    private static ArrayList<Product> productList;
     // End of variables declaration                   
 }

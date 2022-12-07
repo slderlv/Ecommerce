@@ -200,7 +200,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     clientBuilder.setNumber(rs.getInt("phone_number"));
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
-                    ClientFrame cf = new ClientFrame(client,null);
+                    ClientFrame cf = new ClientFrame(client);
                     this.setVisible(false);
                     cf.setVisible(true);
                 }

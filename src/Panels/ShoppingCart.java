@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import Database.SQLBuyService;
 import Domain.Purchase;
 import Domain.Client;
 import Domain.Product;
@@ -286,16 +288,18 @@ public class ShoppingCart extends javax.swing.JFrame {
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	dispose();
-    	ClientFrame cf = new ClientFrame(client, shoppingCart);
+    	ClientFrame cf = new ClientFrame(client);
     	cf.setVisible(true);
     } 
     
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {   
     	if(client.getCards().isEmpty() == true) {
     		dispose();
-        	CardFrame cf = new CardFrame();
+        	CardFrame cf = new CardFrame(client, shoppingCart);
         	cf.setVisible(true);
-    	}else {
+    	}
+    	/*
+    	else {
 		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
     			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
     				boolean bc = client.getTransactions().getShoppingCart().remove(x);
@@ -313,11 +317,12 @@ public class ShoppingCart extends javax.swing.JFrame {
 		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
 	    	sqls.update(c);
     	}
+    	*/
     } 
     
     private void addCardButtonActionPerformed(java.awt.event.ActionEvent evt) {   
     	dispose();
-    	CardFrame cf = new CardFrame();
+    	CardFrame cf = new CardFrame(client, shoppingCart);
     	cf.setVisible(true);
     }
 
