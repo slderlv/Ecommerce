@@ -255,22 +255,21 @@ public class CardFrame extends javax.swing.JFrame {
 		}
 	   
    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
-    				// boolean bc = client.getTransactions().getShoppingCart().remove(x);
-    			}
+    		if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
+    				client.getTransactions().getShoppingCart().remove(x);
     		}
+    	}
     		
-    		for(int i=0;  i<productList.size(); i++) {
-   			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-    				if(productList.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
-    					int stock = productList.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
-    					productList.get(i).getInfo().setStock(stock);
-					
-    				}
+    	for(int i=0;  i<productList.size(); i++) {
+    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+    			if(productList.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+    				int stock = productList.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+    				productList.get(i).getInfo().setStock(stock);
     			}
     		}
-	    	SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-	    	sqls.update(client);
+    	}
+	    SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+	    sqls.update(client);
 		
     }      
     

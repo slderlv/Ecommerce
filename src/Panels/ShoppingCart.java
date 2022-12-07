@@ -298,11 +298,11 @@ public class ShoppingCart extends javax.swing.JFrame {
         	CardFrame cf = new CardFrame(client, shoppingCart);
         	cf.setVisible(true);
     	}
-    	/*
+    	
     	else {
-		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
     			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
-    				boolean bc = client.getTransactions().getShoppingCart().remove(x);
+    				client.getTransactions().getShoppingCart().remove(x);
     			}
     		}
 		
@@ -314,10 +314,10 @@ public class ShoppingCart extends javax.swing.JFrame {
     				}
     			}
     		}
-		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-	    	sqls.update(c);
+    		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+    		sqls.update(client);
     	}
-    	*/
+    	
     } 
     
     private void addCardButtonActionPerformed(java.awt.event.ActionEvent evt) {   
