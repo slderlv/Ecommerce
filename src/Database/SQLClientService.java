@@ -25,7 +25,7 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
     public void create(User t) {
         // Register
         try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path,street,blocked) VALUES (?,false,'',?,null,?,null,'',false)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO users(rut,admin,name,password,phone_number,mail,img_path,street,blocked) VALUES (?,false,'',?,0,?,'','',false)");
             statement.setString(1,t.getRut());
             statement.setString(2,t.getPassword());   
             statement.setString(3,t.getMail()); 
