@@ -3,6 +3,7 @@ package Assets;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import Domain.Card;
 import Domain.Product;
 
 public class ArrayToString {
@@ -32,6 +33,15 @@ public class ArrayToString {
     	String[] array = new String[products.size()];
     	for(int i=0; i<products.size(); i++) {
     		array[i] = products.get(i).getInfo().getName();
+    	}
+		return array;
+	}
+    
+    public static String[] getStringArrayFromCards(ArrayList<Card> cards) {
+		// TODO Auto-generated method stub
+    	String[] array = new String[cards.size()];
+    	for(int i=0; i<cards.size(); i++) {
+    		array[i] = cards.get(i).getCardInfo().getCardNumber();
     	}
 		return array;
 	}

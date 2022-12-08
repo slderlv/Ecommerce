@@ -22,12 +22,12 @@ public class SQLCardService implements ISQLRead<Client>{
 	@Override
 	public ResultSet read(Client t) {
 			try{  
-	            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM cards INNER JOIN cards_users ON cards.id = cards_users.card_id  WHERE cards_users.user_rut=? ");
+	            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM cards inner join cards_users on cards.card_number = cards_users.card_number WHERE user_rut = ? ");
 	            statement.setString(1,t.getRut());
 	            ResultSet response = statement.executeQuery();
 	            return response;
 	        }catch (SQLException e){
-	            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+	            JOptionPane.showMessageDialog(null, "Error con la consulta (aca)" + e);
 	        }
 			return null;
 	}

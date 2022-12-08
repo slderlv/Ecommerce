@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Assets.ArrayToString;
 import Database.SQLBuyService;
 import Domain.Purchase;
 import Domain.Client;
@@ -25,8 +26,9 @@ public class ShoppingCart extends javax.swing.JFrame {
     	shoppingCart = new ArrayList<Product>();
     	*/
     	//lient..add(product);
-    	// ShoppingCart.client = client;
-        // ShoppingCart.productList = productList;
+    	ShoppingCart.client = client;
+    	shoppingCart = client.getTransactions().getShoppingCart();
+        //ShoppingCart.productList = productList;
     	initComponents();
 	}
                      
@@ -208,7 +210,8 @@ public class ShoppingCart extends javax.swing.JFrame {
         cardsComboBox.setBackground(new java.awt.Color(255, 255, 255));
         cardsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cardsComboBox.setForeground(new java.awt.Color(0, 0, 0));
-        cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1111 1111 1111 1111", "2222 2222 2222 2222", "Item 3", "Item 4" }));
+        cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArrayFromCards(client.getCards())));
+        //cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1111 1111 1111 1111", "2222 2222 2222 2222", "Item 3", "Item 4" }));
 
         payButton.setBackground(new java.awt.Color(255, 111, 156));
         payButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

@@ -154,9 +154,12 @@ public class SystemService {
 	public void getCards(Client client) {
 		ResultSet rs = SQLCardService.getSQLCardService().read(client);
 		ArrayList<Card> cards = new ArrayList<Card>();
+		System.out.println("oli");
 		try {
+			System.out.println("aca si ");
 			while(rs.next()) {
-				CardInfo ci = new CardInfo(rs.getInt("cvv"),rs.getString("card_number"),rs.getInt("expiration_month"),rs.getInt("expiration_year"));
+				System.out.println("entre aca");
+				CardInfo ci = new CardInfo(rs.getInt("cvv"),rs.getString("cards.card_number"),rs.getInt("expiration_month"),rs.getInt("expiration_year"));
 				Card card = new Card(ci,client);
 				cards.add(card);
 			}
@@ -206,13 +209,13 @@ public class SystemService {
 					//Nueva compra
 					counter++;
 					id = buy_id;
-					products = = new ArrayList<Product>();
+					products =  new ArrayList<Product>();
 					purchase = new Purchase(buy_id,products);
 					purchases.add(purchase);
 				} else {
 					purchase = purchases.get(counter);
 					products = purchase.getProducts();
-					Product p;
+					Product p = products.get(0);
 					int product_id = rs.getInt("product_id");
 					for(int i =0; i < this.products.size(); i++) {
 						p = products.get(i);

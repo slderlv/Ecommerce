@@ -25,6 +25,8 @@ public class ClientFrame extends JFrame {
     	//ClientFrame.shoppingCart = client.getTransactions().getShoppingCart();
     	ClientFrame.client = client;
     	SystemService.getSystem().getTransactions(client);
+    	System.out.println(client.getTransactions());
+    	shoppingCart = client.getTransactions().getShoppingCart();
     	if(shoppingCart==null) {
     		ClientFrame.shoppingCart = new ArrayList<>();
     	}
