@@ -62,7 +62,8 @@ public class ProductListFrame extends javax.swing.JFrame {
         });
         productList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                productListMouseClicked(evt);
+                //productListMouseClicked(evt);
+                DoubleClick(evt);
             }
         });
         jScrollPane1.setViewportView(productList);
@@ -168,10 +169,19 @@ public class ProductListFrame extends javax.swing.JFrame {
         });
     }     
     
-    private void DoubleClick(java.awt.event.MouseEvent evt) {
+	private void DoubleClick(java.awt.event.MouseEvent evt) {
+    	//System.out.println("ola");
     	if (evt.getClickCount() == 2) {
     		String selectProduct = productList.getSelectedValue();
-		 	System.out.println("doble anashei");
+    		Product product = products.get(0);
+    		for (int i = 0; i < products.size(); i++) {
+    			product = products.get(i);
+    			if (product.getInfo().getName().equals(selectProduct)) break;
+    		}
+    		dispose();
+    		ProductFrame pf = new ProductFrame(product);
+    		pf.setVisible(true);
+		 	
     	}
     	
     }

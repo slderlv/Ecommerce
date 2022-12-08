@@ -14,11 +14,14 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
+
+import Assets.ArrayToString;
 import Assets.WordWrapCellRenderer;
 import Database.SQLProductService;
 import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
+import Logic.SystemService;
 
 @SuppressWarnings("serial")
 public class EditProduct extends javax.swing.JFrame {
@@ -34,6 +37,7 @@ public class EditProduct extends javax.swing.JFrame {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
     	*/
+		categoriesList = SystemService.getSystem().getCategorys();
 		EditProduct.product = product;
 		commentsList = product.getComments();
     	initComponents();
@@ -154,7 +158,7 @@ public class EditProduct extends javax.swing.JFrame {
         categoryComboBox.setBackground(new java.awt.Color(255, 255, 255));
         categoryComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         categoryComboBox.setForeground(new java.awt.Color(0, 0, 0));
-        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Category 1", "Category 2", "Category 3", "Category 4" }));
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
 
         jPanel3.setBackground(new java.awt.Color(255, 212, 171));
 
@@ -512,5 +516,6 @@ public class EditProduct extends javax.swing.JFrame {
     private String prevName;
     private int prevPrice;
     private ArrayList<Comment> commentsList;
+    private ArrayList<String> categoriesList;
     // End of variables declaration                   
 }

@@ -408,9 +408,7 @@ public class MenuAdminEdit extends JFrame {
     	try {
     		
 			if(response.next()) {
-				System.out.println("de ");
 	    			ProductInfo info = new ProductInfo(response.getString("name"),response.getInt("price"),response.getString("description"),response.getInt("stock"),response.getString("category"),response.getString("img_path"));
-	    			System.out.println("1");
 	    			Product p = new Product(info,id,null,0);
 	    			ResultSet rs = SQLCommentsService.getSQLCommentsService().read(p);
 	    			ArrayList<Comment> comments = new ArrayList<Comment>();

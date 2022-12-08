@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Database.SQLCategoryService;
+import Database.SQLCommentsService;
 import Database.SQLProductService;
+import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
 import Panels.LoginFrame;
@@ -70,6 +72,14 @@ public class SystemService {
 				ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
 				Product product = new Product(info, id, null, 0);
 				products.add(product);
+				
+				ResultSet rs = SQLCommentsService.getSQLCommentsService().read(product);
+				ArrayList<Comment> comments = new ArrayList<Comment>();
+    			while (rs.next()) {
+    				Comment comment = new Comment(rs.getInt("id"),rs.getFloat("rating"),rs.getString("comment"),product,rs.getString("user_rut"));
+    				comments.add(comment);    				
+    			}
+    			product.setComments(comments);
 				//Boolean blocked = response.getBoolean("blocked");
 				//System.out.print(id + " ");
 				//System.out.println(blocked);

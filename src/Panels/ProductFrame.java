@@ -14,16 +14,18 @@ import Domain.ProductInfo;
 
 public class ProductFrame extends javax.swing.JFrame {
 
-    public ProductFrame() {
-    	ProductFrame.product = new Product(
+    public ProductFrame(Product product) {
+    	ProductFrame.product = product; /*new Product(
     			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
     					250000,
-    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnología", null), 10, null, 0);
+    					"Tipo	Televisores\nConexiï¿½n WiFi	Sï¿½\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sï¿½\nSintonizador digital	Sï¿½\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnologï¿½a", null), 10, null, 0);
     	commentsList = new ArrayList<>();
     	for(int i=0; i<10; i++) {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
+    	*/
+    	commentsList = product.getComments();
         initComponents();
     }
                         
@@ -133,7 +135,7 @@ public class ProductFrame extends javax.swing.JFrame {
 
         categoryLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         categoryLabel.setForeground(new java.awt.Color(0, 0, 0));
-        categoryLabel.setText("Categoría");
+        categoryLabel.setText("Categorï¿½a");
 
         jPanel3.setBackground(new java.awt.Color(255, 212, 171));
 
@@ -289,7 +291,7 @@ public class ProductFrame extends javax.swing.JFrame {
 
         descriptionLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         descriptionLabel.setForeground(new java.awt.Color(0, 0, 0));
-        descriptionLabel.setText("Descripción");
+        descriptionLabel.setText("Descripciï¿½n");
 
         categoryField.setEditable(false);
         categoryField.setBackground(new java.awt.Color(255, 255, 255));
@@ -394,20 +396,20 @@ public class ProductFrame extends javax.swing.JFrame {
     	try {
     		rating = Float.parseFloat(JOptionPane.showInputDialog("Califique el producto de 1 a 5:"));
     	} catch (NumberFormatException e) {
-    		JOptionPane.showMessageDialog(null, "La calificación ingresada es inválida","Error de formato",JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "La calificaciï¿½n ingresada es invï¿½lida","Error de formato",JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	if(rating<1||rating>5) {
-    		JOptionPane.showMessageDialog(null, "La calificación ingresada es inválida", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "La calificaciï¿½n ingresada es invï¿½lida", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	String comment = JOptionPane.showInputDialog("Ingrese su comentario:");
     	if(comment.isBlank()) {
-    		JOptionPane.showMessageDialog(null, "El comentario está vacío", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El comentario estï¿½ vacï¿½o", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	};
     	if(comment.length()>70) {
-    		JOptionPane.showMessageDialog(null, "El comentario excede el máximo de carácteres", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El comentario excede el mï¿½ximo de carï¿½cteres", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	// ARREGLAR ID
@@ -463,7 +465,7 @@ public class ProductFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductFrame().setVisible(true);
+                new ProductFrame(product).setVisible(true);
             }
         });
     }
