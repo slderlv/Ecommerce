@@ -433,8 +433,8 @@ public class ProductFrame extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	dispose();
-    	ClientFrame cf = new ClientFrame(client);
-    	cf.setVisible(true);
+    	ProductListFrame pdf = new ProductListFrame(client);
+    	pdf.setVisible(true);
     }                 
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
