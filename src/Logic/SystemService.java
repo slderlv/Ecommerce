@@ -154,12 +154,12 @@ public class SystemService {
 	public void getCards(Client client) {
 		ResultSet rs = SQLCardService.getSQLCardService().read(client);
 		ArrayList<Card> cards = new ArrayList<Card>();
-		System.out.println("oli");
+		
 		try {
-			System.out.println("aca si ");
+			
 			while(rs.next()) {
-				System.out.println("entre aca");
-				CardInfo ci = new CardInfo(rs.getInt("cvv"),rs.getString("cards.card_number"),rs.getInt("expiration_month"),rs.getInt("expiration_year"));
+			
+				CardInfo ci = new CardInfo(rs.getInt("cvv"),rs.getString("card_number"),rs.getInt("expiration_month"),rs.getInt("expiration_year"));
 				Card card = new Card(ci,client);
 				cards.add(card);
 			}

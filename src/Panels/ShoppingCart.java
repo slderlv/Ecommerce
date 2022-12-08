@@ -12,6 +12,7 @@ import Domain.Client;
 import Domain.Product;
 import Domain.ProductInfo;
 import Domain.Transactions;
+import Logic.SystemService;
 
 public class ShoppingCart extends javax.swing.JFrame {
 
@@ -26,6 +27,7 @@ public class ShoppingCart extends javax.swing.JFrame {
     	shoppingCart = new ArrayList<Product>();
     	*/
     	//lient..add(product);
+    	//SystemService.getSystem().getTransactions(client);
     	ShoppingCart.client = client;
     	shoppingCart = client.getTransactions().getShoppingCart();
         //ShoppingCart.productList = productList;
