@@ -13,6 +13,8 @@ public class SQLConnection {
 	private static final String url = "jdbc:postgresql://localhost/PPAV";
 	private static final String user = "postgres";
 	private static final String password = "anashe123";
+	
+	
 	private static Connection connection =  null;
 	private static SQLConnection sqlConnection = null;
     

@@ -4,6 +4,9 @@
  */
 package Panels;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import Assets.CryptoService;
@@ -257,8 +260,20 @@ public class RegisterFrame extends javax.swing.JFrame {
             if(RutFormat.isValid(rut)) {
             	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
             	User us = SQLClientServiceAdapter.userData(format);
+            	
             	SQLClientService.getSQLClientService().create(us);   
-            	JOptionPane.showMessageDialog(null, "REGISTRADO");
+            	ResultSet rs = SQLClientService.getSQLClientService().read(us);
+            	try {
+					if (!rs.next()) {
+						JOptionPane.showMessageDialog(null, "REGISTRADO");
+						dispose();
+						LoginFrame lf = new LoginFrame();            		
+						lf.setVisible(true);						
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+            	
         }
         }
         else {
