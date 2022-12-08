@@ -397,21 +397,28 @@ public class MenuAdminEdit extends JFrame {
     	int id = Integer.parseInt(editProductField.getText());
     	ResultSet response = SQLProductService.getSQLProductService().readById(id);
     	try {
+    		
 			if(response.next()) {
+				System.out.println("de ");
 	    			ProductInfo info = new ProductInfo(response.getString("name"),response.getInt("price"),response.getString("description"),response.getInt("stock"),response.getString("category"),response.getString("img_path"));
+	    			System.out.println("1");
 	    			Product p = new Product(info,id,null,0);
+	    			System.out.println("2");
+	    			System.out.println(p);
 	    			EditProduct ep = new EditProduct(p);	
+	    			System.out.println("3");
 	    			ep.setVisible(true);
+	    			System.out.println("ola?");
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
 	    			//String name, int price, String description, int stock, String category, String img_path
 				
 			}
-			return;
+			//return;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-    	EditProduct editProduct = new EditProduct(null);
-    	editProduct.setVisible(true);
+    	//EditProduct editProduct = new EditProduct(null);
+    	//editProduct.setVisible(true);
     }                                                 
 
     private void editCategoryButtonActionPerformed(ActionEvent evt) {                                                  

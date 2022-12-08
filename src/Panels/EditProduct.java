@@ -24,15 +24,17 @@ import Domain.ProductInfo;
 public class EditProduct extends javax.swing.JFrame {
 
 	public EditProduct(Product product) {
-    	EditProduct.product = new Product(
+    	/*EditProduct.product = new Product(
     			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
-    					250000,
-    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnología", null), 10, null, 0); 
+    				250000,
+    					"Tipo	Televisores\nConexiï¿½n WiFi	Sï¿½\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sï¿½\nSintonizador digital	Sï¿½\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
+    					20, "Tecnologï¿½a", null), 10, null, 0); 
     	commentsList = new ArrayList<>();
     	for(int i=0; i<10; i++) {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
+    	*/
+		EditProduct.product = product;
     	initComponents();
         setLocationRelativeTo(null);
     }

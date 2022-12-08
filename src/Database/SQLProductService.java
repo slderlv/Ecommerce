@@ -24,7 +24,7 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
 	public void create(String category) {
 		// TODO Auto-generated method stub
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path,blocked) VALUES (default,null,null,null,null,?,null,false)");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO products(id,name,price,description,stock,category,img_path,blocked) VALUES (default,'',0,'',0,?,'',false)");
             statement.setString(1,category);
             statement.execute();
         }catch (SQLException e){

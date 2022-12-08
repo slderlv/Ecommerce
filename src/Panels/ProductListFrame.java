@@ -171,7 +171,7 @@ public class ProductListFrame extends javax.swing.JFrame {
     private void DoubleClick(java.awt.event.MouseEvent evt) {
     	if (evt.getClickCount() == 2) {
     		String selectProduct = productList.getSelectedValue();
-		 		
+		 	System.out.println("doble anashei");
     	}
     	
     }
