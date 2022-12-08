@@ -10,6 +10,16 @@ public class Transactions {
     	shoppingCart = null;
     	purchases = null;
     }
+    
+    
+
+	public Transactions(ArrayList<Product> shoppingCart, ArrayList<Purchase> purchases) {
+		super();
+		this.shoppingCart = shoppingCart;
+		this.purchases = purchases;
+	}
+
+
 
 	public ArrayList<Product> getShoppingCart() {
 		return shoppingCart;

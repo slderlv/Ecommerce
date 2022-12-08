@@ -29,6 +29,7 @@ public class main {
 		//ANOTAR BUGS ACA
 		// PRODUCT FRAME -> al volver bota el programa
 		// Al abrir desde admin un producto crea una ventana y no la borra
+		
 	}
 
 }

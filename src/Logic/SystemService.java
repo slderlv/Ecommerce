@@ -4,12 +4,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Database.SQLCardService;
 import Database.SQLCategoryService;
 import Database.SQLCommentsService;
 import Database.SQLProductService;
+import Database.SQLShoppingCart;
+import Domain.Card;
+import Domain.CardInfo;
+import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
+import Domain.Purchase;
+import Domain.Transactions;
 import Panels.LoginFrame;
 
 public class SystemService {
@@ -142,6 +149,96 @@ public class SystemService {
 			
 		}
 
+	}
+	
+	public void getCards(Client client) {
+		ResultSet rs = SQLCardService.getSQLCardService().read(client);
+		ArrayList<Card> cards = new ArrayList<Card>();
+		try {
+			while(rs.next()) {
+				CardInfo ci = new CardInfo(rs.getInt("cvv"),rs.getString("card_number"),rs.getInt("expiration_month"),rs.getInt("expiration_year"));
+				Card card = new Card(ci,client);
+				cards.add(card);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		client.setCards(cards);
+	}
+	
+	public ArrayList<Product> getShoppingCart(Client client) {
+		ResultSet rs = SQLShoppingCart.getSQLShoppingCart().read(client);
+		ArrayList<Product> products = new ArrayList<Product>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("product_id");
+				Product p = null;
+				for(int i =0; i < products.size(); i++) {
+					p = products.get(i);
+					if (p.getId() == id) break;
+				}
+				p.setBuy_quantity(rs.getInt("quantity"));
+				products.add(p);
+				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)
+				//public ProductInfo(String name, int price, String description, int stock, String category, String img_path) 
+			}
+			return products;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Purchase> getPurchases(Client client) {
+		ResultSet rs = SQLShoppingCart.getSQLShoppingCart().read(client);
+		ArrayList<Purchase> purchases = new ArrayList<Purchase>();
+		try {
+			int id = 0;
+			int counter = -1;
+			Purchase purchase;
+			ArrayList<Product> products;
+			while (rs.next()) {
+				int buy_id = rs.getInt("id");
+				
+				if (id == 0 || id != buy_id){
+					//Nueva compra
+					counter++;
+					id = buy_id;
+					products = = new ArrayList<Product>();
+					purchase = new Purchase(buy_id,products);
+					purchases.add(purchase);
+				} else {
+					purchase = purchases.get(counter);
+					products = purchase.getProducts();
+					Product p;
+					for(int i =0; i < this.products.size(); i++) {
+						p = products.get(i);
+						if (p.getId() == id) break;
+					}
+					p.setBuy_quantity(rs.getInt("quantity"));
+					products.add(p);
+				}
+				
+				//public Purchase(int id, ArrayList<Product> products) {
+				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)
+				//public ProductInfo(String name, int price, String description, int stock, String category, String img_path) 
+			}
+			return purchases;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void getTransactions(Client client) {
+		getCards(client);
+		//private ArrayList<Product> shoppingCart;
+	   // private ArrayList<Purchase> purchases;
+		Transactions t = new Transactions(getShoppingCart(client),getPurchases(client));
+		client.setTransactions(t);
 	}
 	
 	public void refreshLists() {

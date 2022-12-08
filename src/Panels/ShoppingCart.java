@@ -15,7 +15,7 @@ import Domain.Transactions;
 public class ShoppingCart extends javax.swing.JFrame {
 
 	public ShoppingCart(Client client,ArrayList<Product> productList) {
-    	ShoppingCart.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, new Transactions(), "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+    	ShoppingCart.client = client;/*new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, new Transactions(), "aaaaa", null, "UserIcons/juan_bekios.jpeg");
     	shoppingCart = ShoppingCart.client.getTransactions().getShoppingCart();
     	Product product = new Product(
     			new ProductInfo("Led Philips Ambilight 65",
@@ -23,7 +23,8 @@ public class ShoppingCart extends javax.swing.JFrame {
     					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
     					20, "Tecnología", null), 10, null, 10);
     	shoppingCart = new ArrayList<Product>();
-    	shoppingCart.add(product);
+    	*/
+    	//lient..add(product);
     	// ShoppingCart.client = client;
         // ShoppingCart.productList = productList;
     	initComponents();

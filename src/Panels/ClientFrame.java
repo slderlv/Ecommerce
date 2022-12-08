@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import Domain.Client;
 import Domain.Product;
+import Logic.SystemService;
 import Assets.CryptoService;
 import Assets.ValidateMail;
 import Database.SQLClientService;
@@ -23,6 +24,7 @@ public class ClientFrame extends JFrame {
     	//ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
     	//ClientFrame.shoppingCart = client.getTransactions().getShoppingCart();
     	ClientFrame.client = client;
+    	SystemService.getSystem().getTransactions(client);
     	if(shoppingCart==null) {
     		ClientFrame.shoppingCart = new ArrayList<>();
     	}

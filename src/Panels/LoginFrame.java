@@ -28,8 +28,8 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     public LoginFrame() {
+    	SystemService.getSystem().refreshLists();
         initComponents();
-        SystemService.getSystem().refreshLists();
     }
 
     /**
