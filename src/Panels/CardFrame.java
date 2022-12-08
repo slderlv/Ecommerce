@@ -28,11 +28,12 @@ public class CardFrame extends javax.swing.JFrame {
      * Creates new form Tarjeta
      */
     public CardFrame(Client client, ArrayList<Product> productList) {
+    	//System.out.println("ACA TAMBIEN");
     	CardFrame.client = client;
     	CardFrame.productList = productList;
         initComponents();
         //String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path
-        client = new Client("","","12345","",0,null,"",null,"");
+        //client = new Client("","","12345","",0,null,"",null,"");
     }
 
     /**
@@ -94,6 +95,12 @@ public class CardFrame extends javax.swing.JFrame {
 
         pay.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         pay.setText("PAGAR");
+        pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	Pay(evt);
+            }
+        });
+        
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -186,6 +193,11 @@ public class CardFrame extends javax.swing.JFrame {
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
         back.setActionCommand("VOLCER");
         back.setBorderPainted(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	Back(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -235,7 +247,7 @@ public class CardFrame extends javax.swing.JFrame {
     
     private void Pay(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
-    	
+    	System.out.println("OLA");
     	CardInfo cardInfo = new CardInfo(Integer.parseInt(cvv.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText()));
     	Card card = new Card(cardInfo,client);
     	ResultSet rs = SQLCardService.getSQLCardService().checkIfExists(card);

@@ -66,8 +66,8 @@ public class SQLCardService implements ISQLRead<Client>{
 		PreparedStatement statement;
 		try {
 			statement = SQLConnection.getSQLConnection().connect().prepareStatement("INSERT INTO cards_users(id,user_rut,card_number) VALUES (default,?,?)");
-			statement.setString(1,card.getCardInfo().getCardNumber());   
-			statement.setString(2,client.getRut());
+			statement.setString(2,card.getCardInfo().getCardNumber());   
+			statement.setString(1,client.getRut());
 			statement.execute();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
