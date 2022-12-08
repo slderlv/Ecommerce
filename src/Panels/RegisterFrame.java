@@ -261,14 +261,16 @@ public class RegisterFrame extends javax.swing.JFrame {
             	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
             	User us = SQLClientServiceAdapter.userData(format);
             	
-            	SQLClientService.getSQLClientService().create(us);   
-            	ResultSet rs = SQLClientService.getSQLClientService().read(us);
             	try {
+            		ResultSet rs = SQLClientService.getSQLClientService().read(us);
 					if (!rs.next()) {
+						SQLClientService.getSQLClientService().create(us);   
 						JOptionPane.showMessageDialog(null, "REGISTRADO");
 						dispose();
 						LoginFrame lf = new LoginFrame();            		
-						lf.setVisible(true);						
+						lf.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(null, "YA ESTAS REGISTRADO");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
