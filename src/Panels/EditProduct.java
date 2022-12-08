@@ -35,6 +35,7 @@ public class EditProduct extends javax.swing.JFrame {
     	}
     	*/
 		EditProduct.product = product;
+		commentsList = product.getComments();
     	initComponents();
         setLocationRelativeTo(null);
     }

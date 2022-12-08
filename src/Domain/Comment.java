@@ -5,21 +5,24 @@ public class Comment {
 	private float rating;
 	private String comment;
 	private Product product;
-	private Client client;
-	public Comment(int id, float rating, String comment, Product product,Client client) {
+	private String rut;
+	public Comment(int id, float rating, String comment, Product product,String rut) {
 		super();
 		this.id = id;
 		this.rating = rating;
 		this.comment = comment;
 		this.product = product;
-		this.client = client;
+		this.rut = rut;
 	}
-	public Client getClient() {
-		return client;
+	
+	public String getRut() {
+		return rut;
 	}
-	public void setClient(Client client) {
-		this.client = client;
+
+	public void setRut(String rut) {
+		this.rut = rut;
 	}
+
 	public int getId() {
 		return id;
 	}

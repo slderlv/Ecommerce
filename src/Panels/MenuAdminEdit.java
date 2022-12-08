@@ -15,6 +15,7 @@ import Assets.GhostText;
 import Assets.RutFormat;
 import Database.SQLCategoryService;
 import Database.SQLClientService;
+import Database.SQLCommentsService;
 import Database.SQLProductService;
 import Domain.Admin;
 import Domain.Card;
@@ -370,7 +371,15 @@ public class MenuAdminEdit extends JFrame {
     		if(response.next()) {
     			int id = response.getInt("id");
     			ProductInfo info = new ProductInfo("",0,"",0,addProductComboBox.getSelectedItem().toString(),"");
+    			ArrayList<Comment> comments = new ArrayList<Comment>();
     			Product p = new Product(info,id,null,0);
+    			ResultSet rs = SQLCommentsService.getSQLCommentsService().read(p);
+    			
+    			while (rs.next()) {
+    				Comment comment = new Comment(rs.getInt("id"),rs.getFloat("rating"),rs.getString("comment"),p,rs.getString("user_rut"));
+    				comments.add(comment);    				
+    			}
+    			p.setComments(comments);
     			EditProduct ep = new EditProduct(p);	
     			ep.setVisible(true);
     		}
@@ -403,12 +412,15 @@ public class MenuAdminEdit extends JFrame {
 	    			ProductInfo info = new ProductInfo(response.getString("name"),response.getInt("price"),response.getString("description"),response.getInt("stock"),response.getString("category"),response.getString("img_path"));
 	    			System.out.println("1");
 	    			Product p = new Product(info,id,null,0);
-	    			System.out.println("2");
-	    			System.out.println(p);
+	    			ResultSet rs = SQLCommentsService.getSQLCommentsService().read(p);
+	    			ArrayList<Comment> comments = new ArrayList<Comment>();
+	    			while (rs.next()) {
+	    				Comment comment = new Comment(rs.getInt("id"),rs.getFloat("rating"),rs.getString("comment"),p,rs.getString("user_rut"));
+	    				comments.add(comment);    				
+	    			}
+	    			p.setComments(comments);
 	    			EditProduct ep = new EditProduct(p);	
-	    			System.out.println("3");
 	    			ep.setVisible(true);
-	    			System.out.println("ola?");
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
 	    			//String name, int price, String description, int stock, String category, String img_path
 				
