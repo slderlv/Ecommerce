@@ -20,9 +20,9 @@ import Database.SQLClientService;
 public class ClientFrame extends JFrame {
 
     public ClientFrame(Client client) {
-    	ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
-    	ClientFrame.shoppingCart = client.getTransactions().getShoppingCart();
-    	//ClientFrame.client = client;
+    	//ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
+    	//ClientFrame.shoppingCart = client.getTransactions().getShoppingCart();
+    	ClientFrame.client = client;
     	if(shoppingCart==null) {
     		ClientFrame.shoppingCart = new ArrayList<>();
     	}
