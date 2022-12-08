@@ -15,6 +15,7 @@ public class ProductListFrame extends javax.swing.JFrame {
 
 	private ArrayList<String> categorys;
 	private ArrayList<Product> products;
+
     public ProductListFrame(User user) {
     	ProductListFrame.user = user;
     	SystemService.getSystem().refreshLists();
@@ -154,9 +155,6 @@ public class ProductListFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void productListMouseClicked(java.awt.event.MouseEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
 
     private void Filter(java.awt.event.ActionEvent evt) {                        
         String filter = filterText.getText();
@@ -168,7 +166,15 @@ public class ProductListFrame extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-    }                       
+    }     
+    
+    private void DoubleClick(java.awt.event.MouseEvent evt) {
+    	if (evt.getClickCount() == 2) {
+    		String selectProduct = productList.getSelectedValue();
+		 		
+    	}
+    	
+    }
 
     private void Back(java.awt.event.ActionEvent evt) {                      
         // TODO add your handling code here:
