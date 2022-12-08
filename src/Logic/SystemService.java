@@ -213,6 +213,7 @@ public class SystemService {
 					purchase = purchases.get(counter);
 					products = purchase.getProducts();
 					Product p;
+					int product_id = rs.getInt("product_id");
 					for(int i =0; i < this.products.size(); i++) {
 						p = products.get(i);
 						if (p.getId() == id) break;
