@@ -10,11 +10,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import Assets.WordWrapCellRenderer;
 import Database.SQLBuyService;
+import Database.SQLProductService;
 import Database.SQLShoppingCart;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
+import Logic.SystemService;
 
 public class ProductFrame extends javax.swing.JFrame {
 
@@ -392,21 +394,40 @@ public class ProductFrame extends javax.swing.JFrame {
     	if(total>product.getInfo().getStock()) {
     		JOptionPane.showMessageDialog(null, "Cantidad seleccionada excede el stock disponible", "Error en la compra", JOptionPane.ERROR_MESSAGE);
     	} else {
+    		boolean have_product = false;
     		product.setBuy_quantity(total);
-    		if(!shoppingCart.contains(product)) {
-    			System.out.println("ENTRE ACA");
-    			if (client.getTransactions().getShoppingCart().size() == 0) {
-    				System.out.println("Efectivamente tengo 0");
-    				SQLBuyService.getSQLBuyService().create(client);
-    				client.getTransactions().getShoppingCart().add(product);
-    				System.out.println("IMPRIMO");
+    		int localQuantity = 0;
+    		if (client.getTransactions().getShoppingCart().size() == 0) {
+
+    			SQLBuyService.getSQLBuyService().create(client);
+    			client.getTransactions().getShoppingCart().add(product);
+
     				
+    		} else {
+    			have_product = false;
+    			for (int i =0; i < client.getTransactions().getShoppingCart().size(); i ++ ) {
+    				if (client.getTransactions().getShoppingCart().get(i).getId() == product.getId()) {
+    					have_product = true;
+    					localQuantity = client.getTransactions().getShoppingCart().get(i).getBuy_quantity();
+    					break;
+    				}
     			}
-    			int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
-				//System.out.println(buy_id);
-				SQLShoppingCart.getSQLShoppingCart().create(product, buy_id);
-				
+    			
     		}
+    		//System.out.println("ola");
+    		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+    		if (have_product) {
+    			SQLShoppingCart.getSQLShoppingCart().update(product, buy_id,(int)quantitySpinner.getValue() + localQuantity);
+    	
+    		} else {
+    			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id,(int)quantitySpinner.getValue());    			
+    		}
+    		SQLProductService.getSQLProductService().updateStock(product, (int)quantitySpinner.getValue());
+    		product.getInfo().setStock(product.getInfo().getStock() - (int)quantitySpinner.getValue());
+    		stockField.setText(product.getInfo().getStock()+"");;
+			//SystemService.getSystem().refreshProducts();
+				
+    		
     	}
     }                                               
 

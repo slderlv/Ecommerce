@@ -328,7 +328,6 @@ public class ShoppingCart extends javax.swing.JFrame {
     
     private void addCardButtonActionPerformed(java.awt.event.ActionEvent evt) {   
     	dispose();
-    	System.out.println("ACA PRINTEO");
     	CardFrame cf = new CardFrame(client, shoppingCart);
     	cf.setVisible(true);
     }

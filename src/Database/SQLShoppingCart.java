@@ -31,7 +31,7 @@ public class SQLShoppingCart implements ISQLRead<Client>{
         }
 		return null;
 	}
-	public void create(Product t, int id) {
+	public void create(Product t, int id,int quantity) {
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("insert into products_buys(id,buy_id,product_id,quantity) values (default,?,?,?)");
             statement.setInt(1,id);
@@ -44,10 +44,10 @@ public class SQLShoppingCart implements ISQLRead<Client>{
 		
 	}
 	
-	public void update(Product t, int id) {
+	public void update(Product t, int id,int quantity) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update products_buys set quantity = ? where buy_id = id and product_id = ?");
-            statement.setInt(1,t.getBuy_quantity());
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update products_buys set quantity = ? where buy_id = ? and product_id = ?");
+            statement.setInt(1,quantity);
             statement.setInt(2,id);
             statement.setInt(3,t.getId());
             statement.execute();
