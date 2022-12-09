@@ -1,12 +1,14 @@
 package Panels;
 
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -73,18 +75,18 @@ public class ClientFrame extends JFrame {
         setResizable(false);
 
         jPanel1.setBackground(mainColor);
-        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jPanel1.setPreferredSize(new Dimension(1280, 720));
 
         jPanel2.setBackground(secondColor);
-        jPanel2.setPreferredSize(new java.awt.Dimension(405, 720));
+        jPanel2.setPreferredSize(new Dimension(405, 720));
 
         backButton.setIcon(new ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
         backButton.setContentAreaFilled(false);
-        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backButton.setFocusPainted(false);
         backButton.setBorderPainted(false);
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -92,14 +94,14 @@ public class ClientFrame extends JFrame {
         jPanel3.setBackground(secondColor);
 
         productButton.setBackground(mainColor);
-        productButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        productButton.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
         productButton.setForeground(black);
         productButton.setText("Productos");
-        productButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         productButton.setFocusPainted(false);
         productButton.setHorizontalTextPosition(SwingConstants.LEFT);
-        productButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        productButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 productButtonActionPerformed(evt);
             }
         });
@@ -128,17 +130,17 @@ public class ClientFrame extends JFrame {
         );
 
         jPanel4.setBackground(secondColor);
-        jPanel4.setPreferredSize(new java.awt.Dimension(258, 67));
+        jPanel4.setPreferredSize(new Dimension(258, 67));
 
         cartButton.setBackground(mainColor);
-        cartButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        cartButton.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
         cartButton.setForeground(black);
         cartButton.setText("Carrito");
-        cartButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartButton.setFocusPainted(false);
         cartButton.setHorizontalTextPosition(SwingConstants.LEFT);
-        cartButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 cartButtonActionPerformed(evt);
             }
         });
@@ -167,17 +169,17 @@ public class ClientFrame extends JFrame {
         );
 
         jPanel5.setBackground(secondColor);
-        jPanel5.setPreferredSize(new java.awt.Dimension(258, 67));
+        jPanel5.setPreferredSize(new Dimension(258, 67));
 
         historyButton.setBackground(mainColor);
-        historyButton.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        historyButton.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
         historyButton.setForeground(black);
         historyButton.setText("Historial");
-        historyButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        historyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         historyButton.setFocusPainted(false);
         historyButton.setHorizontalTextPosition(SwingConstants.LEFT);
-        historyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        historyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 historyButtonActionPerformed(evt);
             }
         });
@@ -233,16 +235,16 @@ public class ClientFrame extends JFrame {
                 .addGap(0, 173, Short.MAX_VALUE))
         );
 
-        editButton.setBackground(new java.awt.Color(255, 111, 156));
-        editButton.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        editButton.setBackground(new Color(255, 111, 156));
+        editButton.setFont(new Font("Segoe UI", 0, 22)); // NOI18N
         editButton.setForeground(black);
         editButton.setIcon(new ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         editButton.setText("Editar datos");
-        editButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         editButton.setFocusPainted(false);
         editButton.setHorizontalTextPosition(SwingConstants.LEFT);
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 editButtonActionPerformed(evt);
             }
         });
@@ -251,14 +253,14 @@ public class ClientFrame extends JFrame {
         jPanel7.setFocusable(false);
 
         passwordLabel.setBackground(secondColor);
-        passwordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        passwordLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         passwordLabel.setText("Contrase\u00f1a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
-        addressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        addressLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
         addressLabel.setText("Direcci\u00f3n");
@@ -266,39 +268,39 @@ public class ClientFrame extends JFrame {
 
         addressField.setEditable(false);
         addressField.setBackground(secondColor);
-        addressField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        addressField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         addressField.setForeground(black);
         addressField.setText(client.getAddress());
         addressField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         nameLabel.setBackground(secondColor);
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         nameLabel.setForeground(black);
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         nameLabel.setText("Nombre");
         nameLabel.setOpaque(true);
         nameLabel.setVisible(true);
         
-        invalidPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidPasswordLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         invalidPasswordLabel.setForeground(mainColor);
         invalidPasswordLabel.setText("Contrase\u00f1a inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
-        invalidAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidAddressLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         invalidAddressLabel.setForeground(mainColor);
         invalidAddressLabel.setText("Direcci\u00f3n inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
         passwordField.setEditable(false);
         passwordField.setBackground(secondColor);
-        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        passwordField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         passwordField.setForeground(black);
         passwordField.setText(CryptoService.getCryptoService().decodePassword(client.getPassword()));
         passwordField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         nameField.setEditable(false);
         nameField.setBackground(secondColor);
-        nameField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        nameField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         nameField.setForeground(black);
         nameField.setText(client.getName());
         nameField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
@@ -352,9 +354,9 @@ public class ClientFrame extends JFrame {
         } else {
         	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource(client.getImg_path()))));
         }
-        userPhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        userPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        userPhoto.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        userPhoto.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 userPhotoMouseClicked(evt);
             }
         });
@@ -371,10 +373,10 @@ public class ClientFrame extends JFrame {
         );
 
         jPanel6.setBackground(mainColor);
-        jPanel6.setPreferredSize(new java.awt.Dimension(420, 322));
+        jPanel6.setPreferredSize(new Dimension(420, 322));
 
         rutLabel.setBackground(secondColor);
-        rutLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        rutLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         rutLabel.setForeground(black);
         rutLabel.setHorizontalAlignment(SwingConstants.CENTER);
         rutLabel.setText("Rut");
@@ -382,18 +384,18 @@ public class ClientFrame extends JFrame {
 
         rutField.setEditable(false);
         rutField.setBackground(secondColor);
-        rutField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        rutField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         rutField.setForeground(black);
         rutField.setText(client.getRut());
         rutField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        invalidEmailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidEmailLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         invalidEmailLabel.setForeground(mainColor);
         invalidEmailLabel.setText("Correo inv\u00e1lido");
         invalidEmailLabel.setVisible(true);
 
         emailLabel.setBackground(secondColor);
-        emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         emailLabel.setForeground(black);
         emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
         emailLabel.setText("Correo");
@@ -401,25 +403,25 @@ public class ClientFrame extends JFrame {
 
         emailField.setEditable(false);
         emailField.setBackground(secondColor);
-        emailField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        emailField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         emailField.setForeground(black);
         emailField.setText(client.getMail());
         emailField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        invalidPhoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        invalidPhoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         invalidPhoneNumberLabel.setForeground(mainColor);
         invalidPhoneNumberLabel.setText("Tel\u00e9fono inv\u00e1lido");
         invalidPhoneNumberLabel.setVisible(true);
 
         phoneNumberField.setEditable(false);
         phoneNumberField.setBackground(secondColor);
-        phoneNumberField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberField.setForeground(black);
         phoneNumberField.setText("+56"+client.getNumber());
         phoneNumberField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         phoneNumberLabel.setBackground(secondColor);
-        phoneNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
         phoneNumberLabel.setText("Tel\u00e9fono");
@@ -516,33 +518,33 @@ public class ClientFrame extends JFrame {
         
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>                        
+    }                        
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void backButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
     	LoginFrame lf = new LoginFrame();
     	lf.setVisible(true);
     }
     
-    private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void productButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
     	ProductListFrame plf = new ProductListFrame(client);
     	plf.setVisible(true);
     }  
 
-    private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void cartButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
     	ShoppingCart sc = new ShoppingCart(client, shoppingCart);
     	sc.setVisible(true);
     }
     
-    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void historyButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
     	ShoppingHistory sh = new ShoppingHistory(client);
     	sh.setVisible(true);
     }
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void editButtonActionPerformed(ActionEvent evt) {                                           
     	// Edit to save changes
         if(editButton.getText().equals("Editar datos")) {
             
@@ -622,7 +624,7 @@ public class ClientFrame extends JFrame {
         }
     }                                    
 
-    private void userPhotoMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    private void userPhotoMouseClicked(MouseEvent evt) {                                       
     	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Seleccione una imagen");
 		jfc.setAcceptAllFileFilterUsed(false);
@@ -642,7 +644,6 @@ public class ClientFrame extends JFrame {
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -657,7 +658,7 @@ public class ClientFrame extends JFrame {
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
     	Image img = imageIcon.getImage();
-		img = img.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(200, 200,  Image.SCALE_SMOOTH);
         return new ImageIcon(img);
 	}
 
@@ -675,15 +676,8 @@ public class ClientFrame extends JFrame {
     	return true;
     }                                          
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -692,18 +686,16 @@ public class ClientFrame extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ClientFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ClientFrame(client).setVisible(true);
             }
