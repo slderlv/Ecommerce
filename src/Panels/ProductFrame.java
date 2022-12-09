@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import Assets.WordWrapCellRenderer;
+import Database.SQLBuyService;
+import Database.SQLShoppingCart;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
@@ -385,9 +387,18 @@ public class ProductFrame extends javax.swing.JFrame {
     	int total = product.getBuy_quantity() + (int)quantitySpinner.getValue();
     	if(total>product.getInfo().getStock()) {
     		JOptionPane.showMessageDialog(null, "Cantidad seleccionada excede el stock disponible", "Error en la compra", JOptionPane.ERROR_MESSAGE);
+    	} else {
+    		product.setBuy_quantity(total);
+    		if(!shoppingCart.contains(product)) {
+    			shoppingCart.add(product);
+    			if (client.getTransactions().getShoppingCart().size() == 0) {
+    				SQLBuyService.getSQLBuyService().create(client);
+    			}
+    			int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+    			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id);
+    		}
+    		
     	}
-    	product.setBuy_quantity(total);
-    	if(!shoppingCart.contains(product)) shoppingCart.add(product);
     }                                               
 
     private void addCommentButtonActionPerformed(java.awt.event.ActionEvent evt) {  
