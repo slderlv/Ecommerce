@@ -7,6 +7,8 @@ import javax.swing.event.ListSelectionListener;
 
 import Assets.ArrayToString;
 import Database.SQLBuyService;
+import Database.SQLProductService;
+import Database.SQLShoppingCart;
 import Domain.Purchase;
 import Domain.Client;
 import Domain.Product;
@@ -332,15 +334,33 @@ public class ShoppingCart extends javax.swing.JFrame {
     	cf.setVisible(true);
     }
 
-    private void addUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void addUnitButtonActionPerformed(java.awt.event.ActionEvent evt) { 
         int rowIndex = shoppingCartTable.getSelectedRow();
         int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
-        int stock = shoppingCart.get(rowIndex).getInfo().getStock();
-        if(quantity==stock) {
-        	JOptionPane.showMessageDialog(null, "No hay mï¿½s productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
-        	return;
+        int stock = 0;
+        Product p = null;
+        for(int i =0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
+        	if (shoppingCart.get(rowIndex).getId() == SystemService.getSystem().getProducts().get(i).getId()) {
+        		stock = SystemService.getSystem().getProducts().get(i).getInfo().getStock();
+        		p = SystemService.getSystem().getProducts().get(i);
+        		break;
+        	}
         }
-        updateFrame(true,rowIndex,quantity);
+        
+        if(stock <= 0) {
+        	JOptionPane.showMessageDialog(null, "No hay mï¿½s productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+        	//p.getInfo().setStock(stock-1);
+        	  		
+        		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+        		SQLProductService.getSQLProductService().updateStock(p, 1);
+        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity);
+        		SystemService.getSystem().refreshProducts();
+        		updateFrame(true,rowIndex,quantity);
+        		//System.out.println("STOCK "+ stock);
+        	
+        	
+        }
     }                                             
 
     
