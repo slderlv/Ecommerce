@@ -41,7 +41,7 @@ public class RegisterFrame extends JFrame {
         passwordText = new JPasswordField();
         emailText = new JTextField();
         password2Text = new JPasswordField();
-        registerButtom = new JButton();
+        registerButton = new JButton();
         loginText = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,12 +94,12 @@ public class RegisterFrame extends JFrame {
         password2Text.setBackground(new Color(255, 174, 167));
         password2Text.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
 
-        registerButtom.setBackground(new Color(255, 27, 157));
-        registerButtom.setFont(new Font("Segoe UI", 0, 48)); // NOI18N
-        registerButtom.setText("Crear Cuenta");
-        registerButtom.addActionListener(new ActionListener() {
+        registerButton.setBackground(new Color(255, 27, 157));
+        registerButton.setFont(new Font("Segoe UI", 0, 48)); // NOI18N
+        registerButton.setText("Crear Cuenta");
+        registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                RegisterButtom(evt);
+                RegisterButton(evt);
             }
         });
 
@@ -146,7 +146,7 @@ public class RegisterFrame extends JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(registerButtom, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(registerButton, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(loginText)
                                         .addGap(77, 77, 77)))))))
@@ -176,7 +176,7 @@ public class RegisterFrame extends JFrame {
                                     .addComponent(passwordText, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
-                                .addComponent(registerButtom, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(loginText)))
                         .addGap(18, 18, 18)
@@ -231,12 +231,15 @@ public class RegisterFrame extends JFrame {
     }
 
     @SuppressWarnings("deprecation")
-	private void RegisterButtom(ActionEvent evt) {
+	private void RegisterButton(ActionEvent evt) {
     	//JOptionPane.showMessageDialog(null, "EL BOTON FUNCIONA");
     	String rut = nameText.getText();
         String password = passwordText.getText();
         String password2 = password2Text.getText();
-        
+        if(password.length()<4) {
+        	JOptionPane.showMessageDialog(null, "Contrase\u00f1a debe tener al menos 4 car\u00e1cteres");
+        	return;
+        }
         if(password.equals(password2)) {
             password = CryptoService.getCryptoService().encodePassword(password);
             String email = emailText.getText();
@@ -309,7 +312,7 @@ public class RegisterFrame extends JFrame {
     private JTextField nameText;
     private JPasswordField passwordText;
     private JPasswordField password2Text;
-    private JButton registerButtom;
+    private JButton registerButton;
     private static User user;
     // End of variables declaration
 }
