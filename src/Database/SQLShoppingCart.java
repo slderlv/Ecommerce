@@ -62,7 +62,8 @@ public class SQLShoppingCart implements ISQLRead<Client>{
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM buys WHERE user_rut=? AND state = 'CARRITO' order by id desc limit 1");
             statement.setString(1,c.getRut());
             ResultSet response = statement.executeQuery();
-            return response.getInt("id");
+            if (response.next()) return response.getInt("id");
+            //return response.getInt("id");
         }catch (SQLException e){ 
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }

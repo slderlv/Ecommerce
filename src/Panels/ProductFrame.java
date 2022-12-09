@@ -1,6 +1,8 @@
 package Panels;
 
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -16,7 +18,7 @@ import Domain.ProductInfo;
 
 public class ProductFrame extends javax.swing.JFrame {
 
-    public ProductFrame(Product product) {
+    public ProductFrame(Product product, Client clientI) {
     	ProductFrame.product = product; /*new Product(
     			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
     					250000,
@@ -27,6 +29,8 @@ public class ProductFrame extends javax.swing.JFrame {
             commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
     	}
     	*/
+    	client = clientI;
+    	shoppingCart = client.getTransactions().getShoppingCart(); //a
     	commentsList = product.getComments();
         initComponents();
     }
@@ -390,14 +394,19 @@ public class ProductFrame extends javax.swing.JFrame {
     	} else {
     		product.setBuy_quantity(total);
     		if(!shoppingCart.contains(product)) {
-    			shoppingCart.add(product);
+    			System.out.println("ENTRE ACA");
     			if (client.getTransactions().getShoppingCart().size() == 0) {
+    				System.out.println("Efectivamente tengo 0");
     				SQLBuyService.getSQLBuyService().create(client);
+    				client.getTransactions().getShoppingCart().add(product);
+    				System.out.println("IMPRIMO");
+    				
     			}
     			int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
-    			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id);
+				//System.out.println(buy_id);
+				SQLShoppingCart.getSQLShoppingCart().create(product, buy_id);
+				
     		}
-    		
     	}
     }                                               
 
@@ -476,7 +485,7 @@ public class ProductFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductFrame(product).setVisible(true);
+                new ProductFrame(product,client).setVisible(true);
             }
         });
     }

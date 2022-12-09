@@ -31,7 +31,8 @@ public class main {
 		// Al abrir desde admin un producto crea una ventana y no la borra
 		// LISTA DE PRODUCTO NO DEVUELVE A USER LUEGO DE METERSE A UN PRODUCTO
 		// TARJETAS TE MANDA PA ADMIN
-		
+		// SE CAYO AL HACER -> CLIENTE -> SHOPPING CART -> LISTA DE PRODUCTOS -> PRODUCTO
+		//PRODUCT LIST A USURARIO SE CAYO
 	}
 
 }

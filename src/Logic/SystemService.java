@@ -172,21 +172,22 @@ public class SystemService {
 	
 	public ArrayList<Product> getShoppingCart(Client client) {
 		ResultSet rs = SQLShoppingCart.getSQLShoppingCart().read(client);
-		ArrayList<Product> products = new ArrayList<Product>();
+		ArrayList<Product> clientProducts = new ArrayList<Product>();
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("product_id");
+				System.out.println(id);
 				Product p = null;
 				for(int i =0; i < products.size(); i++) {
 					p = products.get(i);
 					if (p.getId() == id) break;
 				}
 				p.setBuy_quantity(rs.getInt("quantity"));
-				products.add(p);
+				clientProducts.add(p);
 				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)
 				//public ProductInfo(String name, int price, String description, int stock, String category, String img_path) 
 			}
-			return products;
+			return clientProducts;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -241,7 +242,7 @@ public class SystemService {
 		getCards(client);
 		//private ArrayList<Product> shoppingCart;
 	   // private ArrayList<Purchase> purchases;
-		Transactions t = new Transactions(getShoppingCart(client),getPurchases(client));
+		Transactions t = new Transactions(getShoppingCart(client),new ArrayList<Purchase>());//getPurchases(client));
 		client.setTransactions(t);
 	}
 	

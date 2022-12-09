@@ -179,7 +179,7 @@ public class ProductListFrame extends javax.swing.JFrame {
     			if (product.getInfo().getName().equals(selectProduct)) break;
     		}
     		dispose();
-    		ProductFrame pf = new ProductFrame(product);
+    		ProductFrame pf = new ProductFrame(product,(Client)user);
     		pf.setVisible(true);
 		 	
     	}
