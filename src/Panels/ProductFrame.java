@@ -20,16 +20,7 @@ import Domain.Product;
 public class ProductFrame extends JFrame {
 
     public ProductFrame(Product product, Client client) {
-    	ProductFrame.product = product; /*new Product(
-    			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
-    					250000,
-    					"Tipo	Televisores\nConexi�n WiFi	S�\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	S�\nSintonizador digital	S�\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnolog�a", null), 10, null, 0);
-    	commentsList = new ArrayList<>();
-    	for(int i=0; i<10; i++) {
-            commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
-    	}
-    	*/
+    	ProductFrame.product = product;
     	ProductFrame.client = client;
     	commentsList = product.getComments();
         initComponents();
@@ -87,8 +78,11 @@ public class ProductFrame extends JFrame {
         imageButton.setIcon(new ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
         imageButton.setContentAreaFilled(false);
         imageButton.setFocusPainted(false);
-    	// imageButton.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource(product.getInfo().getImg_path()))));
-    	imageButton.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/ProductIcons/cellphone.png"))));
+        if(product.getInfo().getImg_path()!=null) {
+        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource(product.getInfo().getImg_path()))));
+        } else {
+        	imageButton.setIcon(resizeImageIcon(new javax.swing.ImageIcon(getClass().getResource("/ProductIcons/cellphone.png"))));
+        }
 
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
@@ -141,7 +135,7 @@ public class ProductFrame extends JFrame {
 
         categoryLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         categoryLabel.setForeground(new Color(0, 0, 0));
-        categoryLabel.setText("Categor�a");
+        categoryLabel.setText("Categor\u00eda");
 
         jPanel3.setBackground(new Color(255, 212, 171));
 
@@ -297,13 +291,13 @@ public class ProductFrame extends JFrame {
 
         descriptionLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
         descriptionLabel.setForeground(new Color(0, 0, 0));
-        descriptionLabel.setText("Descripci�n");
+        descriptionLabel.setText("Descripci\u00f3n");
 
         categoryField.setEditable(false);
         categoryField.setBackground(new Color(255, 255, 255));
         categoryField.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
         categoryField.setForeground(new Color(0, 0, 0));
-        categoryField.setText("jTextField1");
+        categoryField.setText(product.getInfo().getCategory());
         categoryField.setCaretColor(new Color(0, 0, 0));
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -424,8 +418,6 @@ public class ProductFrame extends JFrame {
     		product.getInfo().setStock(product.getInfo().getStock() - (int)quantitySpinner.getValue());
     		stockField.setText(product.getInfo().getStock()+"");;
 			//SystemService.getSystem().refreshProducts();
-				
-    		
     	}
     }                                               
 
@@ -454,7 +446,7 @@ public class ProductFrame extends JFrame {
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
     	JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
-    	String[] row = {"hola",rating+"",comment}; // client.getName()
+    	String[] row = {client.getName(),rating+"",comment};
     	((DefaultTableModel)commentsTable.getModel()).addRow(row);
     	commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
     }                                                
@@ -478,7 +470,7 @@ public class ProductFrame extends JFrame {
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
     	Image img = imageIcon.getImage();
-		img = img.getScaledInstance(jPanel2.getPreferredSize().width, jPanel2.getPreferredSize().height,  Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(jPanel2.getPreferredSize().width-50, jPanel2.getPreferredSize().height,  Image.SCALE_SMOOTH);
         return new ImageIcon(img);
 	}
 

@@ -38,6 +38,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         cardsComboBox = new javax.swing.JComboBox<>();
         payButton = new javax.swing.JButton();
 
+        setTitle("Ecommerce - Carrito de compras");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 212, 171));
