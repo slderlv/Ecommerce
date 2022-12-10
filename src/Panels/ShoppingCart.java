@@ -390,6 +390,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         		System.out.println("buenas");
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, 0);
+        		SQLProductService.getSQLProductService().sumStock(p, 1);
         		shoppingCart.remove(rowIndex);
         		dispose();
         		SystemService.getSystem().getTransactions(client);
