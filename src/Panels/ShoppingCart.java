@@ -300,30 +300,34 @@ public class ShoppingCart extends javax.swing.JFrame {
     	cf.setVisible(true);
     } 
     
-    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {   
-    	if(client.getCards().isEmpty() == true) {
-    		dispose();
-        	CardFrame cf = new CardFrame(client, shoppingCart);
-        	cf.setVisible(true);
+    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+    	if(client.getTransactions().getShoppingCart() != null ){
+	    	if(client.getCards().isEmpty() == true) {
+	    		dispose();
+	        	CardFrame cf = new CardFrame(client, shoppingCart);
+	        	cf.setVisible(true);
+	    	}
+	    	else {
+	    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+	    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
+	    				client.getTransactions().getShoppingCart().remove(x);
+	    			}
+	    		}
+			
+	    		for(int i=0;  i<shoppingCart.size(); i++) {
+	    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+	    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+	    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+	    					shoppingCart.get(i).getInfo().setStock(stock);
+	    				}
+	    			}
+	    		}
+	    		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+	    		sqls.update(client);
+	    	}
     	}
-    	
     	else {
-    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
-    				client.getTransactions().getShoppingCart().remove(x);
-    			}
-    		}
-		
-    		for(int i=0;  i<shoppingCart.size(); i++) {
-    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
-    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
-    					shoppingCart.get(i).getInfo().setStock(stock);
-    				}
-    			}
-    		}
-    		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-    		sqls.update(client);
+    		JOptionPane.showMessageDialog(null, "Tiene que haber un producto en el carrito antes de poder pagar");
     	}
     	
     } 
@@ -348,7 +352,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         }
         
         if(stock <= 0) {
-        	JOptionPane.showMessageDialog(null, "No hay mï¿½s productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
+        	JOptionPane.showMessageDialog(null, "No hay mas productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         } else {
         	//p.getInfo().setStock(stock-1);
         	  		
