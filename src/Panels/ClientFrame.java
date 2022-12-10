@@ -267,6 +267,7 @@ public class ClientFrame extends JFrame {
         addressLabel.setText("Direcci\u00f3n");
         addressLabel.setOpaque(true);
 
+        addressField.setDocument(new JTextFieldLimit(35));
         addressField.setEditable(false);
         addressField.setBackground(secondColor);
         addressField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
@@ -292,6 +293,7 @@ public class ClientFrame extends JFrame {
         invalidAddressLabel.setText("Direcci\u00f3n inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
+        passwordField.setDocument(new JTextFieldLimit(41));
         passwordField.setEditable(false);
         passwordField.setBackground(secondColor);
         passwordField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
@@ -299,6 +301,7 @@ public class ClientFrame extends JFrame {
         passwordField.setText(CryptoService.getCryptoService().decodePassword(client.getPassword()));
         passwordField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
+        nameField.setDocument(new JTextFieldLimit(16));
         nameField.setEditable(false);
         nameField.setBackground(secondColor);
         nameField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
@@ -402,6 +405,7 @@ public class ClientFrame extends JFrame {
         emailLabel.setText("Correo");
         emailLabel.setOpaque(true);
 
+        emailField.setDocument(new JTextFieldLimit(35));
         emailField.setEditable(false);
         emailField.setBackground(secondColor);
         emailField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
@@ -414,6 +418,7 @@ public class ClientFrame extends JFrame {
         invalidPhoneNumberLabel.setText("Tel\u00e9fono inv\u00e1lido");
         invalidPhoneNumberLabel.setVisible(true);
 
+        phoneNumberField.setDocument(new JTextFieldLimit(12));
         phoneNumberField.setEditable(false);
         phoneNumberField.setBackground(secondColor);
         phoneNumberField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
