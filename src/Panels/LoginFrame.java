@@ -181,6 +181,7 @@ public class LoginFrame extends JFrame {
                     dispose();
                 }
                 else{
+                	String img_path = rs.getString("img_path");
                     //Client 
                 	//BUILD ASSET
                     format = name + "," + mail + ","+ password + ","+ rut;
@@ -190,6 +191,7 @@ public class LoginFrame extends JFrame {
                     clientBuilder.setNumber(rs.getInt("phone_number"));
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
+                    client.setImg_path(img_path);
                     ClientFrame cf = new ClientFrame(client);
                     cf.setVisible(true);
                     dispose();

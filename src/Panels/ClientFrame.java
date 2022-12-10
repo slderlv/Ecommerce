@@ -352,7 +352,7 @@ public class ClientFrame extends JFrame {
         if(client.getImg_path()==null) {
         	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/UserIcons/FBmvyqjWQAwkCia.jpeg"))));
         } else {
-        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource(client.getImg_path()))));
+        	userPhoto.setIcon(resizeImageIcon(new ImageIcon(getClass().getResource("/"+client.getImg_path()))));
         }
         userPhoto.setCursor(new Cursor(Cursor.HAND_CURSOR));
         userPhoto.addMouseListener(new MouseAdapter() {
@@ -628,7 +628,7 @@ public class ClientFrame extends JFrame {
     	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 		jfc.setDialogTitle("Seleccione una imagen");
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG o JPEG", "png", "jpeg");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNG", "png");
 		jfc.addChoosableFileFilter(filter);
 		int returnValue = jfc.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -637,10 +637,9 @@ public class ClientFrame extends JFrame {
 	        userPhoto.setIcon(userIcon);
 			userPhoto.repaint();
 			File original = new File(imagePath);
-			File copy = new File("UserIcons/"+client.getRut()+"."+getFileType(original));
-			if(client.getImg_path()==null) {
-				client.setImg_path("/"+copy.toPath().toString());
-			}
+			String path = "UserIcons/"+client.getRut()+"."+getFileType(original);
+			File copy = new File(path);
+			client.setImg_path(path);
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
