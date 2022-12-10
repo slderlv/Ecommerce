@@ -23,6 +23,7 @@ import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
 import Domain.ProductInfo;
+import Domain.Purchase;
 import Domain.Transactions;
 import Logic.SystemService;
 
@@ -342,10 +343,7 @@ public class MenuAdminEdit extends JFrame {
     }                       
 
     private void editUserButtonActionPerformed(ActionEvent evt) {                                               		
-		// if(editUserField existe en la base de datos){
-		// editUserField.getText() buscar
-		// }
-		dispose();
+		
 		ResultSet response = SQLClientService.getSQLClientService().read(RutFormat.formatToDatabase(editUserField.getText()));
 		try {
 			if (response.next()) {
@@ -353,10 +351,15 @@ public class MenuAdminEdit extends JFrame {
 				Client client = new Client(response.getString("rut"), response.getString("name"), CryptoService.getCryptoService().decodePassword(response.getString("password")), response.getString("mail"), response.getInt("phone_number"), null, response.getString("street"),null, "");
 				String img_path = response.getString("img_path");
 				client.setImg_path(img_path);
+				client.setTransactions(new Transactions());
+				ArrayList<Purchase> purchaseList = SystemService.getSystem().getPurchases(client);
+				ArrayList<Product> shoppingCart = SystemService.getSystem().getShoppingCart(client);
+				client.getTransactions().setPurchases(purchaseList);
+				client.getTransactions().setShoppingCart(shoppingCart);
+				dispose();
 				ManageUser manageUser = new ManageUser(client);
 				manageUser.setVisible(true);
 			}else {
-				this.setVisible(true);
 				JOptionPane.showMessageDialog(null, "El usuario esta bloqueado o no existe");
 			}
 		} catch (Exception e) {

@@ -4,35 +4,20 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import Assets.ArrayToString;
 import Database.SQLBuyService;
 import Database.SQLProductService;
 import Database.SQLShoppingCart;
-import Domain.Purchase;
 import Domain.Client;
 import Domain.Product;
-import Domain.ProductInfo;
-import Domain.Transactions;
 import Logic.SystemService;
 
+@SuppressWarnings("serial")
 public class ShoppingCart extends javax.swing.JFrame {
 
-	public ShoppingCart(Client client,ArrayList<Product> productList) {
-    	ShoppingCart.client = client;/*new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, new Transactions(), "aaaaa", null, "UserIcons/juan_bekios.jpeg");
-    	shoppingCart = ShoppingCart.client.getTransactions().getShoppingCart();
-    	Product product = new Product(
-    			new ProductInfo("Led Philips Ambilight 65",
-    					250000,
-    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnología", null), 10, null, 10);
-    	shoppingCart = new ArrayList<Product>();
-    	*/
-    	//lient..add(product);
-    	//SystemService.getSystem().getTransactions(client);
+	public ShoppingCart(Client client) {
     	ShoppingCart.client = client;
     	shoppingCart = client.getTransactions().getShoppingCart();
-        //ShoppingCart.productList = productList;
     	initComponents();
 	}
                      
@@ -62,7 +47,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         shoppingCartScrollPane.setAutoscrolls(true);
 
         shoppingCartTable.setBackground(new java.awt.Color(255, 255, 255));
-        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         shoppingCartTable.setForeground(new java.awt.Color(0, 0, 0));
         String[] columnNames = {"Nombre","Unidades","Subtotal"};
         String[] rowData = new String[3];
@@ -82,7 +67,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         shoppingCartTable.setModel(model);
         for (int c = 0; c < shoppingCartTable.getColumnCount(); c++){
             Class<?> col_class = shoppingCartTable.getColumnClass(c);
-            shoppingCartTable.setDefaultEditor(col_class, null);        // remove editor
+            shoppingCartTable.setDefaultEditor(col_class, null); // remove editor
         }
         shoppingCartTable.setGridColor(new java.awt.Color(0, 0, 0));
         shoppingCartTable.setShowGrid(true);
@@ -101,18 +86,18 @@ public class ShoppingCart extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 212, 171));
 
-        selectedProductLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        selectedProductLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); 
         selectedProductLabel.setForeground(new java.awt.Color(0, 0, 0));
         selectedProductLabel.setText("Producto seleccionado:");
 
         selectedProductField.setEditable(false);
         selectedProductField.setBackground(new java.awt.Color(255, 255, 255));
-        selectedProductField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        selectedProductField.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         selectedProductField.setForeground(new java.awt.Color(0, 0, 0));
         selectedProductField.setText("Seleccione un producto");
 
         addUnitButton.setBackground(new java.awt.Color(255, 111, 156));
-        addUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         addUnitButton.setForeground(new java.awt.Color(0, 0, 0));
         addUnitButton.setText("Agregar unidad");
         addUnitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -124,7 +109,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
 
         removeUnitButton.setBackground(new java.awt.Color(255, 111, 156));
-        removeUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        removeUnitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         removeUnitButton.setForeground(new java.awt.Color(0, 0, 0));
         removeUnitButton.setText("Eliminar unidad");
         removeUnitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -137,7 +122,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
         totalAmountField.setEditable(false);
         totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
-        totalAmountField.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalAmountField.setFont(new java.awt.Font("Segoe UI", 0, 24)); 
         totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         if(shoppingCart != null) {
@@ -150,7 +135,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         }
 
         totalAmountLabel.setBackground(new java.awt.Color(255, 255, 255));
-        totalAmountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        totalAmountLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); 
         totalAmountLabel.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalAmountLabel.setText("Total a pagar:");
@@ -190,7 +175,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                     .addComponent(totalAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/back.png")));
         backButton.setBorderPainted(false);
         backButton.setContentAreaFilled(false);
         backButton.setFocusPainted(false);
@@ -202,7 +187,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
 
         addCardButton.setBackground(new java.awt.Color(255, 111, 156));
-        addCardButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addCardButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         addCardButton.setForeground(new java.awt.Color(0, 0, 0));
         addCardButton.setText("Agregar tarjeta");
         addCardButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,13 +199,12 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
 
         cardsComboBox.setBackground(new java.awt.Color(255, 255, 255));
-        cardsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cardsComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         cardsComboBox.setForeground(new java.awt.Color(0, 0, 0));
         cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayToString.getStringArrayFromCards(client.getCards())));
-        //cardsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1111 1111 1111 1111", "2222 2222 2222 2222", "Item 3", "Item 4" }));
 
         payButton.setBackground(new java.awt.Color(255, 111, 156));
-        payButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        payButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         payButton.setForeground(new java.awt.Color(0, 0, 0));
         payButton.setText("Pagar");
         payButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -287,7 +271,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>                        
+    }                     
 
     private void selectedRowActionPerformed(ListSelectionEvent evt) {                  
     	if(shoppingCartTable.getSelectedRowCount()==1) {
@@ -325,19 +309,8 @@ public class ShoppingCart extends javax.swing.JFrame {
 	    			JOptionPane.showMessageDialog(null, "ARTICULOS COMPRADOS");
 	    			
 	    		}
-//			
-//	    		for(int i=0;  i<shoppingCart.size(); i++) {
-//	    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-//	    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
-//	    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
-//	    					shoppingCart.get(i).getInfo().setStock(stock);
-//	    				}
-//	    			}
-//	    		}
 	    	}
     	}
-    	
-    	
     } 
     
     private void addCardButtonActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -350,14 +323,6 @@ public class ShoppingCart extends javax.swing.JFrame {
         int rowIndex = shoppingCartTable.getSelectedRow();
         int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
         int stock = 0;
-//        Product actualProduct = null;
-//        
-//        for(int i =0 ; i < shoppingCart.size(); i ++) {
-//        	if (shoppingCart.get(rowIndex).getId() == shoppingCart.get(i).getId()) {
-//        		actualProduct = SystemService.getSystem().getProducts().get(i);
-//        		break;
-//        	}
-//        }
         Product p =null;
         for(int i =0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
         	if (shoppingCart.get(rowIndex).getId() == SystemService.getSystem().getProducts().get(i).getId()) {
@@ -408,7 +373,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         		shoppingCart.remove(rowIndex);
         		dispose();
         		SystemService.getSystem().getTransactions(client);
-        		ShoppingCart sc = new ShoppingCart(client,client.getTransactions().getShoppingCart());
+        		ShoppingCart sc = new ShoppingCart(client);
         		sc.setVisible(true);
         		
         	} 
@@ -463,7 +428,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShoppingCart(client,shoppingCart).setVisible(true);
+                new ShoppingCart(client).setVisible(true);
             }
         });
     }

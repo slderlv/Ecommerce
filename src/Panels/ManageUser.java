@@ -590,7 +590,7 @@ public class ManageUser extends JFrame {
 
     private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	AdminShoppingCart adminShoppingCart = new AdminShoppingCart();
+    	AdminShoppingCart adminShoppingCart = new AdminShoppingCart(client);
     	adminShoppingCart.setVisible(true);
     }
     
