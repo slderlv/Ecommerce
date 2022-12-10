@@ -53,7 +53,7 @@ public class ArrayToString {
     	String[] array = new String[purchaseList.size()];
     	for(int i=0; i<purchaseList.size(); i++) {
     		array[i] = "Compra N: " + counter+ "(ID: "+ purchaseList.get(i).getId() + ")";
-    		System.out.println("QUE PASO ");
+    		
     		counter ++;
     	}
 		return array;

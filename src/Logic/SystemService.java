@@ -200,20 +200,20 @@ public class SystemService {
 	public ArrayList<Purchase> getPurchases(Client client) {
 		ResultSet rs = SQLBuyService.getSQLBuyService().read(client);
 		ArrayList<Purchase> purchases = new ArrayList<Purchase>();
-		System.out.println("OLO");
+		
 		try {
 			int id = 0;
 			int counter = -1;
 			Purchase purchase;
 			ArrayList<Product> productsOfPurchase;
-			System.out.println("buenas");
+			
 			while (rs.next()) {
-				System.out.println("COMPRA");
+				
 				int buy_id = rs.getInt("id");
 				
 				if (id == 0 || id != buy_id){
 					//Nueva compra
-					System.out.println("Me meti aca 1");
+					
 					counter++;
 					id = buy_id;
 					productsOfPurchase =  new ArrayList<Product>();
@@ -230,7 +230,7 @@ public class SystemService {
 					purchase.getProducts().add(p);
 					purchases.add(purchase);
 				} else {
-					System.out.println("Me meti aca 2");
+				
 					purchase = purchases.get(counter);
 					productsOfPurchase = purchase.getProducts();
 					
