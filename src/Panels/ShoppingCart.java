@@ -310,27 +310,33 @@ public class ShoppingCart extends javax.swing.JFrame {
 	        	cf.setVisible(true);
 	    	}
 	    	else {
+	    		boolean allElements = true;
 	    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-	    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() == 0) {
-	    				client.getTransactions().getShoppingCart().remove(x);
+	    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() > 0) {
+	    				allElements = false;
+	    				break;
 	    			}
 	    		}
-			
-	    		for(int i=0;  i<shoppingCart.size(); i++) {
-	    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
-	    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
-	    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
-	    					shoppingCart.get(i).getInfo().setStock(stock);
-	    				}
-	    			}
+	    		if(client.getTransactions().getShoppingCart().size() == 0 || allElements == true) {
+	    			JOptionPane.showMessageDialog(null, "Tiene que haber un producto en el carrito antes de poder pagar");
+	    		} else {
+	    			SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+	    			sqls.update(client);
+	    			JOptionPane.showMessageDialog(null, "ARTICULOS COMPRADOS");
+	    			
 	    		}
-	    		SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-	    		sqls.update(client);
+//			
+//	    		for(int i=0;  i<shoppingCart.size(); i++) {
+//	    			for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+//	    				if(shoppingCart.get(i).getId() == client.getTransactions().getShoppingCart().get(x).getId()) {
+//	    					int stock = shoppingCart.get(i).getInfo().getStock()-client.getTransactions().getShoppingCart().get(x).getBuy_quantity();
+//	    					shoppingCart.get(i).getInfo().setStock(stock);
+//	    				}
+//	    			}
+//	    		}
 	    	}
     	}
-    	else {
-    		JOptionPane.showMessageDialog(null, "Tiene que haber un producto en el carrito antes de poder pagar");
-    	}
+    	
     	
     } 
     
@@ -365,7 +371,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         	JOptionPane.showMessageDialog(null, "No hay mas productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         } else {
         	//p.getInfo().setStock(stock-1);
-        	  	System.out.println(shoppingCart.get(rowIndex).getId());
+//        	  	System.out.println(shoppingCart.get(rowIndex).getId());
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         		SQLProductService.getSQLProductService().updateStock(p, 1);
         		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity + 1);
