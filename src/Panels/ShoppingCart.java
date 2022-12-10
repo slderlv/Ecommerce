@@ -314,6 +314,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 	    		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
 	    			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() > 0) {
 	    				allElements = false;
+	    				break;
 	    			}
 	    		}
 	    		if(client.getTransactions().getShoppingCart().size() == 0 || allElements == true) {
