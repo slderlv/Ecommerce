@@ -369,7 +369,7 @@ public class AdminShoppingCart extends javax.swing.JFrame {
         }
         if(quantity==1) {
         	Object[] buttons = {"Aceptar","Cancelar"};
-        	int reply = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
+        	int reply = JOptionPane.showOptionDialog(null, "\u00bfEst\u00e1seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
         	System.out.println(reply);
         	if(reply==0) {
