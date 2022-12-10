@@ -35,7 +35,6 @@ public class AdminHistoryUser extends javax.swing.JFrame {
             historyCart.setGridColor(new java.awt.Color(255, 255, 255));
             jScrollPane1.setViewportView(historyCart);
             model.addColumn("Producto");
-            model.addColumn("Fecha");
             model.addColumn("Cantidad");
             model.addColumn("Costo");
             historyCart.setModel(model);
