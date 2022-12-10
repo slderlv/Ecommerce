@@ -52,6 +52,10 @@ public class RegisterFrame extends JFrame {
 
         backButton.setBackground(new Color(255, 212, 171));
         backButton.setIcon(new ImageIcon(getClass().getResource("/Icons/back.png"))); // NOI18N
+        backButton.setContentAreaFilled(false);
+        backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        backButton.setFocusPainted(false);
+        backButton.setBorderPainted(false);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 Back(evt);
@@ -59,25 +63,25 @@ public class RegisterFrame extends JFrame {
         });
 
         rutLabel.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        rutLabel.setForeground(new Color(255, 255, 255));
+        rutLabel.setForeground(new Color(0, 0, 0));
         rutLabel.setText("Rut");
 
         jLabel2.setIcon(new ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
 
         jLabel3.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setForeground(new Color(255, 255, 255));
+        jLabel3.setForeground(new Color(0, 0, 0));
         jLabel3.setText("Contrase\u00f1a");
 
         jLabel4.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel5.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel5.setForeground(new Color(255, 255, 255));
+        jLabel5.setForeground(new Color(0, 0, 0));
         jLabel5.setText("Confirmar contrase\u00f1a");
 
         jLabel6.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
         jLabel7.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel7.setForeground(new Color(255, 255, 255));
+        jLabel7.setForeground(new Color(0, 0, 0));
         jLabel7.setText("Email");
 
         jLabel8.setIcon(new ImageIcon(getClass().getResource("/Icons/email.png"))); // NOI18N
@@ -95,8 +99,11 @@ public class RegisterFrame extends JFrame {
         password2Text.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
 
         registerButton.setBackground(new Color(255, 27, 157));
+        registerButton.setForeground(new Color(0, 0, 0));
         registerButton.setFont(new Font("Segoe UI", 0, 48)); // NOI18N
         registerButton.setText("Crear Cuenta");
+        registerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        registerButton.setFocusPainted(false);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 RegisterButton(evt);
@@ -104,6 +111,9 @@ public class RegisterFrame extends JFrame {
         });
 
         loginText.setText("\u00bfYa tienes cuenta? Inicia sesi\u00f3n");
+        loginText.setFont(new Font("Segoe UI", 3, 13));
+        loginText.setForeground(Color.blue);
+        loginText.setCursor(new Cursor(Cursor.HAND_CURSOR));
         loginText.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 LoginText(evt);
@@ -208,6 +218,7 @@ public class RegisterFrame extends JFrame {
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
         pack();
         setLocationRelativeTo(null);
     }
@@ -236,6 +247,10 @@ public class RegisterFrame extends JFrame {
     	String rut = nameText.getText();
         String password = passwordText.getText();
         String password2 = password2Text.getText();
+        if(rut.isBlank()) {
+        	JOptionPane.showMessageDialog(null, "El campo rut se encuentra vac\u00edo");
+        	return;
+        }
         if(password.length()<4) {
         	JOptionPane.showMessageDialog(null, "Contrase\u00f1a debe tener al menos 4 car\u00e1cteres");
         	return;
@@ -252,12 +267,12 @@ public class RegisterFrame extends JFrame {
             		ResultSet rs = SQLClientService.getSQLClientService().read(us);
 					if (!rs.next()) {
 						SQLClientService.getSQLClientService().create(us);   
-						JOptionPane.showMessageDialog(null, "REGISTRADO");
+						JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 						dispose();
 						LoginFrame lf = new LoginFrame();            		
 						lf.setVisible(true);
 					} else {
-						JOptionPane.showMessageDialog(null, "YA ESTAS REGISTRADO");
+						JOptionPane.showMessageDialog(null, "Usuario ya registrado");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();

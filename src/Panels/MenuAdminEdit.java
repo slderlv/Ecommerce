@@ -391,7 +391,6 @@ public class MenuAdminEdit extends JFrame {
 		}
     	//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
     	//String name, int price, String description, int stock, String category, String img_path
-    	JOptionPane.showMessageDialog(null, "Producto creado con \u00e9xito, iD: "+2124124+" y categor\u00eda: "+addProductComboBox.getSelectedItem());
     	
     	// AQUI CREAR NUEVO PRODUCTO
     }                               
