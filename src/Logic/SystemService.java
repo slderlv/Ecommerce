@@ -183,7 +183,7 @@ public class SystemService {
 					if (p.getId() == id) break;
 				}
 				p.setBuy_quantity(rs.getInt("quantity"));
-				if (p.getBuy_quantity()>0)clientProducts.add(p);
+				clientProducts.add(p);
 				
 				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)
 				//public ProductInfo(String name, int price, String description, int stock, String category, String img_path) 

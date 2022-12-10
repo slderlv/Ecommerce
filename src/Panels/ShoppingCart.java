@@ -73,8 +73,10 @@ public class ShoppingCart extends javax.swing.JFrame {
         	rowData[0] = shoppingCart.get(i).getInfo().getName();
         	rowData[1] = shoppingCart.get(i).getBuy_quantity()+"";
         	rowData[2] = (shoppingCart.get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
-        	model.addRow(rowData);
-        	sum+=Integer.parseInt(rowData[2]);
+        	if (shoppingCart.get(i).getBuy_quantity() > 0) {
+        		model.addRow(rowData);
+        		sum+=Integer.parseInt(rowData[2]);	
+        	}
         }
         totalAmountField.setText(sum+"");
         shoppingCartTable.setModel(model);
