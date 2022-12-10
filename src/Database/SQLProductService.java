@@ -132,7 +132,23 @@ public class SQLProductService implements ISQLCreate<String> , ISQLUpdate<Produc
             ProductInfo product = p.getInfo();
             statement.setInt(1, (product.getStock() - subtraction));
             statement.setInt(2, p.getId());
-            System.out.println(p.getId());
+
+            
+            
+            statement.execute();            
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+	}
+	
+	public void sumStock(Product p, int sum) {
+		String sql = "UPDATE products SET stock = ? where id = ?";
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement(sql);
+            ProductInfo product = p.getInfo();
+            statement.setInt(1, (product.getStock() + sum));
+            statement.setInt(2, p.getId());
+            
             
             
             statement.execute();            

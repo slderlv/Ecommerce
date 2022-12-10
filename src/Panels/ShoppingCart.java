@@ -372,6 +372,13 @@ public class ShoppingCart extends javax.swing.JFrame {
 	private void removeUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
     	int rowIndex = shoppingCartTable.getSelectedRow();
         int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
+        Product p = null;
+        for(int i =0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
+        	if (shoppingCart.get(rowIndex).getId() == SystemService.getSystem().getProducts().get(i).getId()) {
+        		p = SystemService.getSystem().getProducts().get(i);
+        		break;
+        	}
+        }
         if(quantity==1) {
         	Object[] buttons = {"Aceptar","Cancelar"};
         	int reply = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
@@ -380,6 +387,12 @@ public class ShoppingCart extends javax.swing.JFrame {
         		// ELIMINAR PRODUCTO
         		return;
         	}
+        } else {
+        	shoppingCart.get(rowIndex).setBuy_quantity(shoppingCart.get(rowIndex).getBuy_quantity() - 1);
+        	int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+        	SQLProductService.getSQLProductService().sumStock(p, 1);
+        	SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, shoppingCart.get(rowIndex).getBuy_quantity());
+        	SystemService.getSystem().refreshProducts();
         }
         updateFrame(false,rowIndex,quantity);
     }     
