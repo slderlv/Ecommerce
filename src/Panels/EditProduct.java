@@ -14,29 +14,17 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
-
 import Assets.ArrayToString;
 import Assets.WordWrapCellRenderer;
 import Database.SQLProductService;
 import Domain.Comment;
 import Domain.Product;
-import Domain.ProductInfo;
 import Logic.SystemService;
 
 @SuppressWarnings("serial")
 public class EditProduct extends javax.swing.JFrame {
 
 	public EditProduct(Product product) {
-    	/*EditProduct.product = new Product(
-    			new ProductInfo("Led Philips Ambilight 65 4K Uhd 65Pud7906 Android",
-    				250000,
-    					"Tipo	Televisores\nConexi�n WiFi	S�\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	S�\nSintonizador digital	S�\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnolog�a", null), 10, null, 0); 
-    	commentsList = new ArrayList<>();
-    	for(int i=0; i<10; i++) {
-            commentsList.add(new Comment(0,(float) 5.5,"Muy bueno me ayudo mucho etc etc etc etc etc",product,null));
-    	}
-    	*/
 		categoriesList = SystemService.getSystem().getCategorys();
 		EditProduct.product = product;
 		commentsList = product.getComments();
