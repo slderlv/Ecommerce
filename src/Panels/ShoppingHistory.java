@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import Assets.ArrayToString;
+import Assets.getIDInShoppingHistory;
 import Domain.Purchase;
 import Domain.Transactions;
 import Domain.Client;
@@ -17,7 +18,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
     public ShoppingHistory(Client client) {
     	ShoppingHistory.client = client;
     	purchases = client.getTransactions().getPurchases();
-    	System.out.println(purchases);
+    	//System.out.println(purchases);
         initComponents();
     }
 
@@ -60,6 +61,12 @@ public class ShoppingHistory extends javax.swing.JFrame {
             String[] strings = ArrayToString.getStringArrayFromPurchases(purchases);//{ "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                //productListMouseClicked(evt);
+                DoubleClick(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -113,6 +120,29 @@ public class ShoppingHistory extends javax.swing.JFrame {
     	ClientFrame cf = new ClientFrame(client);
     	cf.setVisible(true);
     }
+    
+    private void DoubleClick(java.awt.event.MouseEvent evt) {
+    	//System.out.println("ola");
+    	//System.out.println("Buenas");
+    	if (evt.getClickCount() == 2) {
+    		String selectedPurchase = jList1.getSelectedValue();
+    		Purchase purchase = purchases.get(0);
+    		
+    		int purchaseId = getIDInShoppingHistory.getId(selectedPurchase);
+    		for (int i = 0; i < purchases.size(); i++) {
+    			purchase = purchases.get(i);
+    			if (purchase.getId() == purchaseId) break;
+    		}
+    		
+    		
+    		dispose();
+    		PurchaseFrame pf = new PurchaseFrame(purchase);
+    		pf.setVisible(true);
+		 	
+    	}
+    	
+    }
+
     
     public static void main(String args[]) {
 
