@@ -383,10 +383,18 @@ public class ShoppingCart extends javax.swing.JFrame {
         	Object[] buttons = {"Aceptar","Cancelar"};
         	int reply = JOptionPane.showOptionDialog(null, "ï¿½Estï¿½ seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-        	if(reply==1) {
-        		// ELIMINAR PRODUCTO
-        		return;
-        	}
+        	System.out.println(reply);
+        	if(reply==0) {
+        		System.out.println("buenas");
+        		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, 0);
+        		shoppingCart.remove(rowIndex);
+        		dispose();
+        		SystemService.getSystem().getTransactions(client);
+        		ShoppingCart sc = new ShoppingCart(client,client.getTransactions().getShoppingCart());
+        		sc.setVisible(true);
+        		
+        	} 
         } else {
         	shoppingCart.get(rowIndex).setBuy_quantity(shoppingCart.get(rowIndex).getBuy_quantity() - 1);
         	int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
