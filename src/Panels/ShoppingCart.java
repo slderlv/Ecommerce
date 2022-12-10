@@ -344,7 +344,15 @@ public class ShoppingCart extends javax.swing.JFrame {
         int rowIndex = shoppingCartTable.getSelectedRow();
         int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
         int stock = 0;
-        Product p = null;
+//        Product actualProduct = null;
+//        
+//        for(int i =0 ; i < shoppingCart.size(); i ++) {
+//        	if (shoppingCart.get(rowIndex).getId() == shoppingCart.get(i).getId()) {
+//        		actualProduct = SystemService.getSystem().getProducts().get(i);
+//        		break;
+//        	}
+//        }
+        Product p =null;
         for(int i =0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
         	if (shoppingCart.get(rowIndex).getId() == SystemService.getSystem().getProducts().get(i).getId()) {
         		stock = SystemService.getSystem().getProducts().get(i).getInfo().getStock();
@@ -357,10 +365,10 @@ public class ShoppingCart extends javax.swing.JFrame {
         	JOptionPane.showMessageDialog(null, "No hay mas productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         } else {
         	//p.getInfo().setStock(stock-1);
-        	  		
+        	  	System.out.println(shoppingCart.get(rowIndex).getId());
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         		SQLProductService.getSQLProductService().updateStock(p, 1);
-        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity);
+        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity + 1);
         		SystemService.getSystem().refreshProducts();
         		updateFrame(true,rowIndex,quantity);
         		//System.out.println("STOCK "+ stock);
