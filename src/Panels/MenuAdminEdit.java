@@ -445,7 +445,7 @@ public class MenuAdminEdit extends JFrame {
     }  
     
 	private void addCategoryButtonActionPerformed(ActionEvent evt) {                                                  
-    	//categoriesList.add(addCategoryField.getText());
+    	if(addCategoryField.getText().equals(" Ingrese nombre")) return;
     	SQLCategoryService.getSQLCategoryService().create(addCategoryField.getText());
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();

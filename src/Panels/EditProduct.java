@@ -399,10 +399,9 @@ public class EditProduct extends javax.swing.JFrame {
 	        imageButton.setIcon(productIcon);
 			imageButton.repaint();
 			File original = new File(imagePath);
-			File copy = new File("ProductIcons/"+product.getId()+"."+getFileType(original));
-			if(product.getInfo().getImg_path()==null) {
-				product.getInfo().setImg_path("/"+copy.toPath().toString());
-			}
+			String path = "ProductIcons/"+product.getId()+"."+getFileType(original);
+			File copy = new File(path);
+			product.getInfo().setImg_path("/"+path);
 			try {
 				Files.copy(original.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
@@ -457,7 +456,7 @@ public class EditProduct extends javax.swing.JFrame {
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
     	Image img = imageIcon.getImage();
-		img = img.getScaledInstance(jPanel2.getPreferredSize().width, jPanel2.getPreferredSize().height,  java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(jPanel2.getPreferredSize().width-50, jPanel2.getPreferredSize().height,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(img);
 	}
     
