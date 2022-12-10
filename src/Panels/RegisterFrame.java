@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Assets.CryptoService;
+import Assets.JTextFieldLimit;
 import Assets.SQLClientServiceAdapter;
 import Assets.RutFormat;
 import Database.SQLClientService;
@@ -30,17 +31,17 @@ public class RegisterFrame extends JFrame {
         jPanel1 = new JPanel();
         backButton = new JButton();
         rutLabel = new JLabel();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        jLabel4 = new JLabel();
-        jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
-        jLabel7 = new JLabel();
-        jLabel8 = new JLabel();
-        nameText = new JTextField();
-        passwordText = new JPasswordField();
-        emailText = new JTextField();
-        password2Text = new JPasswordField();
+        personIconLabel = new JLabel();
+        passwordLabel = new JLabel();
+        passwordIconLabel = new JLabel();
+        confirmPasswordLabel = new JLabel();
+        confirmPasswordIconLabel = new JLabel();
+        emailLabel = new JLabel();
+        emailIconLabel = new JLabel();
+        rutField = new JTextField();
+        passwordField = new JPasswordField();
+        emailField = new JTextField();
+        passwordField2 = new JPasswordField();
         registerButton = new JButton();
         loginText = new JLabel();
 
@@ -66,37 +67,41 @@ public class RegisterFrame extends JFrame {
         rutLabel.setForeground(new Color(0, 0, 0));
         rutLabel.setText("Rut");
 
-        jLabel2.setIcon(new ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
+        personIconLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/person.png"))); // NOI18N
 
-        jLabel3.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setForeground(new Color(0, 0, 0));
-        jLabel3.setText("Contrase\u00f1a");
+        passwordLabel.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        passwordLabel.setForeground(new Color(0, 0, 0));
+        passwordLabel.setText("Contrase\u00f1a");
 
-        jLabel4.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
+        passwordIconLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
-        jLabel5.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel5.setForeground(new Color(0, 0, 0));
-        jLabel5.setText("Confirmar contrase\u00f1a");
+        confirmPasswordLabel.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        confirmPasswordLabel.setForeground(new Color(0, 0, 0));
+        confirmPasswordLabel.setText("Confirmar contrase\u00f1a");
 
-        jLabel6.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
+        confirmPasswordIconLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/key.png"))); // NOI18N
 
-        jLabel7.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel7.setForeground(new Color(0, 0, 0));
-        jLabel7.setText("Email");
+        emailLabel.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        emailLabel.setForeground(new Color(0, 0, 0));
+        emailLabel.setText("Email");
 
-        jLabel8.setIcon(new ImageIcon(getClass().getResource("/Icons/email.png"))); // NOI18N
+        emailIconLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/email.png"))); // NOI18N
+        
+        rutField.setDocument(new JTextFieldLimit(12));
+        rutField.setBackground(new Color(255, 174, 167));
+        rutField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        
+        passwordField.setDocument(new JTextFieldLimit(41));
+        passwordField.setBackground(new Color(255, 174, 167));
+        passwordField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
 
-        nameText.setBackground(new Color(255, 174, 167));
-        nameText.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        emailField.setDocument(new JTextFieldLimit(39));
+        emailField.setBackground(new Color(255, 174, 167));
+        emailField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
 
-        passwordText.setBackground(new Color(255, 174, 167));
-        passwordText.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
-
-        emailText.setBackground(new Color(255, 174, 167));
-        emailText.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
-
-        password2Text.setBackground(new Color(255, 174, 167));
-        password2Text.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        passwordField2.setDocument(new JTextFieldLimit(41));
+        passwordField2.setBackground(new Color(255, 174, 167));
+        passwordField2.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
 
         registerButton.setBackground(new Color(255, 27, 157));
         registerButton.setForeground(new Color(0, 0, 0));
@@ -132,28 +137,28 @@ public class RegisterFrame extends JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(confirmPasswordLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(confirmPasswordIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(password2Text, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7)
+                                .addComponent(passwordField2, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(emailIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(emailText, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(emailField, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
                             .addComponent(rutLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(personIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(nameText, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rutField, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(passwordText, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel3))
+                                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(passwordLabel))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(registerButton, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
@@ -172,18 +177,18 @@ public class RegisterFrame extends JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(personIconLabel)
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
+                                .addComponent(passwordLabel)
                                 .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel5))
-                                    .addComponent(passwordText, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(confirmPasswordLabel))
+                                    .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
                                 .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
@@ -192,15 +197,15 @@ public class RegisterFrame extends JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(confirmPasswordIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7))
-                            .addComponent(password2Text, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(emailLabel))
+                            .addComponent(passwordField2, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailText, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(nameText, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailIconLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailField, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(rutField, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -244,9 +249,9 @@ public class RegisterFrame extends JFrame {
     @SuppressWarnings("deprecation")
 	private void RegisterButton(ActionEvent evt) {
     	//JOptionPane.showMessageDialog(null, "EL BOTON FUNCIONA");
-    	String rut = nameText.getText();
-        String password = passwordText.getText();
-        String password2 = password2Text.getText();
+    	String rut = rutField.getText();
+        String password = passwordField.getText();
+        String password2 = passwordField2.getText();
         if(rut.isBlank()) {
         	JOptionPane.showMessageDialog(null, "El campo rut se encuentra vac\u00edo");
         	return;
@@ -257,7 +262,7 @@ public class RegisterFrame extends JFrame {
         }
         if(password.equals(password2)) {
             password = CryptoService.getCryptoService().encodePassword(password);
-            String email = emailText.getText();
+            String email = emailField.getText();
             //String number = phoneText.getText();
             if(RutFormat.isValid(rut)) {
             	String format =  " ,"+ email+ "," + password +"," + RutFormat.formatToDatabase(rut);
@@ -313,20 +318,20 @@ public class RegisterFrame extends JFrame {
 
     // Variables declaration - do not modify
     private JButton backButton;
-    private JTextField emailText;
+    private JTextField emailField;
     private JLabel rutLabel;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
-    private JLabel jLabel8;
+    private JLabel personIconLabel;
+    private JLabel passwordLabel;
+    private JLabel passwordIconLabel;
+    private JLabel confirmPasswordLabel;
+    private JLabel confirmPasswordIconLabel;
+    private JLabel emailLabel;
+    private JLabel emailIconLabel;
     private JPanel jPanel1;
     private JLabel loginText;
-    private JTextField nameText;
-    private JPasswordField passwordText;
-    private JPasswordField password2Text;
+    private JTextField rutField;
+    private JPasswordField passwordField;
+    private JPasswordField passwordField2;
     private JButton registerButton;
     private static User user;
     // End of variables declaration

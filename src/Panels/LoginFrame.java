@@ -2,6 +2,7 @@ package Panels;
 
 import Database.SQLClientService;
 import Assets.CryptoService;
+import Assets.JTextFieldLimit;
 import Assets.RutFormat;
 import Assets.SQLClientServiceAdapter;
 import Domain.User;
@@ -50,9 +51,11 @@ public class LoginFrame extends JFrame {
         jPanel1.setBackground(new Color(255, 212, 171));
         jPanel1.setPreferredSize(new Dimension(1280, 720));
 
+        usernameText.setDocument(new JTextFieldLimit(12));
         usernameText.setBackground(new Color(255, 174, 167));
         usernameText.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
 
+        passwordText.setDocument(new JTextFieldLimit(41));
         passwordText.setBackground(new Color(255, 174, 167));
         passwordText.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
 

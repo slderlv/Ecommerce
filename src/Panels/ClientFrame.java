@@ -17,6 +17,7 @@ import Domain.Product;
 import Logic.SystemService;
 import Assets.CryptoService;
 import Assets.ValidateMail;
+import Assets.JTextFieldLimit;
 import Database.SQLClientService;
 
 @SuppressWarnings("serial")
