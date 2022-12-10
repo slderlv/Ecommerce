@@ -3,7 +3,6 @@ package Panels;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import Assets.ArrayToString;
 import Assets.getIDInShoppingHistory;
 import Domain.Purchase;

@@ -15,6 +15,7 @@ import Database.SQLShoppingCart;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
+import Logic.SystemService;
 
 @SuppressWarnings("serial")
 public class ProductFrame extends JFrame {
@@ -427,20 +428,20 @@ public class ProductFrame extends JFrame {
     	try {
     		rating = Float.parseFloat(JOptionPane.showInputDialog("Califique el producto de 1 a 5:"));
     	} catch (NumberFormatException e) {
-    		JOptionPane.showMessageDialog(null, "La calificaci�n ingresada es inv�lida","Error de formato",JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "La calificaci\u00f3n ingresada es inv\u00e1lida","Error de formato",JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	if(rating<1||rating>5) {
-    		JOptionPane.showMessageDialog(null, "La calificaci�n ingresada es inv�lida", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "La calificaci\u00f3n ingresada es inv\u00e1lida", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	String comment = JOptionPane.showInputDialog("Ingrese su comentario:");
     	if(comment.isBlank()) {
-    		JOptionPane.showMessageDialog(null, "El comentario est� vac�o", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El comentario est\u00e1 vac�o", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	};
     	if(comment.length()>70) {
-    		JOptionPane.showMessageDialog(null, "El comentario excede el m�ximo de car�cteres", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El comentario excede el m\u00e1ximo de car\u00e1cteres", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
     	// ARREGLAR ID
@@ -449,6 +450,9 @@ public class ProductFrame extends JFrame {
     	String[] row = {client.getName(),rating+"",comment};
     	((DefaultTableModel)commentsTable.getModel()).addRow(row);
     	commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
+    	// AQUI DEBERIA CREAR EL COMENTARIO EN BBDD
+    	//
+    	//
     }                                                
 
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  

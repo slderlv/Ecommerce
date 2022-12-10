@@ -2,6 +2,7 @@ package Panels;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import Assets.ArrayToString;
@@ -48,11 +49,11 @@ public class ShoppingCart extends javax.swing.JFrame {
         shoppingCartScrollPane.setAutoscrolls(true);
 
         shoppingCartTable.setBackground(new java.awt.Color(255, 255, 255));
-        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
+        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 20)); 
         shoppingCartTable.setForeground(new java.awt.Color(0, 0, 0));
         String[] columnNames = {"Nombre","Unidades","Subtotal"};
         String[] rowData = new String[3];
-        
+
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
         int sum = 0;
         for(int i=0; i<shoppingCart.size(); i++){
@@ -70,13 +71,14 @@ public class ShoppingCart extends javax.swing.JFrame {
             Class<?> col_class = shoppingCartTable.getColumnClass(c);
             shoppingCartTable.setDefaultEditor(col_class, null); // remove editor
         }
+        
         shoppingCartTable.setGridColor(new java.awt.Color(0, 0, 0));
         shoppingCartTable.setShowGrid(true);
         shoppingCartTable.setShowHorizontalLines(false);
         shoppingCartTable.getTableHeader().setResizingAllowed(false);
         shoppingCartTable.getTableHeader().setReorderingAllowed(false);
         shoppingCartTable.getTableHeader().setBackground(new java.awt.Color(255,111,156));
-        shoppingCartTable.getTableHeader().setForeground(new java.awt.Color(0,0,0));
+        shoppingCartTable.getTableHeader().setForeground(new java.awt.Color(0,0,0));        
         shoppingCartTable.getSelectionModel().addListSelectionListener(new ListSelectionListener () {
 			public void valueChanged(ListSelectionEvent evt) {
 				selectedRowActionPerformed(evt);
