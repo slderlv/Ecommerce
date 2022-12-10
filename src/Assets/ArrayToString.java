@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import Domain.Card;
 import Domain.Product;
+import Domain.Purchase;
 
 public class ArrayToString {
 	
@@ -42,6 +43,18 @@ public class ArrayToString {
     	String[] array = new String[cards.size()];
     	for(int i=0; i<cards.size(); i++) {
     		array[i] = cards.get(i).getCardInfo().getCardNumber();
+    	}
+		return array;
+	}
+    
+    public static String[] getStringArrayFromPurchases(ArrayList<Purchase> purchaseList) {
+		// TODO Auto-generated method stub
+    	int counter = 1;
+    	String[] array = new String[purchaseList.size()];
+    	for(int i=0; i<purchaseList.size(); i++) {
+    		array[i] = "Compra N: " + counter+ "(ID: "+ purchaseList.get(i).getId() + ")";
+    		System.out.println("QUE PASO ");
+    		counter ++;
     	}
 		return array;
 	}

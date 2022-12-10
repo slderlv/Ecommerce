@@ -1,7 +1,10 @@
 package Panels;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import Assets.ArrayToString;
 import Domain.Purchase;
 import Domain.Transactions;
 import Domain.Client;
@@ -12,18 +15,9 @@ import Domain.ProductInfo;
 public class ShoppingHistory extends javax.swing.JFrame {
 
     public ShoppingHistory(Client client) {
-    	client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, new Transactions(), "aaaaa", null, "UserIcons/juan_bekios.jpeg");
-    	ArrayList<Purchase> pu = new ArrayList<>();
-    	ArrayList<Product> pr = new ArrayList<Product>();
-    	pr.add(new Product(
-    			new ProductInfo("Led Philips Ambilight 65",
-    					250000,
-    					"Tipo	Televisores\nConexión WiFi	Sí\nTasa de refresco nativa	60Hz\nProfundidad	293,2 mm\nEntrada Internet	Sí\nSintonizador digital	Sí\nPotencia de los parlantes	20W\nEntradas auxiliares de 3.5 mm	1",
-    					20, "Tecnología", null), 10, null, 10));
-    	pu.add(new Purchase(1,pr));
-    	client.getTransactions().setPurchases(purchases);
     	ShoppingHistory.client = client;
     	purchases = client.getTransactions().getPurchases();
+    	System.out.println(purchases);
         initComponents();
     }
 
@@ -48,6 +42,12 @@ public class ShoppingHistory extends javax.swing.JFrame {
         backButton.setDisabledIcon(null);
         backButton.setFocusPainted(false);
         backButton.setFocusable(false);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
 
         jScrollPane1.setBackground(new java.awt.Color(255, 111, 156));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -57,7 +57,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
         jList1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jList1.setForeground(new java.awt.Color(0, 0, 0));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = ArrayToString.getStringArrayFromPurchases(purchases);//{ "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -107,6 +107,13 @@ public class ShoppingHistory extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    private void backButtonActionPerformed(ActionEvent evt) {                                           
+    	dispose();
+    	ClientFrame cf = new ClientFrame(client);
+    	cf.setVisible(true);
+    }
+    
     public static void main(String args[]) {
 
         try {

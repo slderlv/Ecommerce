@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Database.SQLBuyService;
 import Database.SQLCardService;
 import Database.SQLCategoryService;
 import Database.SQLCommentsService;
@@ -176,7 +177,7 @@ public class SystemService {
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("product_id");
-				System.out.println(id);
+//				System.out.println(id);
 				Product p = null;
 				for(int i =0; i < products.size(); i++) {
 					p = products.get(i);
@@ -197,34 +198,51 @@ public class SystemService {
 	}
 	
 	public ArrayList<Purchase> getPurchases(Client client) {
-		ResultSet rs = SQLShoppingCart.getSQLShoppingCart().read(client);
+		ResultSet rs = SQLBuyService.getSQLBuyService().read(client);
 		ArrayList<Purchase> purchases = new ArrayList<Purchase>();
+		System.out.println("OLO");
 		try {
 			int id = 0;
 			int counter = -1;
 			Purchase purchase;
-			ArrayList<Product> products;
+			ArrayList<Product> productsOfPurchase;
+			System.out.println("buenas");
 			while (rs.next()) {
+				System.out.println("COMPRA");
 				int buy_id = rs.getInt("id");
 				
 				if (id == 0 || id != buy_id){
 					//Nueva compra
+					System.out.println("Me meti aca 1");
 					counter++;
 					id = buy_id;
-					products =  new ArrayList<Product>();
-					purchase = new Purchase(buy_id,products);
-					purchases.add(purchase);
-				} else {
-					purchase = purchases.get(counter);
-					products = purchase.getProducts();
-					Product p = products.get(0);
-					int product_id = rs.getInt("product_id");
-					for(int i =0; i < this.products.size(); i++) {
+					productsOfPurchase =  new ArrayList<Product>();
+					purchase = new Purchase(buy_id,productsOfPurchase);
+					purchase.setProducts(productsOfPurchase);
+					int prod_id = rs.getInt("product_id");
+					Product p = null;
+					for(int i =0; i < products.size(); i++) {
 						p = products.get(i);
-						if (p.getId() == id) break;
+						if (p.getId() == prod_id) break;
 					}
 					p.setBuy_quantity(rs.getInt("quantity"));
-					products.add(p);
+					
+					purchase.getProducts().add(p);
+					purchases.add(purchase);
+				} else {
+					System.out.println("Me meti aca 2");
+					purchase = purchases.get(counter);
+					productsOfPurchase = purchase.getProducts();
+					
+					int prod_id = rs.getInt("product_id");
+					Product p = null;
+					for(int i =0; i < products.size(); i++) {
+						p = products.get(i);
+						if (p.getId() == prod_id) break;
+					}
+					
+					p.setBuy_quantity(rs.getInt("quantity"));
+					productsOfPurchase.add(p);
 				}
 				
 				//public Purchase(int id, ArrayList<Product> products) {
@@ -243,7 +261,7 @@ public class SystemService {
 		getCards(client);
 		//private ArrayList<Product> shoppingCart;
 	   // private ArrayList<Purchase> purchases;
-		Transactions t = new Transactions(getShoppingCart(client),new ArrayList<Purchase>());//getPurchases(client));
+		Transactions t = new Transactions(getShoppingCart(client),getPurchases(client));//,new ArrayList<Purchase>());//getPurchases(client));
 		client.setTransactions(t);
 	}
 	

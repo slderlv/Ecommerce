@@ -7,24 +7,9 @@ import Domain.Client;
 
 public class main {
 	public static void main(String[] args) {	
-		/*
-		SystemService system = SystemService.getSystem();
-		system.refreshLists();
-		System.out.println(system.getCategorys());
-		system.start();
-		*/
-		//system.refreshLists();
-		//system.start();
 		SystemService system = SystemService.getSystem();
 		system.refreshLists();
 		system.start();
-		//ProductListFrame pf = new ProductListFrame();
-		//pf.setVisible(true);
-		
-		//MenuAdminEdit mae = new MenuAdminEdit();
-		//mae.setVisible(true);
-		
-		//DEV WORKING AGAIN
 		
 		//ANOTAR BUGS ACA
 		// PRODUCT FRAME -> al volver bota el programa
@@ -35,6 +20,7 @@ public class main {
 		//PRODUCT LIST A USURARIO SE CAYO
 		// VA CREANDO NUEVAS BUY_ID AL QUITAR PRODUCTOS y PONERLOS
 		// NO AGREGA DE NEVO EN SHOPPING CART
+		// BUG AL ELIMINAR NO-ASIGNADO -> TIRA UN ERROR RARO DEBERIA TIRAR UN NO SE PUEDE BORRAR NO ASIGNADO (tal vez esta mal desde code)
 	}
 
 }
