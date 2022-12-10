@@ -645,7 +645,6 @@ public class ClientFrame extends JFrame {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
     }           
     

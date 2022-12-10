@@ -351,7 +351,8 @@ public class MenuAdminEdit extends JFrame {
 			if (response.next()) {
 				//String rut, String name, String password, String mail,int number, Transactions transactions, String address, ArrayList<Card> cards, String img_path)
 				Client client = new Client(response.getString("rut"), response.getString("name"), CryptoService.getCryptoService().decodePassword(response.getString("password")), response.getString("mail"), response.getInt("phone_number"), null, response.getString("street"),null, "");
-				//
+				String img_path = response.getString("img_path");
+				client.setImg_path(img_path);
 				ManageUser manageUser = new ManageUser(client);
 				manageUser.setVisible(true);
 			}else {
