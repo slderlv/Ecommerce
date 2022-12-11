@@ -100,14 +100,8 @@ public class PurchaseFrame extends javax.swing.JFrame {
 
     private void exitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         dispose();
-        if(admin==null) {
-        	ShoppingHistory sh = new ShoppingHistory(client,admin);
-        	sh.setVisible(true);
-        } else {
-        	AdminShoppingHistory ash = new AdminShoppingHistory(client,admin);
-        	ash.setVisible(true);
-        }
-    	
+        ShoppingHistory sh = new ShoppingHistory(client,admin);
+        sh.setVisible(true);
     }                                          
 
     public static void main(String args[]) {
