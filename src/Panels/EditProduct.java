@@ -18,6 +18,7 @@ import Assets.ArrayToString;
 import Assets.WordWrapCellRenderer;
 import Database.SQLCommentsService;
 import Database.SQLProductService;
+import Domain.Admin;
 import Domain.Comment;
 import Domain.Product;
 import Logic.SystemService;
@@ -25,7 +26,7 @@ import Logic.SystemService;
 @SuppressWarnings("serial")
 public class EditProduct extends JFrame {
 
-	public EditProduct(Product product) {
+	public EditProduct(Product product,Admin admin) {
 		categoriesList = SystemService.getSystem().getCategorys();
 		EditProduct.product = product;
 		commentsList = product.getComments();
@@ -370,7 +371,7 @@ public class EditProduct extends JFrame {
     
     private void backButtonActionPerformed(ActionEvent evt) {
 		dispose();
-		MenuAdminEdit mae = new MenuAdminEdit(null);
+		MenuAdminEdit mae = new MenuAdminEdit(admin);
 		mae.setVisible(true);
 	}
     
@@ -472,7 +473,7 @@ public class EditProduct extends JFrame {
        
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditProduct(product).setVisible(true);
+                new EditProduct(product,admin).setVisible(true);
             }
         });
     }
@@ -507,5 +508,6 @@ public class EditProduct extends JFrame {
     private int prevPrice;
     private ArrayList<Comment> commentsList;
     private ArrayList<String> categoriesList;
+    private static Admin admin;
     // End of variables declaration                   
 }
