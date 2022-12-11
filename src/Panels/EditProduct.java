@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 import Assets.ArrayToString;
 import Assets.WordWrapCellRenderer;
+import Database.SQLCommentsService;
 import Database.SQLProductService;
 import Domain.Comment;
 import Domain.Product;
@@ -160,7 +161,7 @@ public class EditProduct extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for(int i=0; i<commentsList.size(); i++) {
         	Comment c = commentsList.get(i);
-        	String[] rowData = {"Nombre cliente"+i,c.getRating()+"", c.getComment()};
+        	String[] rowData = {c.getRut(),c.getRating()+"", c.getComment()};
         	model.addRow(rowData);
         }
         commentsTable.setModel(model);
@@ -430,6 +431,7 @@ public class EditProduct extends javax.swing.JFrame {
     
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {
     	int index = commentsTable.getSelectedRow();
+    	SQLCommentsService.getSQLCommentsService().delete(commentsList.get(index));
     	commentsList.remove(index);
     	((DefaultTableModel)commentsTable.getModel()).removeRow(index);
         commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
