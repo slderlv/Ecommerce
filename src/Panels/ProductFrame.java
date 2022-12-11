@@ -452,7 +452,7 @@ public class ProductFrame extends JFrame {
     	}
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
-    	sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client);
+    	sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client,product);
     	
     	ResultSet rs = sqlc.read(product);
     	Comment objetCom = null;

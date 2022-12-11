@@ -44,12 +44,12 @@ public class SQLCommentsService implements ISQLRead<Product>,ISQLDelete<Comment>
 		
 	}
 	
-	public void create(Comment t, Client c) {
+	public void create(Comment t, Client c,Product p) {
 		try{  
             PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("insert into comments (id,rating,comment,product_id,user_rut) values (default,?,?,?,?)");
             statement.setFloat(1,t.getRating());
             statement.setString(2, t.getComment());
-            statement.setInt(3, t.getId());
+            statement.setInt(3, p.getId());
             statement.setString(4, c.getRut());
             statement.execute();
         }catch (SQLException e){
