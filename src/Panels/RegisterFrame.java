@@ -267,6 +267,7 @@ public class RegisterFrame extends JFrame {
         	return;
         }
         
+        
         if(password.equals(password2)) {
             password = CryptoService.getCryptoService().encodePassword(password);
             String email = emailField.getText();
@@ -276,8 +277,10 @@ public class RegisterFrame extends JFrame {
             	User us = SQLClientServiceAdapter.userData(format);
             	
             	try {
-            		System.out.println(us.getRut());
-            		System.out.println(us.getPassword());
+            		if(SQLClientService.getSQLClientService().isBlocked(us.getRut())) {
+            			JOptionPane.showMessageDialog(null, "Usuario BLOQUEADO");
+            			return;
+            		}
             		ResultSet rs = SQLClientService.getSQLClientService().read(us.getRut());
             		//System.out.println(rs.next());
 					if (rs.next()) {
