@@ -3,6 +3,8 @@ package Panels;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,8 +12,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Assets.WordWrapCellRenderer;
 import Database.SQLBuyService;
+import Database.SQLCardService;
 import Database.SQLProductService;
 import Database.SQLShoppingCart;
+import Database.SQLCommentsService;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
@@ -424,6 +428,8 @@ public class ProductFrame extends JFrame {
 
     private void addCommentButtonActionPerformed(ActionEvent evt) {  
     	// CONSULTA SQL: SI EL CLIENTE HA COMPRADO ESTE PRODUCTO
+    	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
+    	
     	float rating = 0; 
     	try {
     		rating = Float.parseFloat(JOptionPane.showInputDialog("Califique el producto de 1 a 5:"));
@@ -437,7 +443,7 @@ public class ProductFrame extends JFrame {
     	}
     	String comment = JOptionPane.showInputDialog("Ingrese su comentario:");
     	if(comment.isBlank()) {
-    		JOptionPane.showMessageDialog(null, "El comentario est\u00e1 vac�o", "Error de formato", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "El comentario est\u00e1 vac\u00edo", "Error de formato", JOptionPane.ERROR_MESSAGE);
     		return;
     	};
     	if(comment.length()>70) {
@@ -446,6 +452,24 @@ public class ProductFrame extends JFrame {
     	}
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
+    	sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client);
+    	
+    	ResultSet rs = sqlc.read(product);
+    	Comment objetCom = null;
+    	try {
+			if(rs.next()) {
+				int id = rs.getInt("id");
+				float rating2 = rs.getFloat("rating");
+				String comment2 = rs.getString("comment");
+				int productId = rs.getInt("product_id");
+				String userRut = rs.getString("user_rut");
+				objetCom = new Comment(id,rating,comment,product,client.getRut());
+			} 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	commentsList.add(objetCom);
     	JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
     	String[] row = {client.getName(),rating+"",comment};
     	((DefaultTableModel)commentsTable.getModel()).addRow(row);
@@ -456,11 +480,14 @@ public class ProductFrame extends JFrame {
     }                                                
 
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  
+    	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	int index = commentsTable.getSelectedRow();
     	if(!commentsList.get(index).getRut().equals(client.getRut())) {
     		JOptionPane.showMessageDialog(null, "Este comentario no te pertenece", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
+    	
+    	sqlc.delete(commentsList.get(index));
     	commentsList.remove(index);
     	((DefaultTableModel)commentsTable.getModel()).removeRow(index);
         commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
