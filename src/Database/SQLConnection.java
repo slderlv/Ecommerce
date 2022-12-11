@@ -32,7 +32,7 @@ public class SQLConnection {
 			connection = DriverManager.getConnection(url,user,password);
 			if(connection != null)return connection;
 		}catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error con la conexion a la base de datos. fallo aca");
+			JOptionPane.showMessageDialog(null, "La base de datos, creo muchos clientes de conexion. Por favor reinicie la aplicacion");
 			e.printStackTrace();
 		}
 		return null;

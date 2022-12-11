@@ -69,4 +69,16 @@ public class SQLShoppingCart implements ISQLRead<Client>{
         }
 		return 0;
 	}
+	
+//	public void setQuantityZero(Client c, Product p) {
+//		try{  
+//            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("update products_buys set quantity = 0)");
+//            statement.setInt(1,id);
+//            statement.setInt(2,t.getId());
+//            statement.setInt(3,t.getBuy_quantity());
+//            statement.execute();
+//        }catch (SQLException e){
+//            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+//        }
+//	}
 }

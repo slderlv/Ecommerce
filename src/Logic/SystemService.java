@@ -175,15 +175,22 @@ public class SystemService {
 		ResultSet rs = SQLShoppingCart.getSQLShoppingCart().read(client);
 		ArrayList<Product> clientProducts = new ArrayList<Product>();
 		try {
+			int controlId = 0;
 			while (rs.next()) {
 				int id = rs.getInt("product_id");
-//				System.out.println(id);
+				if (controlId == id)continue;
+//				System.out.printn(id);
 				Product p = null;
 				for(int i =0; i < products.size(); i++) {
 					p = products.get(i);
 					if (p.getId() == id) break;
 				}
-				p.setBuy_quantity(rs.getInt("quantity"));
+				int quantity = rs.getInt("quantity");
+				if (rs.getInt("quantity") < 0) {
+					
+					quantity = 0;
+				}
+				p.setBuy_quantity(quantity);
 			
 				clientProducts.add(p);
 				
