@@ -12,21 +12,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Assets.WordWrapCellRenderer;
 import Database.SQLBuyService;
-import Database.SQLCardService;
 import Database.SQLProductService;
 import Database.SQLShoppingCart;
 import Database.SQLCommentsService;
+import Domain.Admin;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
-import Logic.SystemService;
+import Domain.User;
 
 @SuppressWarnings("serial")
 public class ProductFrame extends JFrame {
 
-    public ProductFrame(Product product, Client client) {
+    public ProductFrame(Product product, User user) {
     	ProductFrame.product = product;
-    	ProductFrame.client = client;
+    	ProductFrame.user = user;
     	commentsList = product.getComments();
         initComponents();
     }
@@ -388,6 +388,7 @@ public class ProductFrame extends JFrame {
 
     private void addToCartButtonActionPerformed(ActionEvent evt) {                                                
     	int total = product.getBuy_quantity() + (int)quantitySpinner.getValue();
+    	Client client = (Client)user;
     	if(total>product.getInfo().getStock()) {
     		JOptionPane.showMessageDialog(null, "Cantidad seleccionada excede el stock disponible", "Error en la compra", JOptionPane.ERROR_MESSAGE);
     	} else {
@@ -452,6 +453,7 @@ public class ProductFrame extends JFrame {
     	}
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
+    	Client client = (Client)user;
     	if (SQLCommentsService.getSQLCommentsService().purchased(client,product)) {
     		sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client,product);
     		
@@ -487,7 +489,7 @@ public class ProductFrame extends JFrame {
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  
     	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	int index = commentsTable.getSelectedRow();
-    	
+    	Client client = (Client)user;
     	if(!commentsList.get(index).getRut().equals(client.getRut())) {
     		JOptionPane.showMessageDialog(null, "Este comentario no te pertenece", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
     		return;
@@ -501,8 +503,13 @@ public class ProductFrame extends JFrame {
 
     private void backButtonActionPerformed(ActionEvent evt) {  
     	dispose();
-    	ProductListFrame pdf = new ProductListFrame(client);
-    	pdf.setVisible(true);
+    	if(user instanceof Admin) {
+    		ProductListFrame plf = new ProductListFrame((Admin)user);
+    		plf.setVisible(true);
+    	} else {
+    		ProductListFrame plf = new ProductListFrame((Client)user);
+    		plf.setVisible(true);
+    	}
     }                 
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
@@ -533,7 +540,7 @@ public class ProductFrame extends JFrame {
         /* Create and display the form */
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductFrame(product,client).setVisible(true);
+                new ProductFrame(product,user).setVisible(true);
             }
         });
     }
@@ -565,7 +572,7 @@ public class ProductFrame extends JFrame {
     private JSpinner quantitySpinner;
     private JTextField stockField;
     private JLabel stockLabel;
-    private static Client client;
+    private static User user;
     private static Product product;
     private static ArrayList<Comment> commentsList;
     // End of variables declaration                   

@@ -18,7 +18,6 @@ import Database.SQLClientService;
 import Database.SQLCommentsService;
 import Database.SQLProductService;
 import Domain.Admin;
-import Domain.Card;
 import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
@@ -27,6 +26,7 @@ import Domain.Purchase;
 import Domain.Transactions;
 import Logic.SystemService;
 
+@SuppressWarnings("serial")
 public class MenuAdminEdit extends JFrame {
     public MenuAdminEdit(Admin admin) {
     	MenuAdminEdit.admin = admin;
@@ -490,18 +490,7 @@ public class MenuAdminEdit extends JFrame {
     	deleteCategoryComboBox.setModel(new DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));
     	addProductComboBox.setModel(new DefaultComboBoxModel<>(ArrayToString.getStringArray(categoriesList)));    	
     }
-
-	private void updateCategoriesList(String oldName, String newName) {
-		for(int i=0; i<categoriesList.size(); i++) {
-			if(categoriesList.get(i).equals(oldName)) {
-				categoriesList.set(i, newName);
-			}
-		}
-	}
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

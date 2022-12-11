@@ -121,8 +121,6 @@ public class ShoppingHistory extends javax.swing.JFrame {
     }
     
     private void DoubleClick(java.awt.event.MouseEvent evt) {
-    	//System.out.println("ola");
-    	//System.out.println("Buenas");
     	if (evt.getClickCount() == 2) {
     		String selectedPurchase = jList1.getSelectedValue();
     		Purchase purchase = purchases.get(0);
