@@ -49,7 +49,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         shoppingCartScrollPane.setAutoscrolls(true);
 
         shoppingCartTable.setBackground(new java.awt.Color(255, 255, 255));
-        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 20)); 
+        shoppingCartTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         shoppingCartTable.setForeground(new java.awt.Color(0, 0, 0));
         String[] columnNames = {"Nombre","Unidades","Subtotal"};
         String[] rowData = new String[3];

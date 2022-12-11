@@ -64,7 +64,7 @@ public class LoginFrame extends JFrame {
         jLabel2.setIcon(new ImageIcon(getClass().getResource("/Icons/passwordLogin.png"))); // NOI18N
 
         jButton1.setBackground(new Color(255, 174, 167));
-        jButton1.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        jButton1.setFont(new Font("Segoe UI", 0, 24)); 
         jButton1.setText("\u00bfNo tienes cuenta? Reg\u00edstrate aqu\u00ed");
         jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {

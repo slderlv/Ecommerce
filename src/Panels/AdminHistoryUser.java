@@ -1,9 +1,5 @@
 package Panels;
 
-import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -22,6 +18,7 @@ public class AdminHistoryUser extends javax.swing.JFrame {
             jScrollPane1 = new javax.swing.JScrollPane();
             historyCart = new javax.swing.JTable();
 
+            setTitle("Ecommerce - Historial de usuario");
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -72,11 +69,8 @@ public class AdminHistoryUser extends javax.swing.JFrame {
             );
 
             pack();
-        }// </editor-fold>                        
-
-        /**
-         * @param args the command line arguments
-         */
+        }
+    
         public static void main(String args[]) {
             /* Set the Nimbus look and feel */
             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
