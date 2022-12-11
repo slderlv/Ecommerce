@@ -7,6 +7,7 @@ import Assets.ArrayToString;
 import Assets.getIDInShoppingHistory;
 import Domain.Purchase;
 import Domain.Transactions;
+import Domain.Admin;
 import Domain.Client;
 import Domain.Product;
 import Domain.ProductInfo;
@@ -14,8 +15,9 @@ import Domain.ProductInfo;
 @SuppressWarnings("serial")
 public class ShoppingHistory extends javax.swing.JFrame {
 
-    public ShoppingHistory(Client client) {
+    public ShoppingHistory(Client client,Admin admin) {
     	ShoppingHistory.client = client;
+    	ShoppingHistory.admin = admin;
     	purchases = client.getTransactions().getPurchases();
     	//System.out.println(purchases);
         initComponents();
@@ -116,8 +118,14 @@ public class ShoppingHistory extends javax.swing.JFrame {
     
     private void backButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
-    	ClientFrame cf = new ClientFrame(client);
-    	cf.setVisible(true);
+    	if(admin==null) {
+    		ClientFrame cf = new ClientFrame(client);
+        	cf.setVisible(true);
+    	} else {
+    		ManageUser mu = new ManageUser(client,admin);
+    		mu.setVisible(true);
+    	}
+    	
     }
     
     private void DoubleClick(java.awt.event.MouseEvent evt) {
@@ -130,10 +138,8 @@ public class ShoppingHistory extends javax.swing.JFrame {
     			purchase = purchases.get(i);
     			if (purchase.getId() == purchaseId) break;
     		}
-    		
-    		
     		dispose();
-    		PurchaseFrame pf = new PurchaseFrame(client,purchase);
+    		PurchaseFrame pf = new PurchaseFrame(client,purchase,admin);
     		pf.setVisible(true);
 		 	
     	}
@@ -162,7 +168,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShoppingHistory(client).setVisible(true);
+                new ShoppingHistory(client,admin).setVisible(true);
             }
         });
     }
@@ -173,6 +179,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static Client client;
+    private static Admin admin;
     private static ArrayList<Purchase> purchases;
     // End of variables declaration                   
 }

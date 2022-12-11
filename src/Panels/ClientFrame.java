@@ -544,7 +544,7 @@ public class ClientFrame extends JFrame {
     
     private void historyButtonActionPerformed(ActionEvent evt) {                                           
     	dispose();
-    	ShoppingHistory sh = new ShoppingHistory(client);
+    	ShoppingHistory sh = new ShoppingHistory(client,null);
     	sh.setVisible(true);
     }
 

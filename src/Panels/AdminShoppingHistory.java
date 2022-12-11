@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import Assets.ArrayToString;
 import Assets.getIDInShoppingHistory;
 import Domain.Purchase;
-import Domain.Transactions;
 import Domain.Admin;
 import Domain.Client;
-import Domain.Product;
-import Domain.ProductInfo;
 
 @SuppressWarnings("serial")
 public class AdminShoppingHistory extends javax.swing.JFrame {
@@ -134,9 +131,8 @@ public class AdminShoppingHistory extends javax.swing.JFrame {
     			if (purchase.getId() == purchaseId) break;
     		}
     		
-    		
     		dispose();
-    		PurchaseFrame pf = new PurchaseFrame(client,purchase);
+    		PurchaseFrame pf = new PurchaseFrame(client,purchase,admin);
     		pf.setVisible(true);
 		 	
     	}

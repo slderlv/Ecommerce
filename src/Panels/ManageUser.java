@@ -586,7 +586,7 @@ public class ManageUser extends JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	MenuAdminEdit menuAdminEdit = new MenuAdminEdit(null);
+    	MenuAdminEdit menuAdminEdit = new MenuAdminEdit(admin);
     	menuAdminEdit.setVisible(true);
     }                                          
 
@@ -598,8 +598,8 @@ public class ManageUser extends JFrame {
     
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	AdminShoppingHistory adminHistoryUser = new AdminShoppingHistory(client,admin);
-    	adminHistoryUser.setVisible(true);
+    	ShoppingHistory sh = new ShoppingHistory(client,admin);
+    	sh.setVisible(true);
     }                 
     
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           

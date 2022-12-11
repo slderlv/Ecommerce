@@ -1,14 +1,16 @@
 package Panels;
 
+import Domain.Admin;
 import Domain.Client;
 import Domain.Purchase;
 
 @SuppressWarnings("serial")
 public class PurchaseFrame extends javax.swing.JFrame {
 
-    public PurchaseFrame(Client client,Purchase purchase) {
+    public PurchaseFrame(Client client,Purchase purchase,Admin admin) {
     	PurchaseFrame.client = client;
     	PurchaseFrame.purchase = purchase;
+    	PurchaseFrame.admin = admin;
         initComponents();
     }
                         
@@ -98,8 +100,14 @@ public class PurchaseFrame extends javax.swing.JFrame {
 
     private void exitbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         dispose();
-    	ShoppingHistory sh = new ShoppingHistory(client);
-    	sh.setVisible(true);
+        if(admin==null) {
+        	ShoppingHistory sh = new ShoppingHistory(client,admin);
+        	sh.setVisible(true);
+        } else {
+        	AdminShoppingHistory ash = new AdminShoppingHistory(client,admin);
+        	ash.setVisible(true);
+        }
+    	
     }                                          
 
     public static void main(String args[]) {
@@ -123,7 +131,7 @@ public class PurchaseFrame extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PurchaseFrame(client,purchase).setVisible(true);
+                new PurchaseFrame(client,purchase,admin).setVisible(true);
             }
         });
     }
@@ -135,5 +143,6 @@ public class PurchaseFrame extends javax.swing.JFrame {
     private javax.swing.JTable shoppinglist;
     private static Purchase purchase;
     private static Client client;
+    private static Admin admin;
     // End of variables declaration                   
 }
