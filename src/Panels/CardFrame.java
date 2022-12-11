@@ -236,7 +236,19 @@ public class CardFrame extends JFrame {
     	sc.setVisible(true);
     }      
     
-    private void Pay(ActionEvent evt) {                      
+    private void Pay(ActionEvent evt) {   
+    	if(cardNumber.getText().length() < 16) {
+    		JOptionPane.showMessageDialog(null, "Tiene menos de 16 car\u00e1cteres");
+    		return;
+    	}
+    	if(Integer.parseInt(month.getText()) > 13 || Integer.parseInt(month.getText()) < 0) {
+    		JOptionPane.showMessageDialog(null, "Mes invalido");
+    		return;
+    	}
+    	if( Integer.parseInt(year.getText()) < 22) {
+    		JOptionPane.showMessageDialog(null, "año invalido");
+    		return;
+    	}
     	CardInfo cardInfo = new CardInfo(Integer.parseInt(cvv.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText()));
     	Card card = new Card(cardInfo,client);
     	ResultSet rs = SQLCardService.getSQLCardService().checkIfExists(card);
