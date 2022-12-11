@@ -387,7 +387,7 @@ public class MenuAdminEdit extends JFrame {
     				comments.add(comment);    				
     			}
     			p.setComments(comments);
-    			EditProduct ep = new EditProduct(p);	
+    			EditProduct ep = new EditProduct(p,admin);	
     			ep.setVisible(true);
     		}
     		return;
@@ -428,7 +428,7 @@ public class MenuAdminEdit extends JFrame {
 	    			}
 	    			p.setComments(comments);
 	    			dispose();
-	    			EditProduct ep = new EditProduct(p);	
+	    			EditProduct ep = new EditProduct(p,admin);	
 	    			ep.setVisible(true);
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
 	    			//String name, int price, String description, int stock, String category, String img_path
