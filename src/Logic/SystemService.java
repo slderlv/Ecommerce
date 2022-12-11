@@ -190,9 +190,14 @@ public class SystemService {
 					
 					quantity = 0;
 				}
-				p.setBuy_quantity(quantity);
-			
-				clientProducts.add(p);
+				if (p == null) {
+					return clientProducts;
+				}else {
+					p.setBuy_quantity(quantity);
+					
+					clientProducts.add(p);
+					
+				}
 				
 				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)
 				//public ProductInfo(String name, int price, String description, int stock, String category, String img_path) 
