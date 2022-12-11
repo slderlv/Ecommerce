@@ -452,28 +452,33 @@ public class ProductFrame extends JFrame {
     	}
     	// ARREGLAR ID
     	// commentsList.add(new Comment(0,rating,comment,product,client));
-    	sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client,product);
-    	
-    	ResultSet rs = sqlc.read(product);
-    	Comment objetCom = null;
-    	try {
-			if(rs.next()) {
-				int id = rs.getInt("id");
-				float rating2 = rs.getFloat("rating");
-				String comment2 = rs.getString("comment");
-				int productId = rs.getInt("product_id");
-				String userRut = rs.getString("user_rut");
-				objetCom = new Comment(id,rating,comment,product,client.getRut());
-			} 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	commentsList.add(objetCom);
-    	JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
-    	String[] row = {client.getName(),rating+"",comment};
-    	((DefaultTableModel)commentsTable.getModel()).addRow(row);
-    	commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
+    	if (SQLCommentsService.getSQLCommentsService().purchased(client,product)) {
+    		sqlc.create(new Comment(0,rating,comment,product,client.getRut()), client,product);
+    		
+    		ResultSet rs = sqlc.read(product);
+    		Comment objetCom = null;
+    		try {
+    			if(rs.next()) {
+    				int id = rs.getInt("id");
+    				float rating2 = rs.getFloat("rating");
+    				String comment2 = rs.getString("comment");
+    				int productId = rs.getInt("product_id");
+    				String userRut = rs.getString("user_rut");
+    				objetCom = new Comment(id,rating,comment,product,client.getRut());
+    			} 
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		commentsList.add(objetCom);
+    		JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
+    		String[] row = {client.getName(),rating+"",comment};
+    		((DefaultTableModel)commentsTable.getModel()).addRow(row);
+    		commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
+    		
+    	} else {
+    		JOptionPane.showMessageDialog(null, "NO PUEDES COMENTAR PORQUE NO HAS COMPRADO", "Comentario", JOptionPane.INFORMATION_MESSAGE);
+    	}
     	// AQUI DEBERIA CREAR EL COMENTARIO EN BBDD
     	//
     	//

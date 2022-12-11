@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import Domain.Client;
+import Domain.Product;
 
 public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQLCreate<Client>{
 	private static SQLBuyService service = null;
@@ -55,6 +56,17 @@ public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQL
 		
 	}
 	
-	
+	public ResultSet verifyBuy(Client t,Product p) {
+		try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM buys INNER JOIN products_buys ON buys.id = products_buys.buy_id  WHERE user_rut=? AND product_id = ? AND state = 'COMPRADO'");
+            statement.setString(1,t.getRut());
+            statement.setInt(2, p.getId());
+            ResultSet response = statement.executeQuery();
+            return response;
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+		return null;
+	}
 	
 }

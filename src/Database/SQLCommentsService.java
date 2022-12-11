@@ -59,9 +59,9 @@ public class SQLCommentsService implements ISQLRead<Product>,ISQLDelete<Comment>
 	}
 	
 	
-	public boolean purchased(Client c) {
+	public boolean purchased(Client c,Product p) {
 		try{  
-            ResultSet rs = SQLBuyService.getSQLBuyService().read(c);
+            ResultSet rs = SQLBuyService.getSQLBuyService().verifyBuy(c,p);
             if(rs.next())return true;
             return false;
         }catch (SQLException e){
