@@ -461,7 +461,7 @@ public class MenuAdminEdit extends JFrame {
     
 	private void addCategoryButtonActionPerformed(ActionEvent evt) {                                                  
     	if(addCategoryField.getText().equals(" Ingrese nombre")){
-    		JOptionPane.showMessageDialog(null, "Ingrese una categoría");
+    		JOptionPane.showMessageDialog(null, "Ingrese una categor\u00eda");
     		return;
     	}
     	SQLCategoryService.getSQLCategoryService().create(addCategoryField.getText());
