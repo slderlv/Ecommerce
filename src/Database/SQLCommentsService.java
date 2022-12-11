@@ -34,7 +34,7 @@ public class SQLCommentsService implements ISQLRead<Product>,ISQLDelete<Comment>
 	@Override
 	public void delete(Comment t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE comments WHERE id = ?");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("DELETE from comments WHERE id = ?");
             statement.setInt(1,t.getId());
             statement.execute();
         }catch (SQLException e){
