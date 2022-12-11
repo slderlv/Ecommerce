@@ -343,7 +343,10 @@ public class MenuAdminEdit extends JFrame {
     }                       
 
     private void editUserButtonActionPerformed(ActionEvent evt) {                                               		
-		
+    	if(editUserField.getText().equals(" Ingrese rut")) {
+    		  JOptionPane.showMessageDialog(null,"Ingrese un rut");
+    		  return;
+    	}
 		ResultSet response = SQLClientService.getSQLClientService().read(RutFormat.formatToDatabase(editUserField.getText()));
 		try {
 			if (response.next()) {
@@ -405,7 +408,11 @@ public class MenuAdminEdit extends JFrame {
     	
     } 
 
-    private void editProductButtonActionPerformed(ActionEvent evt) {               
+    private void editProductButtonActionPerformed(ActionEvent evt) {   
+    	if(editProductField.getText().equals(" Ingrese id")) {
+			JOptionPane.showMessageDialog(null, "Ingrese un id");
+			return;
+		}
     	int id = Integer.parseInt(editProductField.getText());
     	ResultSet response = SQLProductService.getSQLProductService().readById(id);
     	try {
