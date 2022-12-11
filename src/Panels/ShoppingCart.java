@@ -17,6 +17,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
 	public ShoppingCart(Client client) {
     	ShoppingCart.client = client;
+    	client.getTransactions().setShoppingCart(SystemService.getSystem().getShoppingCart(client));
     	shoppingCart = client.getTransactions().getShoppingCart();
     	initComponents();
 	}
@@ -363,9 +364,9 @@ public class ShoppingCart extends javax.swing.JFrame {
         	Object[] buttons = {"Aceptar","Cancelar"};
         	int reply = JOptionPane.showOptionDialog(null, "\u00bfEst\u00e1 seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
-        	System.out.println(reply);
+        	
         	if(reply==0) {
-        		System.out.println("buenas");
+        		
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, 0);
         		SQLProductService.getSQLProductService().sumStock(p, 1);

@@ -194,6 +194,7 @@ public class LoginFrame extends JFrame {
                     UserDirector.getUserDirector().createUser(clientBuilder,format);
                     Client client = clientBuilder.getResult();
                     client.setImg_path(img_path);
+                    System.out.println("ola");
                     ClientFrame cf = new ClientFrame(client);
                     cf.setVisible(true);
                     dispose();

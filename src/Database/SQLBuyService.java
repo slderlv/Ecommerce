@@ -22,7 +22,7 @@ public class SQLBuyService implements ISQLRead<Client>, ISQLUpdate<Client>, ISQL
 	@Override
 	public ResultSet read(Client t) {
 		try{  
-            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM buys INNER JOIN products_buys ON buys.id = products_buys.buy_id  WHERE user_rut=? AND state = 'COMPRADO'");
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM buys INNER JOIN products_buys ON buys.id = products_buys.buy_id  WHERE user_rut=? AND state = 'COMPRADO' and quantity > 0 ");
             statement.setString(1,t.getRut());
             ResultSet response = statement.executeQuery();
             return response;
