@@ -433,6 +433,9 @@ public class MenuAdminEdit extends JFrame {
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
 	    			//String name, int price, String description, int stock, String category, String img_path
 				
+			}else {
+				JOptionPane.showMessageDialog(null, "El id no existe");
+				return;
 			}
 			//return;
 		} catch (Exception e) {
