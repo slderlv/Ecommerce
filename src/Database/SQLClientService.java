@@ -108,4 +108,17 @@ public class SQLClientService implements ISQLCreate<User>, ISQLDelete<User>, ISQ
         return null;
     }
     
+    public boolean isBlocked(String t) {
+    	try{  
+            PreparedStatement statement = SQLConnection.getSQLConnection().connect().prepareStatement("SELECT * FROM users WHERE rut=? AND blocked = true");
+            statement.setString(1,t);
+            ResultSet response = statement.executeQuery();
+            
+            return response.next();
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
+        }
+    	return false;
+    }
+    
 }
