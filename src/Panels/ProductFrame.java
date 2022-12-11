@@ -62,7 +62,8 @@ public class ProductFrame extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
+        setTitle("Ecommerce - Vista de Producto");
+        
         jPanel1.setBackground(new Color(255, 212, 171));
         jPanel1.setPreferredSize(new Dimension(1280, 720));
 
@@ -496,10 +497,15 @@ public class ProductFrame extends JFrame {
     }                                                
 
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  
+    	
     	if (user instanceof Admin) {
     		JOptionPane.showMessageDialog(null, "No es posible desde esta ventana");
     		return;
     	}
+    	if(commentsTable.getSelectedRowCount() == 0 ) {
+            JOptionPane.showMessageDialog(null,"no se ha seleccionado ning\u00fan comentario");
+            return;
+        }
     	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	int index = commentsTable.getSelectedRow();
     	Client client = (Client)user;

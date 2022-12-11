@@ -306,7 +306,8 @@ public class ShoppingCart extends javax.swing.JFrame {
 	    		}
 	    		if(client.getTransactions().getShoppingCart().size() == 0 || allElements == true) {
 	    			JOptionPane.showMessageDialog(null, "Tiene que haber un producto en el carrito antes de poder pagar");
-	    		} else {
+	    		} 
+	    		else {
 	    			SQLBuyService sqls = SQLBuyService.getSQLBuyService();
 	    			sqls.update(client);
 	    	    	JOptionPane.showMessageDialog(null, "Compra realizada con \u00e9xito","Confirmaci\u00f3n de compra",JOptionPane.INFORMATION_MESSAGE);

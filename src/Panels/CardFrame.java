@@ -267,12 +267,23 @@ public class CardFrame extends JFrame {
     			}
     		}
     	}
-    	JOptionPane.showMessageDialog(null, "Compra realizada con \u00e9xito","Confirmaci\u00f3n de compra",JOptionPane.INFORMATION_MESSAGE);
-	    SQLBuyService sqls = SQLBuyService.getSQLBuyService();
-	    sqls.update(client);
-	    dispose();
-	    ClientFrame cf = new ClientFrame(client);
-	    cf.setVisible(true);
+    	boolean allElements = true;
+		for(int x=0;x<client.getTransactions().getShoppingCart().size(); x++){
+			if(client.getTransactions().getShoppingCart().get(x).getBuy_quantity() > 0) {
+				allElements = false;
+				break;
+			}
+		}
+		if(client.getTransactions().getShoppingCart().size() == 0 || allElements == true) {
+			JOptionPane.showMessageDialog(null, "Tiene que haber un producto en el carrito antes de poder pagar");
+		}else {
+			JOptionPane.showMessageDialog(null, "Compra realizada con \u00e9xito","Confirmaci\u00f3n de compra",JOptionPane.INFORMATION_MESSAGE);
+		    SQLBuyService sqls = SQLBuyService.getSQLBuyService();
+		    sqls.update(client);
+		    dispose();
+		    ClientFrame cf = new ClientFrame(client);
+		    cf.setVisible(true);
+		}
     }      
 
     public static void main(String args[]) {
