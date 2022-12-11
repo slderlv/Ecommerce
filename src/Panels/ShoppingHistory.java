@@ -135,7 +135,7 @@ public class ShoppingHistory extends javax.swing.JFrame {
     		
     		
     		dispose();
-    		PurchaseFrame pf = new PurchaseFrame(purchase);
+    		PurchaseFrame pf = new PurchaseFrame(client,purchase);
     		pf.setVisible(true);
 		 	
     	}

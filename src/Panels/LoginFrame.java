@@ -45,7 +45,7 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ecommerce - Login");
         setBackground(new Color(255, 212, 171));
-        setName("Login"); // NOI18N
+        setName("Login"); 
         setPreferredSize(new Dimension(1280, 720));
 
         jPanel1.setBackground(new Color(255, 212, 171));
@@ -53,15 +53,15 @@ public class LoginFrame extends JFrame {
 
         usernameText.setDocument(new JTextFieldLimit(12));
         usernameText.setBackground(new Color(255, 174, 167));
-        usernameText.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        usernameText.setFont(new Font("Segoe UI", 0, 36)); 
 
         passwordText.setDocument(new JTextFieldLimit(41));
         passwordText.setBackground(new Color(255, 174, 167));
-        passwordText.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        passwordText.setFont(new Font("Segoe UI", 0, 36)); 
 
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/Icons/personLogin.png"))); // NOI18N
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/Icons/personLogin.png"))); 
 
-        jLabel2.setIcon(new ImageIcon(getClass().getResource("/Icons/passwordLogin.png"))); // NOI18N
+        jLabel2.setIcon(new ImageIcon(getClass().getResource("/Icons/passwordLogin.png"))); 
 
         jButton1.setBackground(new Color(255, 174, 167));
         jButton1.setFont(new Font("Segoe UI", 0, 24)); 
@@ -73,19 +73,18 @@ public class LoginFrame extends JFrame {
         });
 
         jButton2.setBackground(new Color(255, 174, 167));
-        jButton2.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        jButton2.setFont(new Font("Segoe UI", 0, 24)); 
         jButton2.setText("Iniciar Sesi\u00f3n");
         jButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     Login(evt);
                 } catch (Exception e) {
-                    //System.out.println("oli");
                 }
             }
         });
 
-        errorLogin.setFont(new Font("Segoe UI", 0, 18)); // NOI18N
+        errorLogin.setFont(new Font("Segoe UI", 0, 18)); 
         errorLogin.setForeground(new Color(255, 0, 51));
         errorLogin.setText("");
 

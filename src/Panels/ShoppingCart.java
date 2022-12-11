@@ -2,7 +2,6 @@ package Panels;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import Assets.ArrayToString;
@@ -309,8 +308,10 @@ public class ShoppingCart extends javax.swing.JFrame {
 	    		} else {
 	    			SQLBuyService sqls = SQLBuyService.getSQLBuyService();
 	    			sqls.update(client);
-	    			JOptionPane.showMessageDialog(null, "ARTICULOS COMPRADOS");
-	    			
+	    	    	JOptionPane.showMessageDialog(null, "Compra realizada con \u00e9xito","Confirmaci\u00f3n de compra",JOptionPane.INFORMATION_MESSAGE);
+	    	    	dispose();
+	    	    	ClientFrame cf = new ClientFrame(client);
+	    	    	cf.setVisible(true);
 	    		}
 	    	}
     	}
@@ -338,16 +339,11 @@ public class ShoppingCart extends javax.swing.JFrame {
         if(stock <= 0) {
         	JOptionPane.showMessageDialog(null, "No hay mas productos en el stock", "Error al agregar unidad", JOptionPane.INFORMATION_MESSAGE);
         } else {
-        	//p.getInfo().setStock(stock-1);
-//        	  	System.out.println(shoppingCart.get(rowIndex).getId());
-        		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
-        		SQLProductService.getSQLProductService().updateStock(p, 1);
-        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity + 1);
-        		SystemService.getSystem().refreshProducts();
-        		updateFrame(true,rowIndex,quantity);
-        		//System.out.println("STOCK "+ stock);
-        	
-        	
+        	int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
+        	SQLProductService.getSQLProductService().updateStock(p, 1);
+        	SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, quantity + 1);
+        	SystemService.getSystem().refreshProducts();
+        	updateFrame(true,rowIndex,quantity);
         }
     }                                             
 

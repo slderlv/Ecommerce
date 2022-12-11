@@ -24,8 +24,6 @@ import Database.SQLClientService;
 public class ClientFrame extends JFrame {
 
     public ClientFrame(Client client) {
-    	//ClientFrame.client = new Client("21249678-2", "aaaaa", "aaaaa", "aaaaa@aaa.aaa", 949314109, null, "aaaaa", null, "UserIcons/juan_bekios.jpeg");
-    	//ClientFrame.shoppingCart = client.getTransactions().getShoppingCart();
     	ClientFrame.client = client;
     	SystemService.getSystem().getTransactions(client);
     	shoppingCart = client.getTransactions().getShoppingCart();
@@ -95,7 +93,7 @@ public class ClientFrame extends JFrame {
         jPanel3.setBackground(secondColor);
 
         productButton.setBackground(mainColor);
-        productButton.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        productButton.setFont(new Font("Segoe UI", 0, 36)); 
         productButton.setForeground(black);
         productButton.setText("Productos");
         productButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -107,7 +105,7 @@ public class ClientFrame extends JFrame {
             }
         });
 
-        productLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/product.png"))); // NOI18N
+        productLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/product.png"))); 
 
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -146,7 +144,7 @@ public class ClientFrame extends JFrame {
             }
         });
 
-        cartLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/cart.png"))); // NOI18N
+        cartLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/cart.png")));
 
         GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -173,7 +171,7 @@ public class ClientFrame extends JFrame {
         jPanel5.setPreferredSize(new Dimension(258, 67));
 
         historyButton.setBackground(mainColor);
-        historyButton.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
+        historyButton.setFont(new Font("Segoe UI", 0, 36));
         historyButton.setForeground(black);
         historyButton.setText("Historial");
         historyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -185,7 +183,7 @@ public class ClientFrame extends JFrame {
             }
         });
 
-        historyLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/history.png"))); // NOI18N
+        historyLabel.setIcon(new ImageIcon(getClass().getResource("/Icons/history.png"))); 
 
         GroupLayout jPanel5Layout = new GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -237,9 +235,9 @@ public class ClientFrame extends JFrame {
         );
 
         editButton.setBackground(new Color(255, 111, 156));
-        editButton.setFont(new Font("Segoe UI", 0, 22)); // NOI18N
+        editButton.setFont(new Font("Segoe UI", 0, 22)); 
         editButton.setForeground(black);
-        editButton.setIcon(new ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        editButton.setIcon(new ImageIcon(getClass().getResource("/Icons/edit.png"))); 
         editButton.setText("Editar datos");
         editButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         editButton.setFocusPainted(false);
@@ -254,14 +252,14 @@ public class ClientFrame extends JFrame {
         jPanel7.setFocusable(false);
 
         passwordLabel.setBackground(secondColor);
-        passwordLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        passwordLabel.setFont(new Font("Segoe UI", 0, 24)); 
         passwordLabel.setForeground(black);
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         passwordLabel.setText("Contrase\u00f1a");
         passwordLabel.setOpaque(true);
 
         addressLabel.setBackground(secondColor);
-        addressLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        addressLabel.setFont(new Font("Segoe UI", 0, 24)); 
         addressLabel.setForeground(black);
         addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
         addressLabel.setText("Direcci\u00f3n");
@@ -270,25 +268,25 @@ public class ClientFrame extends JFrame {
         addressField.setDocument(new JTextFieldLimit(35));
         addressField.setEditable(false);
         addressField.setBackground(secondColor);
-        addressField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        addressField.setFont(new Font("Segoe UI", 0, 24)); 
         addressField.setForeground(black);
         addressField.setText(client.getAddress());
         addressField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         nameLabel.setBackground(secondColor);
-        nameLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        nameLabel.setFont(new Font("Segoe UI", 0, 24)); 
         nameLabel.setForeground(black);
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         nameLabel.setText("Nombre");
         nameLabel.setOpaque(true);
         nameLabel.setVisible(true);
         
-        invalidPasswordLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        invalidPasswordLabel.setFont(new Font("Segoe UI", 0, 24)); 
         invalidPasswordLabel.setForeground(mainColor);
         invalidPasswordLabel.setText("Contrase\u00f1a inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
 
-        invalidAddressLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        invalidAddressLabel.setFont(new Font("Segoe UI", 0, 24)); 
         invalidAddressLabel.setForeground(mainColor);
         invalidAddressLabel.setText("Direcci\u00f3n inv\u00e1lida");
         invalidAddressLabel.setVisible(true);
@@ -296,7 +294,7 @@ public class ClientFrame extends JFrame {
         passwordField.setDocument(new JTextFieldLimit(41));
         passwordField.setEditable(false);
         passwordField.setBackground(secondColor);
-        passwordField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        passwordField.setFont(new Font("Segoe UI", 0, 24)); 
         passwordField.setForeground(black);
         passwordField.setText(CryptoService.getCryptoService().decodePassword(client.getPassword()));
         passwordField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
@@ -304,7 +302,7 @@ public class ClientFrame extends JFrame {
         nameField.setDocument(new JTextFieldLimit(16));
         nameField.setEditable(false);
         nameField.setBackground(secondColor);
-        nameField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        nameField.setFont(new Font("Segoe UI", 0, 24)); 
         nameField.setForeground(black);
         nameField.setText(client.getName());
         nameField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
@@ -380,7 +378,7 @@ public class ClientFrame extends JFrame {
         jPanel6.setPreferredSize(new Dimension(420, 322));
 
         rutLabel.setBackground(secondColor);
-        rutLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        rutLabel.setFont(new Font("Segoe UI", 0, 24));
         rutLabel.setForeground(black);
         rutLabel.setHorizontalAlignment(SwingConstants.CENTER);
         rutLabel.setText("Rut");
@@ -388,18 +386,18 @@ public class ClientFrame extends JFrame {
 
         rutField.setEditable(false);
         rutField.setBackground(secondColor);
-        rutField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        rutField.setFont(new Font("Segoe UI", 0, 24));
         rutField.setForeground(black);
         rutField.setText(client.getRut());
         rutField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        invalidEmailLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        invalidEmailLabel.setFont(new Font("Segoe UI", 0, 24)); 
         invalidEmailLabel.setForeground(mainColor);
         invalidEmailLabel.setText("Correo inv\u00e1lido");
         invalidEmailLabel.setVisible(true);
 
         emailLabel.setBackground(secondColor);
-        emailLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        emailLabel.setFont(new Font("Segoe UI", 0, 24)); 
         emailLabel.setForeground(black);
         emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
         emailLabel.setText("Correo");
@@ -408,12 +406,12 @@ public class ClientFrame extends JFrame {
         emailField.setDocument(new JTextFieldLimit(35));
         emailField.setEditable(false);
         emailField.setBackground(secondColor);
-        emailField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        emailField.setFont(new Font("Segoe UI", 0, 24)); 
         emailField.setForeground(black);
         emailField.setText(client.getMail());
         emailField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
-        invalidPhoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        invalidPhoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); 
         invalidPhoneNumberLabel.setForeground(mainColor);
         invalidPhoneNumberLabel.setText("Tel\u00e9fono inv\u00e1lido");
         invalidPhoneNumberLabel.setVisible(true);
@@ -421,13 +419,13 @@ public class ClientFrame extends JFrame {
         phoneNumberField.setDocument(new JTextFieldLimit(12));
         phoneNumberField.setEditable(false);
         phoneNumberField.setBackground(secondColor);
-        phoneNumberField.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberField.setFont(new Font("Segoe UI", 0, 24)); 
         phoneNumberField.setForeground(black);
         phoneNumberField.setText("+56"+client.getNumber());
         phoneNumberField.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 1));
 
         phoneNumberLabel.setBackground(secondColor);
-        phoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); // NOI18N
+        phoneNumberLabel.setFont(new Font("Segoe UI", 0, 24)); 
         phoneNumberLabel.setForeground(black);
         phoneNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
         phoneNumberLabel.setText("Tel\u00e9fono");
@@ -615,7 +613,6 @@ public class ClientFrame extends JFrame {
         	phoneNumberField.setEditable(false);
         	editButton.setText("Editar datos");
         	
-        	// UPDATE BASE DE DATOS AQUI ----------------------------------------------
         	try {
         		String name = nameField.getText();
         		String password = CryptoService.getCryptoService().encodePassword(new String(passwordField.getPassword()));
@@ -626,7 +623,7 @@ public class ClientFrame extends JFrame {
         		e.printStackTrace();
         	}
         	SQLClientService.getSQLClientService().update(client);
-        	// ------------------------------------------------------------------------
+        	JOptionPane.showMessageDialog(null, "Cambios realizados con \u00e9xito","Datos actualizados",JOptionPane.INFORMATION_MESSAGE);
         }
     }                                    
 
