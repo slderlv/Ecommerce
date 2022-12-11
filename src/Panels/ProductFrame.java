@@ -157,7 +157,7 @@ public class ProductFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for(int i=0; i<commentsList.size(); i++) {
         	Comment c = commentsList.get(i);
-        	String[] rowData = {"Nombre cliente"+i,c.getRating()+"", c.getComment()};
+        	String[] rowData = {c.getRut(),c.getRating()+"", c.getComment()};
         	model.addRow(rowData);
         }
         commentsTable.setModel(model);
@@ -487,6 +487,7 @@ public class ProductFrame extends JFrame {
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  
     	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	int index = commentsTable.getSelectedRow();
+    	
     	if(!commentsList.get(index).getRut().equals(client.getRut())) {
     		JOptionPane.showMessageDialog(null, "Este comentario no te pertenece", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
     		return;
