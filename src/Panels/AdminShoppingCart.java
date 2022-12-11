@@ -14,6 +14,7 @@ import Assets.ArrayToString;
 import Database.SQLBuyService;
 import Database.SQLProductService;
 import Database.SQLShoppingCart;
+import Domain.Admin;
 import Domain.Client;
 import Domain.Product;
 import Logic.SystemService;
@@ -21,8 +22,9 @@ import Logic.SystemService;
 @SuppressWarnings("serial")
 public class AdminShoppingCart extends JFrame {
 
-	public AdminShoppingCart(Client client) {
+	public AdminShoppingCart(Client client,Admin admin) {
     	AdminShoppingCart.client = client;
+    	AdminShoppingCart.admin = admin;
     	shoppingCart = client.getTransactions().getShoppingCart();
     	initComponents();
 	}
@@ -295,8 +297,8 @@ public class AdminShoppingCart extends JFrame {
     
     private void backButtonActionPerformed(ActionEvent evt) {  
     	dispose();
-    	MenuAdminEdit mae = new MenuAdminEdit(null);
-    	mae.setVisible(true);
+    	ManageUser mu = new ManageUser(client,admin);
+    	mu.setVisible(true);
     } 
     
     private void payButtonActionPerformed(ActionEvent evt) { 
@@ -375,14 +377,13 @@ public class AdminShoppingCart extends JFrame {
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
         	System.out.println(reply);
         	if(reply==0) {
-        		System.out.println("buenas");
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, 0);
         		SQLProductService.getSQLProductService().sumStock(p, 1);
         		shoppingCart.remove(rowIndex);
         		dispose();
         		SystemService.getSystem().getTransactions(client);
-        		AdminShoppingCart sc = new AdminShoppingCart(client);
+        		AdminShoppingCart sc = new AdminShoppingCart(client,admin);
         		sc.setVisible(true);
         		
         	} 
@@ -437,7 +438,7 @@ public class AdminShoppingCart extends JFrame {
         
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminShoppingCart(client).setVisible(true);
+                new AdminShoppingCart(client,admin).setVisible(true);
             }
         });
     }
@@ -458,6 +459,7 @@ public class AdminShoppingCart extends JFrame {
     private JTextField totalAmountField;
     private JLabel totalAmountLabel;
     private static Client client;
+    private static Admin admin;
     private static ArrayList<Product> shoppingCart;
     // End of variables declaration                   
 }
