@@ -503,13 +503,8 @@ public class ProductFrame extends JFrame {
 
     private void backButtonActionPerformed(ActionEvent evt) {  
     	dispose();
-    	if(user instanceof Admin) {
-    		ProductListFrame plf = new ProductListFrame((Admin)user);
-    		plf.setVisible(true);
-    	} else {
-    		ProductListFrame plf = new ProductListFrame((Client)user);
-    		plf.setVisible(true);
-    	}
+    	ProductListFrame plf = new ProductListFrame(user);
+		plf.setVisible(true);
     }                 
     
     private ImageIcon resizeImageIcon(ImageIcon imageIcon) {
