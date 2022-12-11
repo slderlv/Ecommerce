@@ -412,6 +412,7 @@ public class ProductFrame extends JFrame {
     			}
     			
     		}
+    		//System.out.println(localQuantity);
     		//System.out.println("ola");
     		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
     		if (have_product) {
@@ -474,7 +475,7 @@ public class ProductFrame extends JFrame {
     		}
     		commentsList.add(objetCom);
     		JOptionPane.showMessageDialog(null, "El comentario se ha publicado existosamente", "Comentario", JOptionPane.INFORMATION_MESSAGE);
-    		String[] row = {client.getName(),rating+"",comment};
+    		String[] row = {client.getRut(),rating+"",comment};
     		((DefaultTableModel)commentsTable.getModel()).addRow(row);
     		commentsTable.getColumnModel().getColumn(2).setCellRenderer(new WordWrapCellRenderer());
     		

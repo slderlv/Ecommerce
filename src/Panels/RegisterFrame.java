@@ -16,6 +16,7 @@ import Assets.SQLClientServiceAdapter;
 import Assets.ValidateMail;
 import Assets.RutFormat;
 import Database.SQLClientService;
+import Database.SQLConnection;
 import Domain.Admin;
 import Domain.User;
 
@@ -292,6 +293,7 @@ public class RegisterFrame extends JFrame {
 						dispose();
 						LoginFrame lf = new LoginFrame();            		
 						lf.setVisible(true);
+						
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();

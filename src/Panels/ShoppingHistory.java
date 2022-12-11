@@ -7,6 +7,7 @@ import Assets.ArrayToString;
 import Assets.getIDInShoppingHistory;
 import Domain.Purchase;
 import Domain.Transactions;
+import Logic.SystemService;
 import Domain.Admin;
 import Domain.Client;
 import Domain.Product;
@@ -18,6 +19,8 @@ public class ShoppingHistory extends javax.swing.JFrame {
     public ShoppingHistory(Client client,Admin admin) {
     	ShoppingHistory.client = client;
     	ShoppingHistory.admin = admin;
+    	client.getTransactions().setShoppingCart(SystemService.getSystem().getShoppingCart(client));
+    	
     	purchases = client.getTransactions().getPurchases();
     	//System.out.println(purchases);
         initComponents();

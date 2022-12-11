@@ -184,6 +184,7 @@ public class SystemService {
 					if (p.getId() == id) break;
 				}
 				p.setBuy_quantity(rs.getInt("quantity"));
+			
 				clientProducts.add(p);
 				
 				//public Product(ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity)

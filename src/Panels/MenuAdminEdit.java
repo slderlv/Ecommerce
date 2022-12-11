@@ -458,6 +458,7 @@ public class MenuAdminEdit extends JFrame {
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();
     	updateComboBoxes();
+    	JOptionPane.showMessageDialog(null, "CATEGORIA CREADA CON EXITO");
 	}         
     
     private void deleteCategoryButtonActionPerformed(ActionEvent evt) {
