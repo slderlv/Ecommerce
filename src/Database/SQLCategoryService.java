@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String>{
+public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String>,ISQLUpdate<String>{
 	private static SQLCategoryService service = null;
 
     private SQLCategoryService(){}
@@ -31,7 +31,7 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
 	public void delete(String t) {
 		try{  
 			if(t.equals("NO-ASIGNADO"))return;
-			PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = 'NO-ASIGNADO' WHERE category = ?");
+			PreparedStatement statementProducts = SQLConnection.getSQLConnection().connect().prepareStatement("UPDATE products SET category = 'NO ASIGNADO' WHERE category = ?");
 			statementProducts.setString(1, t);
 			statementProducts.execute();
 			
@@ -71,6 +71,11 @@ public class SQLCategoryService implements ISQLCreate<String>, ISQLDelete<String
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error con la consulta" + e);
         }
+	}
+	@Override
+	public void update(String t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

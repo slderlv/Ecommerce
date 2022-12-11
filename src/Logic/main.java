@@ -25,6 +25,7 @@ public class main {
 		// DEL HISTORIAL HACIA ATRAS SE CAE
 		// COMPRE UNA CUESTION Y SE CAYO (teniendo un producto con 0)
 		// DEL SHOPPING ME SACO AL LOGIN
+		// SE CAE DE ADMIN PRODUCT LIST PA ATRAS
 	}
 
 }

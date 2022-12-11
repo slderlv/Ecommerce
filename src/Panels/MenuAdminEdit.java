@@ -420,6 +420,7 @@ public class MenuAdminEdit extends JFrame {
 	    				comments.add(comment);    				
 	    			}
 	    			p.setComments(comments);
+	    			dispose();
 	    			EditProduct ep = new EditProduct(p);	
 	    			ep.setVisible(true);
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
@@ -436,6 +437,10 @@ public class MenuAdminEdit extends JFrame {
 
     private void editCategoryButtonActionPerformed(ActionEvent evt) {                                                  
     	String category = editCategoryComboBox.getSelectedItem().toString();
+    	if (category.equals("NO ASIGNADO")) {
+    		JOptionPane.showMessageDialog(null, "NO ES POSIBLE EDITAR LA CATEGORIA 'NO ASIGNADO'");
+    		return;
+    	}
     	String newCategory = JOptionPane.showInputDialog(null, "Inserte nuevo nombre", "Editar categor\u00eda", JOptionPane.INFORMATION_MESSAGE);
     	SQLCategoryService.getSQLCategoryService().update(category, newCategory);
     	
@@ -456,6 +461,12 @@ public class MenuAdminEdit extends JFrame {
 	}         
     
     private void deleteCategoryButtonActionPerformed(ActionEvent evt) {
+    	String category = deleteCategoryComboBox.getSelectedItem().toString();
+    	if (category.equals("NO ASIGNADO")) {
+    		JOptionPane.showMessageDialog(null, "NO ES POSIBLE ELIMINAR LA CATEGORIA 'NO ASIGNADO'");
+    		return;
+    	}
+    	
     	SQLCategoryService.getSQLCategoryService().delete(deleteCategoryComboBox.getSelectedItem().toString());
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();

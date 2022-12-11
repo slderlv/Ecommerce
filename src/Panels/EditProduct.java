@@ -425,7 +425,9 @@ public class EditProduct extends JFrame {
     	product.getInfo().setDescription(descriptionArea.getText());
     	product.getInfo().setStock((Integer) stockSpinner.getValue());
     	product.getInfo().setCategory(categoryComboBox.getSelectedItem().toString());
+    	System.out.println(categoryComboBox.getSelectedItem().toString());
     	SQLProductService.getSQLProductService().update(product);		
+    	JOptionPane.showMessageDialog(null, "PRODUCTO EDITADO CON EXITO");
 	}
     
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {
