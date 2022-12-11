@@ -31,6 +31,7 @@ public class EditProduct extends JFrame {
 		EditProduct.product = product;
 		commentsList = product.getComments();
     	initComponents();
+    	EditProduct.admin=admin;
         setLocationRelativeTo(null);
     }
                          
