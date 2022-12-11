@@ -343,7 +343,10 @@ public class MenuAdminEdit extends JFrame {
     }                       
 
     private void editUserButtonActionPerformed(ActionEvent evt) {                                               		
-		
+    	if(editUserField.getText().equals(" Ingrese rut")) {
+    		  JOptionPane.showMessageDialog(null,"Ingrese un rut");
+    		  return;
+    	}
 		ResultSet response = SQLClientService.getSQLClientService().read(RutFormat.formatToDatabase(editUserField.getText()));
 		try {
 			if (response.next()) {
@@ -405,7 +408,11 @@ public class MenuAdminEdit extends JFrame {
     	
     } 
 
-    private void editProductButtonActionPerformed(ActionEvent evt) {               
+    private void editProductButtonActionPerformed(ActionEvent evt) {   
+    	if(editProductField.getText().equals(" Ingrese id")) {
+			JOptionPane.showMessageDialog(null, "Ingrese un id");
+			return;
+		}
     	int id = Integer.parseInt(editProductField.getText());
     	ResultSet response = SQLProductService.getSQLProductService().readById(id);
     	try {
@@ -426,6 +433,9 @@ public class MenuAdminEdit extends JFrame {
 	    			//ProductInfo info, int id, ArrayList<Comment> comments, int buy_quantity
 	    			//String name, int price, String description, int stock, String category, String img_path
 				
+			}else {
+				JOptionPane.showMessageDialog(null, "El id no existe");
+				return;
 			}
 			//return;
 		} catch (Exception e) {
@@ -453,7 +463,10 @@ public class MenuAdminEdit extends JFrame {
     }  
     
 	private void addCategoryButtonActionPerformed(ActionEvent evt) {                                                  
-    	if(addCategoryField.getText().equals(" Ingrese nombre")) return;
+    	if(addCategoryField.getText().equals(" Ingrese nombre")){
+    		JOptionPane.showMessageDialog(null, "Ingrese una categor\u00eda");
+    		return;
+    	}
     	SQLCategoryService.getSQLCategoryService().create(addCategoryField.getText());
     	SystemService.getSystem().refreshCategory();
     	categoriesList = SystemService.getSystem().getCategorys();

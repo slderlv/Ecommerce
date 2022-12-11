@@ -432,6 +432,10 @@ public class EditProduct extends JFrame {
 	}
     
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {
+	if(commentsTable.getSelectedRowCount() == 0 ) {
+            JOptionPane.showMessageDialog(null,"no se ha seleccionado ning\u00fan comentario");
+            return;
+        }
     	int index = commentsTable.getSelectedRow();
     	SQLCommentsService.getSQLCommentsService().delete(commentsList.get(index));
     	commentsList.remove(index);

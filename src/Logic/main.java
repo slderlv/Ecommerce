@@ -12,7 +12,7 @@ public class main {
 		system.start();
 		
 		//ANOTAR BUGS ACA
-		// Se buggea shopping cart mas de un item en 0
+		// 
 	}
 
 }
