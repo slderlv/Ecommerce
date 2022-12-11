@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import Assets.CryptoService;
 import Assets.JTextFieldLimit;
 import Assets.SQLClientServiceAdapter;
+import Assets.ValidateMail;
 import Assets.RutFormat;
 import Database.SQLClientService;
 import Domain.Admin;
@@ -260,6 +261,12 @@ public class RegisterFrame extends JFrame {
         	JOptionPane.showMessageDialog(null, "Contrase\u00f1a debe tener al menos 4 car\u00e1cteres");
         	return;
         }
+        
+        if (!ValidateMail.isValid(emailField.getText())) {
+        	JOptionPane.showMessageDialog(null, "EMAIL NO VALIDO");
+        	return;
+        }
+        
         if(password.equals(password2)) {
             password = CryptoService.getCryptoService().encodePassword(password);
             String email = emailField.getText();
@@ -269,15 +276,19 @@ public class RegisterFrame extends JFrame {
             	User us = SQLClientServiceAdapter.userData(format);
             	
             	try {
-            		ResultSet rs = SQLClientService.getSQLClientService().read(us);
-					if (!rs.next()) {
+            		System.out.println(us.getRut());
+            		System.out.println(us.getPassword());
+            		ResultSet rs = SQLClientService.getSQLClientService().read(us.getRut());
+            		//System.out.println(rs.next());
+					if (rs.next()) {
+						JOptionPane.showMessageDialog(null, "Usuario ya registrado");
+					
+					} else {
 						SQLClientService.getSQLClientService().create(us);   
 						JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 						dispose();
 						LoginFrame lf = new LoginFrame();            		
 						lf.setVisible(true);
-					} else {
-						JOptionPane.showMessageDialog(null, "Usuario ya registrado");
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
