@@ -386,7 +386,11 @@ public class ProductFrame extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void addToCartButtonActionPerformed(ActionEvent evt) {                                                
+    private void addToCartButtonActionPerformed(ActionEvent evt) {        
+    	if (user instanceof Admin) {
+    		JOptionPane.showMessageDialog(null, "No es posible desde esta ventana");
+    		return;
+    	}
     	int total = product.getBuy_quantity() + (int)quantitySpinner.getValue();
     	Client client = (Client)user;
     	if(total>product.getInfo().getStock()) {
@@ -430,6 +434,10 @@ public class ProductFrame extends JFrame {
 
     private void addCommentButtonActionPerformed(ActionEvent evt) {  
     	// CONSULTA SQL: SI EL CLIENTE HA COMPRADO ESTE PRODUCTO
+    	if (user instanceof Admin) {
+    		JOptionPane.showMessageDialog(null, "No es posible desde esta ventana");
+    		return;
+    	}
     	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	
     	float rating = 0; 
@@ -488,6 +496,10 @@ public class ProductFrame extends JFrame {
     }                                                
 
     private void deleteCommentButtonActionPerformed(ActionEvent evt) {  
+    	if (user instanceof Admin) {
+    		JOptionPane.showMessageDialog(null, "No es posible desde esta ventana");
+    		return;
+    	}
     	SQLCommentsService sqlc = SQLCommentsService.getSQLCommentsService();
     	int index = commentsTable.getSelectedRow();
     	Client client = (Client)user;

@@ -376,7 +376,9 @@ public class ShoppingCart extends javax.swing.JFrame {
         		ShoppingCart sc = new ShoppingCart(client);
         		sc.setVisible(true);
         		
-        	} 
+        	} else {
+        		return;
+        	}
         } else {
         	shoppingCart.get(rowIndex).setBuy_quantity(shoppingCart.get(rowIndex).getBuy_quantity() - 1);
         	int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
