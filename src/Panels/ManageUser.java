@@ -13,12 +13,14 @@ import javax.swing.filechooser.FileSystemView;
 import Assets.CryptoService;
 import Assets.ValidateMail;
 import Database.SQLClientService;
+import Domain.Admin;
 import Domain.Client;
 
 @SuppressWarnings("serial")
 public class ManageUser extends JFrame {
 
-    public ManageUser(Client client) {
+    public ManageUser(Client client,Admin admin) {
+    	ManageUser.admin = admin;
     	ManageUser.client = client;
         initComponents();
     }
@@ -596,7 +598,7 @@ public class ManageUser extends JFrame {
     
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	dispose();
-    	AdminHistoryUser adminHistoryUser = new AdminHistoryUser();
+    	AdminShoppingHistory adminHistoryUser = new AdminShoppingHistory(client,admin);
     	adminHistoryUser.setVisible(true);
     }                 
     
@@ -636,7 +638,7 @@ public class ManageUser extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageUser(client).setVisible(true);
+                new ManageUser(client,admin).setVisible(true);
             }
         });
     }
@@ -683,5 +685,6 @@ public class ManageUser extends JFrame {
 	private String prevTelephone;
 	private String prevEmail;
     private static Client client;
+    private static Admin admin;
     // End of variables declaration                   
 }

@@ -357,7 +357,7 @@ public class MenuAdminEdit extends JFrame {
 				client.getTransactions().setPurchases(purchaseList);
 				client.getTransactions().setShoppingCart(shoppingCart);
 				dispose();
-				ManageUser manageUser = new ManageUser(client);
+				ManageUser manageUser = new ManageUser(client,admin);
 				manageUser.setVisible(true);
 			}else {
 				JOptionPane.showMessageDialog(null, "El usuario esta bloqueado o no existe");
