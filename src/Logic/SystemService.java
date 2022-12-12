@@ -117,8 +117,16 @@ public class SystemService {
 					String img_path = response.getString("img_path");
 					ProductInfo info = new ProductInfo(name, price, description, stock, category, img_path);
 					Product product = new Product(info, id, null, 0);
+					
 					if(category.equals(categoryFilter))products.add(product);
-					// faltan los comments 
+					// comments 
+					ResultSet rs = SQLCommentsService.getSQLCommentsService().read(product);
+					ArrayList<Comment> comments = new ArrayList<Comment>();
+	    			while (rs.next()) {
+	    				Comment comment = new Comment(rs.getInt("id"),rs.getFloat("rating"),rs.getString("comment"),product,rs.getString("user_rut"));
+	    				comments.add(comment);    				
+	    			}
+	    			product.setComments(comments);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
