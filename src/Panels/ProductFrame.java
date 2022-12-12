@@ -396,7 +396,7 @@ public class ProductFrame extends JFrame {
     	}
     	int total = product.getBuy_quantity() + (int)quantitySpinner.getValue();
     	Client client = (Client)user;
-    	if(total>product.getInfo().getStock()) {
+    	if( (int)quantitySpinner.getValue() > product.getInfo().getStock()) {
     		JOptionPane.showMessageDialog(null, "Cantidad seleccionada excede el stock disponible", "Error en la compra", JOptionPane.ERROR_MESSAGE);
     	} else {
     		boolean have_product = false;
@@ -426,7 +426,7 @@ public class ProductFrame extends JFrame {
     		if (have_product) {
     			SQLShoppingCart.getSQLShoppingCart().update(product, buy_id,(int)quantitySpinner.getValue() + localQuantity);
     			
-    			//cambio para arreglar bug
+    			
     			client.getTransactions().getShoppingCart().get(i).setBuy_quantity((int)quantitySpinner.getValue() + localQuantity);
     	
     		} else {

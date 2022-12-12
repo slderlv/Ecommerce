@@ -57,7 +57,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(columnNames, 0);
         int sum = 0;
         for(int i=0; i<shoppingCart.size(); i++){
-        	rowData[0] = shoppingCart.get(i).getInfo().getName();
+        	rowData[0] = shoppingCart.get(i).getInfo().getName() + ": " + shoppingCart.get(i).getId();
         	rowData[1] = shoppingCart.get(i).getBuy_quantity()+"";
         	rowData[2] = (shoppingCart.get(i).getInfo().getPrice()) * Integer.parseInt(rowData[1])+"";
         	if (shoppingCart.get(i).getBuy_quantity() > 0) {
@@ -351,17 +351,39 @@ public class ShoppingCart extends javax.swing.JFrame {
 
     
 
-	private void removeUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+	private void removeUnitButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+		int quantity = 1;
+		try {
+			quantity =Integer.parseInt((String) shoppingCartTable.getModel().getValueAt(shoppingCartTable.getSelectedRow(), 1)) ;
+			
+		} catch (Exception e) {
+			quantity = 1;
+		}
+
+		shoppingCart = client.getTransactions().getShoppingCart();
+		int prodId = 0;
+		for (int i = 0 ; i < selectedProductField.getText().length(); i++) {
+			if (selectedProductField.getText().substring(i,i+1).equals(":")) {
+				prodId = Integer.parseInt(selectedProductField.getText().substring(i+2, selectedProductField.getText().length()));
+			}
+		}
+		
     	int rowIndex = shoppingCartTable.getSelectedRow();
-        int quantity = shoppingCart.get(rowIndex).getBuy_quantity();
         Product p = null;
-        for(int i =0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
-        	if (shoppingCart.get(rowIndex).getId() == SystemService.getSystem().getProducts().get(i).getId()) {
+        for(int i = 0 ; i < SystemService.getSystem().getProducts().size(); i ++) {
+        	if (prodId == SystemService.getSystem().getProducts().get(i).getId()) {
         		p = SystemService.getSystem().getProducts().get(i);
         		break;
         	}
         }
-        if(quantity==1) {
+        int i = 0;
+        for(i = 0; i < shoppingCart.size();i++) {
+        	if (prodId == shoppingCart.get(i).getId()) {
+        		break;
+        	}
+        }
+        
+        if(shoppingCart.get(i).getBuy_quantity() == 1) {
         	Object[] buttons = {"Aceptar","Cancelar"};
         	int reply = JOptionPane.showOptionDialog(null, "\u00bfEst\u00e1 seguro que desea eliminar este producto del carrito?", "Eliminar producto del carrito",
         	        JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
@@ -369,9 +391,9 @@ public class ShoppingCart extends javax.swing.JFrame {
         	if(reply==0) {
         		
         		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
-        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, 0);
+        		SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(i), buy_id, 0);
         		SQLProductService.getSQLProductService().sumStock(p, 1);
-        		shoppingCart.remove(rowIndex);
+        		shoppingCart.remove(i);
         		dispose();
         		SystemService.getSystem().getTransactions(client);
         		ShoppingCart sc = new ShoppingCart(client);
@@ -381,10 +403,15 @@ public class ShoppingCart extends javax.swing.JFrame {
         		return;
         	}
         } else {
-        	shoppingCart.get(rowIndex).setBuy_quantity(shoppingCart.get(rowIndex).getBuy_quantity() - 1);
+        	if (shoppingCart.get(i).getBuy_quantity() == 1) {
+        		JOptionPane.showMessageDialog(null, "si elimina");
+        	}
+        	JOptionPane.showMessageDialog(null, "cantidad: "+shoppingCart.get(i).getBuy_quantity());
+        	shoppingCart.get(i).setBuy_quantity(shoppingCart.get(i).getBuy_quantity() - 1);
+        	client.getTransactions().getShoppingCart().get(i).setBuy_quantity(shoppingCart.get(i).getBuy_quantity() - 1);
         	int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
         	SQLProductService.getSQLProductService().sumStock(p, 1);
-        	SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(rowIndex), buy_id, shoppingCart.get(rowIndex).getBuy_quantity());
+        	SQLShoppingCart.getSQLShoppingCart().update(shoppingCart.get(i), buy_id, shoppingCart.get(i).getBuy_quantity());
         	SystemService.getSystem().refreshProducts();
         }
         updateFrame(false,rowIndex,quantity);
