@@ -238,27 +238,77 @@ public class CardFrame extends JFrame {
     
     private void Pay(ActionEvent evt) {   
     	if(cardNumber.getText().length() < 16) {
+    			
     		JOptionPane.showMessageDialog(null, "Tiene menos de 16 car\u00e1cteres");
     		return;
     	}
+    	try{ 		
+    		Long.parseLong(cardNumber.getText());
+    	} catch (Exception e){
+    		JOptionPane.showMessageDialog(null, "INGRESE UN NUMERO VALIDO");
+			return;
+		}
+    	
+    	
+    	try{ 		
+    		Integer.parseInt(month.getText());
+    	} catch (Exception e){
+    		JOptionPane.showMessageDialog(null, "INGRESE UN MES VALIDO");
+			return;
+		}
+    	
+    	try{ 		
+    		Integer.parseInt(year.getText());
+    	} catch (Exception e){
+    		JOptionPane.showMessageDialog(null, "INGRESE UN A\\u00f1O VALIDO");
+			return;
+		}
+    	
+    	try{ 		
+    		Integer.parseInt(cvv.getText());
+    	} catch (Exception e){
+    		JOptionPane.showMessageDialog(null, "INGRESE UN CVV VALIDO");
+			return;
+		}
+    	
+    	if(Integer.parseInt(cvv.getText()) < 0) {
+    		JOptionPane.showMessageDialog(null, "CVV invalido");
+    		return;
+    	}
+    		
     	if(Integer.parseInt(month.getText()) > 13 || Integer.parseInt(month.getText()) < 0) {
     		JOptionPane.showMessageDialog(null, "Mes invalido");
     		return;
     	}
     	if( Integer.parseInt(year.getText()) < 22) {
-    		JOptionPane.showMessageDialog(null, "año invalido");
+    		JOptionPane.showMessageDialog(null, "a\\u00f1o invalido");
     		return;
     	}
     	CardInfo cardInfo = new CardInfo(Integer.parseInt(cvv.getText()),cardNumber.getText(),Integer.parseInt(month.getText()),Integer.parseInt(year.getText()));
     	Card card = new Card(cardInfo,client);
     	ResultSet rs = SQLCardService.getSQLCardService().checkIfExists(card);
+    	
+    	
+    	
     	try {
 			if(rs.next()) {
 				//The card exists only link
+				for(int i=0;i<client.getCards().size();i++) {
+					if(client.getCards().get(i).getCardInfo().getCardNumber().equals(card.getCardInfo().getCardNumber())) {
+						JOptionPane.showMessageDialog(null, "Tarjeta ya existe");
+						return;
+					}
+					
+				};
+			
 				SQLCardService.getSQLCardService().linkCard(card, client);
+				
 			} else {
 				//Create the new card and link
+				//System.out.println("Creando tarjeta");
 				SQLCardService.getSQLCardService().create(card, client);
+				client.getCards().add(card);
+				
 			}
 			JOptionPane.showMessageDialog(null, "Tarjeta creada con exito");
 		} catch (SQLException e) {
