@@ -20,6 +20,7 @@ import Domain.Client;
 import Domain.Comment;
 import Domain.Product;
 import Domain.User;
+import Logic.SystemService;
 
 @SuppressWarnings("serial")
 public class ProductFrame extends JFrame {
@@ -424,7 +425,8 @@ public class ProductFrame extends JFrame {
     			SQLShoppingCart.getSQLShoppingCart().update(product, buy_id,(int)quantitySpinner.getValue() + localQuantity);
     	
     		} else {
-    			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id,(int)quantitySpinner.getValue());    			
+    			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id,(int)quantitySpinner.getValue());
+    			client.getTransactions().setShoppingCart(SystemService.getSystem().getShoppingCart(client));
     		}
     		SQLProductService.getSQLProductService().updateStock(product, (int)quantitySpinner.getValue());
     		product.getInfo().setStock(product.getInfo().getStock() - (int)quantitySpinner.getValue());
