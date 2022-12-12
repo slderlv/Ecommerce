@@ -388,7 +388,8 @@ public class ProductFrame extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-    private void addToCartButtonActionPerformed(ActionEvent evt) {        
+    private void addToCartButtonActionPerformed(ActionEvent evt) {   
+    	int i=0;
     	if (user instanceof Admin) {
     		JOptionPane.showMessageDialog(null, "No es posible desde esta ventana");
     		return;
@@ -409,7 +410,8 @@ public class ProductFrame extends JFrame {
     				
     		} else {
     			have_product = false;
-    			for (int i =0; i < client.getTransactions().getShoppingCart().size(); i ++ ) {
+    			
+    			for ( i = 0; i < client.getTransactions().getShoppingCart().size(); i ++ ) {
     				if (client.getTransactions().getShoppingCart().get(i).getId() == product.getId()) {
     					have_product = true;
     					localQuantity = client.getTransactions().getShoppingCart().get(i).getBuy_quantity();
@@ -423,6 +425,9 @@ public class ProductFrame extends JFrame {
     		int buy_id = SQLShoppingCart.getSQLShoppingCart().get_id(client);
     		if (have_product) {
     			SQLShoppingCart.getSQLShoppingCart().update(product, buy_id,(int)quantitySpinner.getValue() + localQuantity);
+    			
+    			//cambio para arreglar bug
+    			client.getTransactions().getShoppingCart().get(i).setBuy_quantity((int)quantitySpinner.getValue() + localQuantity);
     	
     		} else {
     			SQLShoppingCart.getSQLShoppingCart().create(product, buy_id,(int)quantitySpinner.getValue());
