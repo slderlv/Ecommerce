@@ -291,8 +291,14 @@ public class RegisterFrame extends JFrame {
 						SQLClientService.getSQLClientService().create(us);   
 						JOptionPane.showMessageDialog(null, "Usuario registrado correctamente");
 						dispose();
-						LoginFrame lf = new LoginFrame();            		
-						lf.setVisible(true);
+						if (user instanceof Admin) {
+							MenuAdminEdit ma = new MenuAdminEdit((Admin)user);
+							ma.setVisible(true);
+						} else {
+							LoginFrame lf = new LoginFrame();            		
+							lf.setVisible(true);
+							
+						}
 						
 					}
 				} catch (SQLException e) {
