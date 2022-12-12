@@ -447,7 +447,7 @@ public class EditProduct extends JFrame {
     private void deleteProductButtonActionPerformed(ActionEvent evt) {
     	SQLProductService.getSQLProductService().delete(product);
     	dispose();
-    	MenuAdminEdit mae = new MenuAdminEdit(null);
+    	MenuAdminEdit mae = new MenuAdminEdit(admin);
     	mae.setVisible(true);    	
 	}
     
